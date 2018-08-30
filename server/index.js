@@ -4,29 +4,28 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { MongoClient } = require('mongodb')
 const producersRouter = require('./routes/producers-router')
-const vocalistsRouter = require('./routes/vocalists-router')
 
 MongoClient
-  .connect('mongodb://localhost:27017', { useNewUrlParser: true })
-  .then(client => {
-    const db = client.db('volab-app')
-    const producers = db.collection('producers')
-    const vocalists = db.collection('vocalists')
-    const producer = {
-      displayName: 'Franz',
-      firstName: 'Franz',
-      lastName: 'Salvador',
-      city: 'Irvine',
-      country: 'US',
-      email: 'fsalvador79@gmail.com',
-      genres: 'hip-hop',
-      bio: "Let's make music"
-    }
-    return producers
-      .insertOne(producer)
-      .then(() => client.close())
-  })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .catch(err => {
     console.error(err)
     process.exit(1)
+  })
+  .then(client => {
+    const db = client.db('volab-app')
+    const producers = db.collection('producers')
+    const publicPath = path.join(__dirname, 'public/')
+    express()
+      .use(express.static(publicPath))
+      .use(bodyParser.json())
+      .use('/producers', producersRouter(producers))
+      .use((err, req, res, next) => {
+        console.error(err)
+        res.status(500).json({
+          error: 'Internal Server Error'
+        })
+      })
+      .listen(process.env.PORT, () => {
+        console.log(`Listening on ${process.env.PORT}!`)
+      })
   })
