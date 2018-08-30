@@ -6,13 +6,9 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink } from 'reactstrap';
 
-export default class Example extends React.Component {
+export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +26,7 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar color="white" light expand="md">
-          <NavbarBrand href="/">Volab</NavbarBrand>
+          <NavbarBrand id="brand" href="/">Volab</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
