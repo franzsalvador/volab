@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 export default class CreateProfileForm extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class CreateProfileForm extends React.Component {
                 <Input type="text" name="city" id="city" onChange={handleChange} placeholder="City"/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="Country" id="country" onChange={handleChange} placeholder="Country"/>
+                <Input type="text" name="country" id="country" onChange={handleChange} placeholder="Country"/>
               </FormGroup>
               <FormGroup>
                 <Input type="email" name="email" id="email" onChange={handleChange} placeholder="Email Address"/>
@@ -72,7 +72,7 @@ export default class CreateProfileForm extends React.Component {
                 <Label for="Bio">Bio</Label>
                 <Input type="textarea" name="bio" id="bio" onChange={handleChange}/>
               </FormGroup>
-              <Button type="submit">Save</Button>
+              <Button type="submit" action="/create-profile">Save</Button>
             </Form>
           </div>
         </div>
