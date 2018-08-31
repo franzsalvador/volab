@@ -18,7 +18,7 @@ MongoClient
     express()
       .use(express.static(publicPath))
       .use(bodyParser.json())
-      .use('/producers', producersRouter(producers))
+      .use('/create-profile', producersRouter(producers))
       .use((err, req, res, next) => {
         console.error(err)
         res.status(500).json({

@@ -1,0 +1,93 @@
+import React from 'react'
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+
+export default class CreateProfileForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange({ target: { name, value } }) {
+    this.setState({ [name]: value })
+  }
+  handleSubmit() {
+    event.preventDefault()
+    const cardForm = event.target
+    const formData = new FormData(cardForm)
+    const userProfile = {}
+    for (var pair of formData.entries()) {
+      userProfile[pair[0]] = pair[1]
+    }
+    this.setState({userProfile})
+    alert('Your profile has been saved.')
+    this.props.onSubmit(this.state)
+  }
+  render()  {
+    const { handleChange, handleSubmit } = this
+    const {
+      displayName,
+      firstName,
+      lastName,
+      city,
+      country,
+      emailAddress,
+      profileImageUrl,
+      genre,
+      bio
+    } = this.state
+    return (
+      <div className="form-container mx-auto">
+        <div className="row">
+          <div className="col">
+            <div className="image-preview-box mx-auto mb-5 border">
+              <i className="fas fa-camera upload-photo-icon"></i>
+              <img></img>
+            </div>
+          </div>
+          <div className="col-6 mx-auto ">
+            <Form onSubmit={handleSubmit}>
+              <FormGroup>
+                <Input type="text" name="display-name" id="display-name" onChange={handleChange} placeholder="Display Name"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="first-name" id="first-name" onChange={handleChange} placeholder="First Name"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="last-name" id="last-name" onChange={handleChange} placeholder="Last Name"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="city" id="city" onChange={handleChange} placeholder="City"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="Country" id="country" onChange={handleChange} placeholder="Country"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="email" name="email" id="email" onChange={handleChange} placeholder="Email Address"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="url" name="image-url" id="image-url" onChange={handleChange} placeholder="Profile Image URL"/>
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleSelect">Genre</Label>
+                <Input type="select" name="select" id="exampleSelect" onChange={handleChange}>
+                  <option>Rock</option>
+                  <option>Pop</option>
+                  <option>Hip Hop</option>
+                  <option>Dance</option>
+                  <option>Folk</option>
+                  <option>Country</option>
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="Bio">Bio</Label>
+                <Input type="textarea" name="bio" id="bio" onChange={handleChange}/>
+              </FormGroup>
+              <Button type="submit">Save</Button>
+            </Form>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}

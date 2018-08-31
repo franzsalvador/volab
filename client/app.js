@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import Home from './views/home'
 import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
+import NavBar from './components/nav-bar'
+import Home from './views/home'
+import CreateProducerProfile from './containers/create-profile'
 
 export default class App extends Component {
   constructor(props) {
@@ -17,13 +19,14 @@ export default class App extends Component {
     window.addEventListener('hashchange', () => {
       const { path, params } = parseHash(window.location.hash)
       this.setState({ path, params })
+      console.log(this.state)
     })
   }
   navigate({ path, params }) {
     window.location.hash = path + queryString.stringify(params)
   }
   handleClickProd() {
-    location.href='create-producer'
+    location.href='#create-profile?producer'
   }
   renderView() {
     switch (this.state.path) {
@@ -32,17 +35,17 @@ export default class App extends Component {
           <Home
           handleClickProd={ this.handleClickProd }/>
         )
-      case 'create-producer' :
+      case 'create-profile' :
         return (
-          <create-producer-form
-          handleSave={this.handleSave}/>
+          <CreateProducerProfile/>
         )
     }
   }
   render() {
     return (
       <div className="container">
-       {this.renderView()}
+        <NavBar/>
+        {this.renderView()}
       </div>
     )
   }
