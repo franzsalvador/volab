@@ -4,9 +4,9 @@ import ProfileSelectors from '../components/profile-selectors'
 
 export default function Home(props) {
   return (
-    <div>
-      <WelcomeMessage/>
-      <ProfileSelectors handleClickProd={ props.handleClickProd }/>
-    </div>
+      <div id="welcome-banner">
+        <WelcomeMessage/>
+        <ProfileSelectors handleClickProd={ props.handleClickProd }/>
+      </div>
   )
 }

@@ -14,6 +14,7 @@ export default class App extends Component {
       params,
     }
     this.handleClickProd=this.handleClickProd.bind(this)
+    this.navigate = this.navigate.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -26,7 +27,7 @@ export default class App extends Component {
     window.location.hash = path + queryString.stringify(params)
   }
   handleClickProd() {
-    location.href='#create-profile?producer'
+    this.navigate({ path: '#create-profile?producer' })
   }
   renderView() {
     switch (this.state.path) {
@@ -43,7 +44,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container clear-border">
         <NavBar/>
         {this.renderView()}
       </div>

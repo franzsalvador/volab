@@ -24,26 +24,31 @@ export default class CreateProfileForm extends React.Component {
     this.props.onSubmit(this.state)
   }
   render()  {
+    const {imageUrl} = this.state
+    const imageSource = imageUrl ? imageUrl : ''
     const { handleChange, handleSubmit } = this
     return (
       <div className="form-container mx-auto">
         <div className="row">
           <div className="col">
-            <div className="image-preview-box mx-auto mb-5 border">
-              <i className="fas fa-camera upload-photo-icon"></i>
-              <img></img>
-            </div>
+            {imageUrl ? (
+              <img className="image-preview-box mx-auto mb-5 border" src={ imageSource }></img>
+            ) : (
+              <div className="image-preview-box-empty mx-auto mb-5 border">
+                <i className="fas fa-camera upload-photo-icon"></i>
+              </div>
+            )}
           </div>
           <div className="col-6 mx-auto ">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="mb-5">
               <FormGroup>
-                <Input type="text" name="display-name" id="display-name" onChange={handleChange} placeholder="Display Name"/>
+                <Input type="text" name="displayName" id="display-name" onChange={handleChange} placeholder="Display Name"/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="first-name" id="first-name" onChange={handleChange} placeholder="First Name"/>
+                <Input type="text" name="firstName" id="first-name" onChange={handleChange} placeholder="First Name"/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="last-name" id="last-name" onChange={handleChange} placeholder="Last Name"/>
+                <Input type="text" name="lastName" id="last-name" onChange={handleChange} placeholder="Last Name"/>
               </FormGroup>
               <FormGroup>
                 <Input type="text" name="city" id="city" onChange={handleChange} placeholder="City"/>
@@ -55,11 +60,11 @@ export default class CreateProfileForm extends React.Component {
                 <Input type="email" name="email" id="email" onChange={handleChange} placeholder="Email Address"/>
               </FormGroup>
               <FormGroup>
-                <Input type="url" name="image-url" id="image-url" onChange={handleChange} placeholder="Profile Image URL"/>
+                <Input type="url" name="imageUrl" id="image-url" onChange={handleChange} placeholder="Profile Image URL"/>
               </FormGroup>
               <FormGroup>
-                <Label for="exampleSelect">Genre</Label>
-                <Input type="select" name="select" id="exampleSelect" onChange={handleChange}>
+                <Label for="genre">Genre</Label>
+                <Input type="select" name="genre" id="genre" onChange={handleChange}>
                   <option>Rock</option>
                   <option>Pop</option>
                   <option>Hip Hop</option>
@@ -72,7 +77,7 @@ export default class CreateProfileForm extends React.Component {
                 <Label for="Bio">Bio</Label>
                 <Input type="textarea" name="bio" id="bio" onChange={handleChange}/>
               </FormGroup>
-              <Button type="submit" action="/create-profile">Save</Button>
+              <Button className="btn btn-outline-dark" type="submit" action="/create-profile">Save</Button>
             </Form>
           </div>
         </div>

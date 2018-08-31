@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken')
 const { Router } = require('express')
 const uuid = require('uuid/v4')
 

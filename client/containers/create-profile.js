@@ -7,7 +7,6 @@ export default class CreateProducerProfile extends Component {
     this.register = this.register.bind(this)
   }
   register(userProfile) {
-    console.log(userProfile)
     const req = {
       method: 'POST',
       body: JSON.stringify(userProfile),
@@ -20,7 +19,7 @@ export default class CreateProducerProfile extends Component {
   render() {
     const {register} = this
     return (
-      <div>
+      <div className="container">
         <CreateProfileForm onSubmit={register}/>
       </div>
     )
