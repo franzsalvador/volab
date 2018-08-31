@@ -25,17 +25,6 @@ export default class CreateProfileForm extends React.Component {
   }
   render()  {
     const { handleChange, handleSubmit } = this
-    const {
-      displayName,
-      firstName,
-      lastName,
-      city,
-      country,
-      emailAddress,
-      profileImageUrl,
-      genre,
-      bio
-    } = this.state
     return (
       <div className="form-container mx-auto">
         <div className="row">
