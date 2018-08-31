@@ -1,0 +1,69 @@
+body {
+  font-family: 'Lato', sans-serif;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: #eee;
+}
+
+#brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 2rem;
+  color: black;
+}
+
+#welcome-message {
+  margin-top: 15rem;
+  text-align: center;
+  color: black;
+}
+
+.banner-main-message {
+  font-weight: 900;
+  line-height: 120%;
+}
+
+#profile-selectors {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.form-container {
+  width: 75%;
+  margin-top: 8rem;
+}
+
+.image-preview-box {
+  display: block;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.image-preview-box-empty {
+  display: block;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background-color: white;
+  text-align: center;
+}
+
+.upload-photo-icon {
+  margin-top: 8rem;
+  font-size: 2rem;
+}
+
+.choose-photo-button {
+  width: 13rem;
+}
+
+.clear-border {
+  border: 1px solid transparent;
+}
+
+
