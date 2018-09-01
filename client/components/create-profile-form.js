@@ -26,13 +26,14 @@ export default class CreateProfileForm extends React.Component {
   render()  {
     const {imageUrl} = this.state
     const imageSource = imageUrl ? imageUrl : ''
+    const imageStyle = { backgroundImage: `url(${imageUrl})`}
     const { handleChange, handleSubmit } = this
     return (
       <div className="form-container mx-auto">
         <div className="row">
           <div className="col">
             {imageUrl ? (
-              <img className="image-preview-box mx-auto mb-5 border" src={ imageSource }></img>
+              <img className="image-preview-box mx-auto mb-5 border" src={imageSource}></img>
             ) : (
               <div className="image-preview-box-empty mx-auto mb-5 border">
                 <i className="fas fa-camera upload-photo-icon"></i>
