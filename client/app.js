@@ -4,7 +4,6 @@ import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
 import CreateProducerProfile from './containers/create-profile'
-import ViewProfile from './containers/view-profile'
 
 export default class App extends Component {
   constructor(props) {
@@ -61,7 +60,6 @@ export default class App extends Component {
     this.setState({user})
     alert('Your profile has been saved.')
     this.register(this.state.user)
-    this.navigate({ path: 'view-profile',params: { displayName }  })
   }
   renderView() {
     const { user } = this.state
