@@ -12,9 +12,13 @@ export default class App extends Component {
     this.state = {
       path,
       params,
+      user: {}
     }
-    this.handleClickProd=this.handleClickProd.bind(this)
     this.navigate = this.navigate.bind(this)
+    this.register = this.register.bind(this)
+    this.handleClickProd=this.handleClickProd.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -29,16 +33,49 @@ export default class App extends Component {
   handleClickProd() {
     this.navigate({ path: '#create-profile?producer' })
   }
+  register(userProfile) {
+    const req = {
+      method: 'POST',
+      body: JSON.stringify(userProfile),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch('/create-profile', req)
+      .then(res => res.ok)
+      .catch(err => console.error(err))
+  }
+  handleChange({ target: { name, value } }) {
+    const {user} = this.state
+    this.setState(Object.assign(user, { [name]: value }))
+    console.log(this.state.user)
+  }
+  handleSubmit(event) {
+    event.preventDefault()
+    const { displayName } = this.state.user
+    const createProfileForm = event.target
+    const formData = new FormData(createProfileForm)
+    const user = {}
+    for (var pair of formData.entries()) {
+      user[pair[0]] = pair[1]
+    }
+    this.setState({user})
+    alert('Your profile has been saved.')
+    this.register(this.state.user)
+  }
   renderView() {
+    const { user } = this.state
+    const { handleChange, handleSubmit }  = this
     switch (this.state.path) {
       case '' :
         return (
           <Home
-          handleClickProd={ this.handleClickProd }/>
+          handleClickProd = { this.handleClickProd }/>
         )
       case 'create-profile' :
         return (
-          <CreateProducerProfile/>
+          <CreateProducerProfile
+          handleChange = { handleChange }
+          handleSubmit = { handleSubmit }
+          user = { user }/>
         )
     }
   }

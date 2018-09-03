@@ -4,30 +4,12 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 export default class CreateProfileForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
-  handleChange({ target: { name, value } }) {
-    this.setState({ [name]: value })
-  }
-  handleSubmit() {
-    event.preventDefault()
-    const cardForm = event.target
-    const formData = new FormData(cardForm)
-    const userProfile = {}
-    for (var pair of formData.entries()) {
-      userProfile[pair[0]] = pair[1]
-    }
-    this.setState({userProfile})
-    alert('Your profile has been saved.')
-    this.props.onSubmit(this.state)
   }
   render()  {
-    const {imageUrl} = this.state
+    const {imageUrl} = this.props.user
     const imageSource = imageUrl ? imageUrl : ''
     const imageStyle = { backgroundImage: `url(${imageUrl})`}
-    const { handleChange, handleSubmit } = this
+    const { handleChange, handleSubmit } = this.props
     return (
       <div className="form-container mx-auto">
         <div className="row">
