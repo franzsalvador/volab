@@ -26,8 +26,14 @@ export default class ViewProfile extends Component {
             <div className="col-8">
               <div id="add-music-prompt" className="align-middle">You aren't sharing any music. Add music so people can hear you sound!</div>
             </div>
-            <div className="col" id="bio-section">
-              <div>{bio}</div>
+            <div className="col" id="about-me-section">
+              <div id="bio">{bio}</div>
+              <div>
+                <i className="fab fa-facebook-square contact-icons">facebook</i>
+                <i className="fab fa-instagram contact-icons">instagram</i>
+                <i className="fab fa-twitter contact-icons">twitter</i>
+                <i className="fas fa-envelope-square contact-icons">email</i>
+              </div>
             </div>
           </div>
         </div>

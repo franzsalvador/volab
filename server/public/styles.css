@@ -115,13 +115,22 @@ body {
   margin-top: 5rem;
 }
 
-#bio-section {
+#about-me-section {
   height: 100vh;
   border-left: 1px solid lightgray;
 }
 
+#bio {
+  margin-bottom: 2rem;
+}
+
 .profile-image-section {
   max-width: 100%;
+}
+
+.contact-icons {
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .clear-border {
