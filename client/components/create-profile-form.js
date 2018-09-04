@@ -43,6 +43,15 @@ export default class CreateProfileForm extends React.Component {
                 <Input type="email" name="email" id="email" onChange={handleChange} placeholder="Email Address"/>
               </FormGroup>
               <FormGroup>
+                <Input type="text" name="facebook" id="facebook" onChange={handleChange} placeholder="Facebook"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="instagram" id="instagram" onChange={handleChange} placeholder="Instagram"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="twitter" id="twitter" onChange={handleChange} placeholder="Twitter"/>
+              </FormGroup>
+              <FormGroup>
                 <Input type="url" name="imageUrl" id="image-url" onChange={handleChange} placeholder="Profile Image URL"/>
               </FormGroup>
               <FormGroup>
