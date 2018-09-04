@@ -25,7 +25,6 @@ export default class App extends Component {
     window.addEventListener('hashchange', () => {
       const { path, params } = parseHash(window.location.hash)
       this.setState({ path, params })
-      console.log(this.state)
     })
   }
   navigate({ path, params }) {
@@ -47,7 +46,6 @@ export default class App extends Component {
   handleChange({ target: { name, value } }) {
     const {user} = this.state
     this.setState(Object.assign(user, { [name]: value }))
-    console.log(this.state.user)
   }
   handleSubmit(event) {
     event.preventDefault()

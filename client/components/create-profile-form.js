@@ -8,7 +8,6 @@ export default class CreateProfileForm extends React.Component {
   render()  {
     const {imageUrl} = this.props.user
     const imageSource = imageUrl ? imageUrl : ''
-    const imageStyle = { backgroundImage: `url(${imageUrl})`}
     const { handleChange, handleSubmit } = this.props
     return (
       <div className="form-container mx-auto">
@@ -50,6 +49,9 @@ export default class CreateProfileForm extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Input type="text" name="twitter" id="twitter" onChange={handleChange} placeholder="Twitter"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="soundcloud" id="soundcloud" onChange={handleChange} placeholder="Soundcloud"/>
               </FormGroup>
               <FormGroup>
                 <Input type="url" name="imageUrl" id="image-url" onChange={handleChange} placeholder="Profile Image URL"/>

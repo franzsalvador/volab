@@ -6,7 +6,7 @@ export default class ViewProfile extends Component {
     super(props)
   }
   render() {
-    const {displayName, firstName, lastName, city, country, imageUrl, bio} = this.props.user
+    const { displayName, firstName, lastName, city, country, imageUrl, bio, facebook, twitter, instagram, soundcloud} = this.props.user
     return (
       <div>
         <div className="container profile-header">
@@ -29,10 +29,18 @@ export default class ViewProfile extends Component {
             <div className="col" id="about-me-section">
               <div id="bio">{bio}</div>
               <div>
-                <i className="fab fa-facebook-square contact-icons">facebook</i>
-                <i className="fab fa-instagram contact-icons">instagram</i>
-                <i className="fab fa-twitter contact-icons">twitter</i>
-                <i className="fas fa-envelope-square contact-icons">email</i>
+                <a target="_blank" href={facebook}>
+                  <i className="fab fa-facebook-square contact-icons"></i>
+                </a>
+                <a target="_blank" href={instagram}>
+                  <i className="fab fa-instagram contact-icons"></i>
+                </a>
+                <a target="_blank" href={twitter}>
+                  <i className="fab fa-twitter contact-icons"></i>
+                </a>
+                <a target="_blank" href={soundcloud}>
+                  <i className="fab fa-soundcloud contact-icons"></i>
+                </a>
               </div>
             </div>
           </div>

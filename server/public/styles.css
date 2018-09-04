@@ -131,6 +131,12 @@ body {
 .contact-icons {
   display: block;
   margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: gray
+}
+
+.contact-icons:hover {
+  color:rgb(253, 104, 33);
 }
 
 .clear-border {
