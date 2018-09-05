@@ -3,9 +3,8 @@ import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
-import CreateProducerProfile from './containers/create-profile'
+import UserProfile from './containers/user-profile'
 import ViewProfile from './containers/view-profile'
-import EditProfile from '.containers/edit-profile'
 
 export default class App extends Component {
   constructor(props) {
@@ -21,12 +20,17 @@ export default class App extends Component {
     this.handleClickProd = this.handleClickProd.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.console = this.console.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       const { path, params } = parseHash(window.location.hash)
       this.setState({ path, params })
     })
+  }
+
+  console() {
+    console.log(this.state)
   }
   navigate({ path, params }) {
     window.location.hash = path + queryString.stringify(params)
@@ -73,7 +77,7 @@ export default class App extends Component {
         )
       case 'create-profile' :
         return (
-          <CreateProducerProfile
+          <UserProfile
             handleChange = { handleChange }
             handleSubmit = { handleSubmit }
             user = { user }/>
@@ -85,7 +89,9 @@ export default class App extends Component {
         )
       case 'edit-profile' :
         return (
-          <EditProfile
+          <UserProfile
+            handleChange = { handleChange }
+            handleSubmit = { handleSubmit }
             user = { user }
             path = { path }/>
         )
@@ -94,7 +100,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <NavBar/>
+        <NavBar console={ this.console }/>
         {this.renderView()}
       </div>
     )
