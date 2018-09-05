@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 import {Navbar, NavbarToggler, NavbarBrand} from 'reactstrap'
 
 export default class NavBar extends Component {
   constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
+    super(props)
+    this.toggle = this.toggle.bind(this)
     this.state = {
       isOpen: false
-    };
+    }
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
-    });
+    })
   }
   render() {
     return (
@@ -27,4 +27,3 @@ export default class NavBar extends Component {
     )
   }
 }
-

@@ -2,19 +2,15 @@ import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 export default class CreateProfileForm extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render()  {
+  render() {
     const {imageUrl} = this.props.user
-    const imageSource = imageUrl ? imageUrl : ''
     const { handleChange, handleSubmit } = this.props
     return (
       <div className="form-container mx-auto">
         <div className="row">
           <div className="col">
             {imageUrl ? (
-              <img className="image-preview-box mx-auto mb-5 border" src={imageSource}></img>
+              <img className="image-preview-box mx-auto mb-5 border" src={imageUrl}></img>
             ) : (
               <div className="image-preview-box-empty mx-auto mb-5 border">
                 <i className="fas fa-camera upload-photo-icon"></i>

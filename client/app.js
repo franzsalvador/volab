@@ -17,7 +17,7 @@ export default class App extends Component {
     }
     this.navigate = this.navigate.bind(this)
     this.register = this.register.bind(this)
-    this.handleClickProd=this.handleClickProd.bind(this)
+    this.handleClickProd = this.handleClickProd.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -59,28 +59,28 @@ export default class App extends Component {
     this.setState({user})
     alert('Your profile has been saved.')
     this.register(this.state.user)
-    this.navigate({ path: 'view-profile', params: { displayName }  })
+    this.navigate({ path: 'view-profile', params: { displayName } })
   }
   renderView() {
     const { user } = this.state
-    const { handleChange, handleSubmit }  = this
+    const { handleChange, handleSubmit } = this
     switch (this.state.path) {
       case '' :
         return (
           <Home
-          handleClickProd = { this.handleClickProd }/>
+            handleClickProd = { this.handleClickProd }/>
         )
       case 'create-profile' :
         return (
           <CreateProducerProfile
-          handleChange = { handleChange }
-          handleSubmit = { handleSubmit }
-          user = { user }/>
+            handleChange = { handleChange }
+            handleSubmit = { handleSubmit }
+            user = { user }/>
         )
       case 'view-profile' :
         return (
           <ViewProfile
-          user = { user }/>
+            user = { user }/>
         )
     }
   }

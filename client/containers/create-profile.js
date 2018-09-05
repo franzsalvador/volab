@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import CreateProfileForm from '../components/create-profile-form'
 
 export default class CreateProducerProfile extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     const {handleSubmit, handleChange, user} = this.props
     return (
