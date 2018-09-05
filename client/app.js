@@ -5,6 +5,7 @@ import NavBar from './components/nav-bar'
 import Home from './views/home'
 import CreateProducerProfile from './containers/create-profile'
 import ViewProfile from './containers/view-profile'
+import EditProfile from '.containers/edit-profile'
 
 export default class App extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ export default class App extends Component {
     this.navigate({ path: 'view-profile', params: { displayName } })
   }
   renderView() {
-    const { user } = this.state
+    const { user, path } = this.state
     const { handleChange, handleSubmit } = this
     switch (this.state.path) {
       case '' :
@@ -81,6 +82,12 @@ export default class App extends Component {
         return (
           <ViewProfile
             user = { user }/>
+        )
+      case 'edit-profile' :
+        return (
+          <EditProfile
+            user = { user }
+            path = { path }/>
         )
     }
   }

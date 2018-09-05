@@ -27,7 +27,7 @@ export default class NavBar extends Component {
                   Me
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="edit-profile">
+                  <DropdownItem href="#edit-profile">
                     Edit Profile
                   </DropdownItem>
                 </DropdownMenu>
