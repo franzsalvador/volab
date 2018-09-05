@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
-export default class CreateProfileForm extends React.Component {
+export default class ProfileForm extends React.Component {
   render() {
     const {imageUrl} = this.props.user
     const { handleChange, handleSubmit } = this.props

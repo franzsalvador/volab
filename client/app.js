@@ -39,7 +39,7 @@ export default class App extends Component {
       body: JSON.stringify(userProfile),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/create-profile', req)
+    fetch('/producers', req)
       .then(res => res.ok)
       .catch(err => console.error(err))
   }
