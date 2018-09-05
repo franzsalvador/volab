@@ -4,23 +4,42 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #eee;
 }
 
 .container {
   background-color: white;
 }
 
+.nav-bar {
+  height: 46px;
+}
+
 #brand {
   font-family: 'Pacifico', cursive;
-  font-size: 2rem;
-  color : #3b5998;
+  font-size: 1.5rem;
+  color: black;
+}
+
+#home-section {
+  background: url(../images/one-mic.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 100vh;
+}
+
+#home-section .dark-overlay {
+  position: absolute;
+  min-height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 #welcome-message {
-  margin-top: 15rem;
+  padding-top: 15rem;
   text-align: center;
-  color: black;
+  color: white;
 }
 
 .banner-main-message {
@@ -35,7 +54,7 @@ body {
 
 .form-container {
   width: 75%;
-  margin-top: 8rem;
+  padding-top: 8rem;
 }
 
 .image-preview-box {
@@ -60,12 +79,37 @@ body {
   font-size: 2rem;
 }
 
-.choose-photo-button {
-  width: 13rem;
+.profile-image {
+  height: auto;
+  width: 300px;
+  margin: 0 auto;
+  margin-right: 2rem;
+}
+
+.detail-list-items {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.details {
+  text-align: center;
+}
+
+.contact-icons {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  color: gray;
+}
+
+.contact-icons:hover {
+  color: rgb(253, 104, 33);
 }
 
 .clear-border {
   border: 1px solid transparent;
 }
 
-
+.border {
+  border: 1px solid gray;
+}

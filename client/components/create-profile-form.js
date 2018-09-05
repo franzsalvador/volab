@@ -2,38 +2,15 @@ import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 export default class CreateProfileForm extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
-  handleChange({ target: { name, value } }) {
-    this.setState({ [name]: value })
-  }
-  handleSubmit() {
-    event.preventDefault()
-    const cardForm = event.target
-    const formData = new FormData(cardForm)
-    const userProfile = {}
-    for (var pair of formData.entries()) {
-      userProfile[pair[0]] = pair[1]
-    }
-    this.setState({userProfile})
-    alert('Your profile has been saved.')
-    this.props.onSubmit(this.state)
-  }
-  render()  {
-    const {imageUrl} = this.state
-    const imageSource = imageUrl ? imageUrl : ''
-    const imageStyle = { backgroundImage: `url(${imageUrl})`}
-    const { handleChange, handleSubmit } = this
+  render() {
+    const {imageUrl} = this.props.user
+    const { handleChange, handleSubmit } = this.props
     return (
       <div className="form-container mx-auto">
         <div className="row">
           <div className="col">
             {imageUrl ? (
-              <img className="image-preview-box mx-auto mb-5 border" src={imageSource}></img>
+              <img className="image-preview-box mx-auto mb-5 border" src={imageUrl}></img>
             ) : (
               <div className="image-preview-box-empty mx-auto mb-5 border">
                 <i className="fas fa-camera upload-photo-icon"></i>
@@ -59,6 +36,18 @@ export default class CreateProfileForm extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Input type="email" name="email" id="email" onChange={handleChange} placeholder="Email Address"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="facebook" id="facebook" onChange={handleChange} placeholder="Facebook"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="instagram" id="instagram" onChange={handleChange} placeholder="Instagram"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="twitter" id="twitter" onChange={handleChange} placeholder="Twitter"/>
+              </FormGroup>
+              <FormGroup>
+                <Input type="text" name="soundcloud" id="soundcloud" onChange={handleChange} placeholder="Soundcloud"/>
               </FormGroup>
               <FormGroup>
                 <Input type="url" name="imageUrl" id="image-url" onChange={handleChange} placeholder="Profile Image URL"/>

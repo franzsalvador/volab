@@ -1,26 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import CreateProfileForm from '../components/create-profile-form'
 
 export default class CreateProducerProfile extends Component {
-  constructor(props) {
-    super(props)
-    this.register = this.register.bind(this)
-  }
-  register(userProfile) {
-    const req = {
-      method: 'POST',
-      body: JSON.stringify(userProfile),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch('/create-profile', req)
-      .then(res => res.ok)
-      .catch(err => console.error(err))
-  }
   render() {
-    const {register} = this
+    const {handleSubmit, handleChange, user} = this.props
     return (
-      <div className="container">
-        <CreateProfileForm onSubmit={register}/>
+      <div className="container bg-white">
+        <CreateProfileForm handleChange={handleChange} handleSubmit={handleSubmit} user={user}/>
       </div>
     )
   }
