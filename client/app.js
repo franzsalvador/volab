@@ -34,7 +34,7 @@ export default class App extends Component {
       body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/', req)
+    fetch('/producers', req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
@@ -48,7 +48,7 @@ export default class App extends Component {
         'id': id
       }
     }
-    fetch('/', req)
+    fetch('/producers', req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
