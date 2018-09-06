@@ -6,17 +6,46 @@ export default class ProfileForm extends React.Component {
     super(props)
     this.state = {}
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value })
     console.log(this.state)
   }
+  handleSubmit(event) {
+    event.preventDefault()
+    const { displayName } = this.props.user
+    const { createProfile, navigate } = this.props
+    const createProfileForm = event.target
+    const formData = new FormData(createProfileForm)
+    const user = {}
+    for (var pair of formData.entries()) {
+      user[pair[0]] = pair[1]
+    }
+    createProfile(user)
+    alert('Your profile has been saved.')
+    navigate({ path: 'view-profile', params: { displayName } })
+  }
+  handleUpdate(event) {
+    event.preventDefault()
+    const { id } = this.props.user
+    const { editProfile, navigate } = this.props
+    const createProfileForm = event.target
+    const formData = new FormData(createProfileForm)
+    const user = {}
+    for (var pair of formData.entries()) {
+      user[pair[0]] = pair[1]
+    }
+    editProfile(user)
+    alert('Your profile has been updated.')
+    navigate({ path: 'view-profile', params: { id } })
+  }
   render() {
-    const { handleChange } = this
+    const { handleChange, handleSubmit, handleUpdate } = this
     const { path } = this.props
     const { user } = this.props
     const { imageUrl } = this.state
-    const { handleSubmit, handleUpdate } = this.props
     return (
       <div className="form-container mx-auto">
         <div className="row">

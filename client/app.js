@@ -17,9 +17,7 @@ export default class App extends Component {
     }
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
-    this.handleClickProd = this.handleClickProd.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleUpdate = this.handleUpdate.bind(this)
+    this.editProfile = this.editProfile.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -29,9 +27,6 @@ export default class App extends Component {
   }
   navigate({ path, params }) {
     window.location.hash = path + queryString.stringify(params)
-  }
-  handleClickProd() {
-    this.navigate({ path: '#create-profile?producer' })
   }
   createProfile(userDetails) {
     const req = {
@@ -58,46 +53,19 @@ export default class App extends Component {
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
   }
-  handleSubmit(event) {
-    event.preventDefault()
-    const { displayName } = this.state.user
-    const createProfileForm = event.target
-    const formData = new FormData(createProfileForm)
-    const user = {}
-    for (var pair of formData.entries()) {
-      user[pair[0]] = pair[1]
-    }
-    this.createProfile(user)
-    alert('Your profile has been saved.')
-    this.navigate({ path: 'view-profile', params: { displayName } })
-  }
-  handleUpdate(event) {
-    event.preventDefault()
-    const { id } = this.state.user
-    const createProfileForm = event.target
-    const formData = new FormData(createProfileForm)
-    const user = {}
-    for (var pair of formData.entries()) {
-      user[pair[0]] = pair[1]
-    }
-    this.editProfile(user)
-    alert('Your profile has been updated.')
-    this.navigate({ path: 'view-profile', params: { id } })
-  }
   renderView() {
     const { user, path } = this.state
-    const { handleChange, handleSubmit, handleUpdate } = this
+    const { createProfile, editProfile, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
-          <Home
-            handleClickProd = { this.handleClickProd }/>
+          <Home navigate = { navigate }/>
         )
       case 'create-profile' :
         return (
           <UserProfile
-            handleChange = { handleChange }
-            handleSubmit = { handleSubmit }
+            createProfile = { createProfile }
+            navigate = { navigate }
             user = { user }/>
         )
       case 'view-profile' :
@@ -108,9 +76,8 @@ export default class App extends Component {
       case 'edit-profile' :
         return (
           <UserProfile
-            handleChange = { handleChange }
-            handleSubmit = { handleSubmit }
-            handleUpdate = { handleUpdate }
+            editProfile = { editProfile }
+            navigate = { navigate }
             user = { user }
             path = { path }/>
         )

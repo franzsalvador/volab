@@ -3,10 +3,15 @@ import ProfileForm from '../components/profile-form'
 
 export default class userProfile extends Component {
   render() {
-    const { handleSubmit, handleUpdate, user, path } = this.props
+    const { createProfile, editProfile, navigate, user, path } = this.props
     return (
       <div className="container bg-white">
-        <ProfileForm handleSubmit={ handleSubmit } handleUpdate={ handleUpdate } user={ user } path={ path }/>
+        <ProfileForm
+          createProfile = { createProfile }
+          editProfile = { editProfile }
+          navigate = { navigate }
+          user={ user }
+          path={ path }/>
       </div>
     )
   }
