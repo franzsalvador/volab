@@ -13,7 +13,7 @@ module.exports = function producersRouter(producers) {
       .catch(err => next(err))
   })
 
-  router.put('/edit-profile/', (req, res, next) => {
+  router.put('/', (req, res, next) => {
     console.log(req.body)
     const id = req.get('id')
     producers
@@ -30,7 +30,7 @@ module.exports = function producersRouter(producers) {
       .catch(err => next(err))
   })
 
-  router.post('/create-profile', (req, res, next) => {
+  router.post('/', (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
     console.log(req.body)
     producers
