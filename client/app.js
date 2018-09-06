@@ -19,8 +19,6 @@ export default class App extends Component {
     this.register = this.register.bind(this)
     this.handleClickProd = this.handleClickProd.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.console = this.console.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -28,29 +26,22 @@ export default class App extends Component {
       this.setState({ path, params })
     })
   }
-
-  console() {
-    console.log(this.state)
-  }
   navigate({ path, params }) {
     window.location.hash = path + queryString.stringify(params)
   }
   handleClickProd() {
     this.navigate({ path: '#create-profile?producer' })
   }
-  register(userProfile) {
+  register(userDetails) {
     const req = {
       method: 'POST',
-      body: JSON.stringify(userProfile),
+      body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
     fetch('/producers', req)
-      .then(res => res.ok)
+      .then(res => res.ok ? res.json() : null)
+      .then(newUser => newUser && this.setState({user: newUser}))
       .catch(err => console.error(err))
-  }
-  handleChange({ target: { name, value } }) {
-    const {user} = this.state
-    this.setState(Object.assign(user, { [name]: value }))
   }
   handleSubmit(event) {
     event.preventDefault()
@@ -61,10 +52,10 @@ export default class App extends Component {
     for (var pair of formData.entries()) {
       user[pair[0]] = pair[1]
     }
-    this.setState({user})
+    this.register(user)
     alert('Your profile has been saved.')
-    this.register(this.state.user)
     this.navigate({ path: 'view-profile', params: { displayName } })
+    console.log(this.state)
   }
   renderView() {
     const { user, path } = this.state
@@ -100,7 +91,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <NavBar console={ this.console }/>
+        <NavBar/>
         {this.renderView()}
       </div>
     )
