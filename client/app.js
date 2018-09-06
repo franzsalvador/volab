@@ -3,7 +3,7 @@ import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
-import CreateProducerProfile from './containers/create-profile'
+import UserProfile from './containers/user-profile'
 import ViewProfile from './containers/view-profile'
 
 export default class App extends Component {
@@ -16,10 +16,8 @@ export default class App extends Component {
       user: {}
     }
     this.navigate = this.navigate.bind(this)
-    this.register = this.register.bind(this)
-    this.handleClickProd = this.handleClickProd.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.createProfile = this.createProfile.bind(this)
+    this.editProfile = this.editProfile.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -30,51 +28,44 @@ export default class App extends Component {
   navigate({ path, params }) {
     window.location.hash = path + queryString.stringify(params)
   }
-  handleClickProd() {
-    this.navigate({ path: '#create-profile?producer' })
-  }
-  register(userProfile) {
+  createProfile(userDetails) {
     const req = {
       method: 'POST',
-      body: JSON.stringify(userProfile),
+      body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/create-profile', req)
-      .then(res => res.ok)
+    fetch('/producers', req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
   }
-  handleChange({ target: { name, value } }) {
-    const {user} = this.state
-    this.setState(Object.assign(user, { [name]: value }))
-  }
-  handleSubmit(event) {
-    event.preventDefault()
-    const { displayName } = this.state.user
-    const createProfileForm = event.target
-    const formData = new FormData(createProfileForm)
-    const user = {}
-    for (var pair of formData.entries()) {
-      user[pair[0]] = pair[1]
+  editProfile(userDetails) {
+    const { id } = this.state.user
+    const req = {
+      method: 'PUT',
+      body: JSON.stringify(userDetails),
+      headers: {'Content-Type': 'application/json',
+        'id': id
+      }
     }
-    this.setState({user})
-    alert('Your profile has been saved.')
-    this.register(this.state.user)
-    this.navigate({ path: 'view-profile', params: { displayName } })
+    fetch('/producers', req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && this.setState({user}))
+      .catch(err => console.error(err))
   }
   renderView() {
-    const { user } = this.state
-    const { handleChange, handleSubmit } = this
+    const { user, path } = this.state
+    const { createProfile, editProfile, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
-          <Home
-            handleClickProd = { this.handleClickProd }/>
+          <Home navigate = { navigate }/>
         )
       case 'create-profile' :
         return (
-          <CreateProducerProfile
-            handleChange = { handleChange }
-            handleSubmit = { handleSubmit }
+          <UserProfile
+            createProfile = { createProfile }
+            navigate = { navigate }
             user = { user }/>
         )
       case 'view-profile' :
@@ -82,13 +73,21 @@ export default class App extends Component {
           <ViewProfile
             user = { user }/>
         )
+      case 'edit-profile' :
+        return (
+          <UserProfile
+            editProfile = { editProfile }
+            navigate = { navigate }
+            user = { user }
+            path = { path }/>
+        )
     }
   }
   render() {
     return (
       <div>
         <NavBar/>
-        {this.renderView()}
+        { this.renderView() }
       </div>
     )
   }
