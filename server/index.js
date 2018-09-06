@@ -18,7 +18,7 @@ MongoClient
     express()
       .use(express.static(publicPath))
       .use(bodyParser.json())
-      .use('/', producersRouter(producers))
+      .use('/producers', producersRouter(producers))
       .use((err, req, res, next) => {
         console.error(err)
         res.status(500).json({
