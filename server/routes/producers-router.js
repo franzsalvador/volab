@@ -13,6 +13,21 @@ module.exports = function producersRouter(producers) {
       .catch(err => next(err))
   })
 
+  router.put('/:id', (req, res, next) => {
+    producers
+      .findOneAndUpdate(
+        { id: req.params.id },
+        { $set: req.body },
+        { returnOriginal: false }
+      )
+      .then(({ value }) => {
+        value
+          ? res.json(value)
+          : res.sendStatus(404)
+      })
+      .catch(err => next(err))
+  })
+
   router.post('/', (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
     console.log(req.body)
