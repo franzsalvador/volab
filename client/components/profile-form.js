@@ -5,17 +5,17 @@ export default class ProfileForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.imagePreview = this.imagePreview.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
-  imagePreview({ target: { name, value } }) {
+  handleChange({ target: { name, value } }) {
     this.setState({ [name]: value })
     console.log(this.state)
   }
   render() {
-    const { imagePreview } = this
+    const { handleChange } = this
     const { path } = this.props
     const { user } = this.props
-    const { imageUrl } = path === 'edit-profile' ? user.imageUrl : this.state
+    const { imageUrl } = this.state
     const { handleSubmit, handleUpdate } = this.props
     return (
       <div className="form-container mx-auto">
@@ -62,7 +62,7 @@ export default class ProfileForm extends React.Component {
                 <Input type="text" name="soundcloud" id="soundcloud" placeholder="Soundcloud" defaultValue={ path === 'edit-profile' ? user.soundcloud : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="url" name="imageUrl" id="image-url" onChange={ imagePreview } placeholder="Profile Image URL" defaultValue={ path === 'edit-profile' ? user.imageUrl : '' }/>
+                <Input type="url" name="imageUrl" id="image-url" onChange={ handleChange } placeholder="Profile Image URL" defaultValue={ path === 'edit-profile' ? user.imageUrl : '' }/>
               </FormGroup>
               <FormGroup>
                 <Label for="genre">Genre</Label>

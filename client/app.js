@@ -16,9 +16,10 @@ export default class App extends Component {
       user: {}
     }
     this.navigate = this.navigate.bind(this)
-    this.register = this.register.bind(this)
+    this.createProfile = this.createProfile.bind(this)
     this.handleClickProd = this.handleClickProd.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -32,15 +33,29 @@ export default class App extends Component {
   handleClickProd() {
     this.navigate({ path: '#create-profile?producer' })
   }
-  register(userDetails) {
+  createProfile(userDetails) {
     const req = {
       method: 'POST',
       body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/producers', req)
+    fetch('/producers/create-profile', req)
       .then(res => res.ok ? res.json() : null)
-      .then(newUser => newUser && this.setState({user: newUser}))
+      .then(user => user && this.setState({user}))
+      .catch(err => console.error(err))
+  }
+  editProfile(userDetails) {
+    const { id } = this.state.user
+    const req = {
+      method: 'PUT',
+      body: JSON.stringify(userDetails),
+      headers: {'Content-Type': 'application/json',
+        'id': id
+      }
+    }
+    fetch('/producers/edit-profile', req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
   }
   handleSubmit(event) {
@@ -52,14 +67,26 @@ export default class App extends Component {
     for (var pair of formData.entries()) {
       user[pair[0]] = pair[1]
     }
-    this.register(user)
+    this.createProfile(user)
     alert('Your profile has been saved.')
     this.navigate({ path: 'view-profile', params: { displayName } })
-    console.log(this.state)
+  }
+  handleUpdate(event) {
+    event.preventDefault()
+    const { id } = this.state.user
+    const createProfileForm = event.target
+    const formData = new FormData(createProfileForm)
+    const user = {}
+    for (var pair of formData.entries()) {
+      user[pair[0]] = pair[1]
+    }
+    this.editProfile(user)
+    alert('Your profile has been updated.')
+    this.navigate({ path: 'view-profile', params: { id } })
   }
   renderView() {
     const { user, path } = this.state
-    const { handleChange, handleSubmit } = this
+    const { handleChange, handleSubmit, handleUpdate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -83,6 +110,7 @@ export default class App extends Component {
           <UserProfile
             handleChange = { handleChange }
             handleSubmit = { handleSubmit }
+            handleUpdate = { handleUpdate }
             user = { user }
             path = { path }/>
         )
@@ -92,7 +120,7 @@ export default class App extends Component {
     return (
       <div>
         <NavBar/>
-        {this.renderView()}
+        { this.renderView() }
       </div>
     )
   }

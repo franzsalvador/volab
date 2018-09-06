@@ -13,10 +13,12 @@ module.exports = function producersRouter(producers) {
       .catch(err => next(err))
   })
 
-  router.put('/:id', (req, res, next) => {
+  router.put('/edit-profile/', (req, res, next) => {
+    console.log(req.body)
+    const id = req.get('id')
     producers
       .findOneAndUpdate(
-        { id: req.params.id },
+        { id: id },
         { $set: req.body },
         { returnOriginal: false }
       )
@@ -28,7 +30,7 @@ module.exports = function producersRouter(producers) {
       .catch(err => next(err))
   })
 
-  router.post('/', (req, res, next) => {
+  router.post('/create-profile', (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
     console.log(req.body)
     producers
