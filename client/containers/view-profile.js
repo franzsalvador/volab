@@ -6,7 +6,7 @@ export default class ViewProfile extends Component {
     return (
       <div>
         <div className="jumbotron container">
-          <img className="img-fluid profile-image float-md-left" src={imageUrl}/>
+          <div className="profile-image float-md-left" style={{ backgroundImage: `url(${imageUrl})` }}></div>
           <h3 className="display-4">{displayName}</h3>
           <p className="lead">{firstName + ' ' + lastName}</p>
           <p className="lead">{city + ', ' + country}</p>

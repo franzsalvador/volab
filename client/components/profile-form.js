@@ -51,9 +51,9 @@ export default class ProfileForm extends React.Component {
         <div className="row">
           <div className="col">
             {imageUrl ? (
-              <img className="image-preview-box mx-auto mb-5 border" src={imageUrl}></img>
+              <div className="profile-image float-md-left" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             ) : (
-              <div className="image-preview-box-empty mx-auto mb-5 border">
+              <div className="image-preview-box-empty mx-auto mb-5 border float-md-left">
                 <i className="fas fa-camera upload-photo-icon"></i>
               </div>
             )}
@@ -108,7 +108,8 @@ export default class ProfileForm extends React.Component {
                 <Label for="Bio">Bio</Label>
                 <Input type="textarea" name="bio" id="bio" defaultValue={ path === 'edit-profile' ? user.bio : '' }/>
               </FormGroup>
-              <Button className="btn btn-outline-dark" type="submit" action="/create-profile">{ path === 'edit-profile' ? 'Save Changes' : 'Save' }</Button>
+              <Button className="btn btn-outline-dark btn-sm" type="submit" action="/create-profile">{ path === 'edit-profile' ? 'Save Changes' : 'Save' }</Button>
+              <Button className="btn btn-outline-dark btn-sm ml-3" type="submit" action="/create-profile">{ path === 'edit-profile' ? 'Delete Profile' : 'Cancel' }</Button>
             </Form>
           </div>
         </div>
