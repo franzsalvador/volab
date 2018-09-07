@@ -4,19 +4,26 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #eee;
 }
 
 .container {
   background-color: white;
+  padding: 0;
 }
 
 .nav-bar {
   height: 46px;
 }
 
+.nav-container {
+  background-color: white;
+}
+
 .drop-down-icons {
   font-size: 2rem;
   margin-right: 0.5rem;
+  color: white;
 }
 
 .drop-down-print {
@@ -26,7 +33,7 @@ body {
 #brand {
   font-family: 'Pacifico', cursive;
   font-size: 1.5rem;
-  color: black;
+  color: white;
 }
 
 #home-section {
@@ -39,7 +46,6 @@ body {
 }
 
 #home-section .dark-overlay {
-  position: absolute;
   min-height: 100vh;
   width: 100%;
   background: rgba(0, 0, 0, 0.8);

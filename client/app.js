@@ -75,7 +75,8 @@ export default class App extends Component {
       case '' :
         return (
           <Home
-            navigate = { navigate }/>
+            navigate = { navigate }
+            path = { path }/>
         )
       case 'create-profile' :
         return (
@@ -107,10 +108,12 @@ export default class App extends Component {
     }
   }
   render() {
-    const { registeredUser } = this.state
+    const { registeredUser, path } = this.state
     return (
       <div>
-        <NavBar registeredUser = { registeredUser } />
+        <NavBar
+          registeredUser = { registeredUser }
+          path = { path } />
         { this.renderView() }
       </div>
     )

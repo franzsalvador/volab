@@ -7,14 +7,17 @@ export default class Home extends Component {
   render() {
     const { navigate } = this.props
     return (
-      <div id="home-section">
-        <div className="dark-overlay">
-          <div id="welcome-banner">
-            <WelcomeMessage/>
-            <ProfileSelectors navigate= { navigate }/>
+      <div className="container">
+        <div id="home-section">
+          <div className="dark-overlay">
+            <div id="welcome-banner">
+              <WelcomeMessage/>
+              <ProfileSelectors navigate= { navigate }/>
+            </div>
           </div>
         </div>
       </div>
+
     )
   }
 }
