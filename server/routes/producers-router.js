@@ -13,9 +13,18 @@ module.exports = function producersRouter(producers) {
       .catch(err => next(err))
   })
 
-  router.put('/', (req, res, next) => {
-    console.log(req.body)
-    const id = req.get('id')
+  router.post('/', (req, res, next) => {
+    const userProfile = Object.assign(req.body, { id: uuid() })
+    producers
+      .insertOne(userProfile)
+      .then(({ ops: [ created ] }) => {
+        res.status(201).json(created)
+      })
+      .catch(err => next(err))
+  })
+
+  router.put('/:id', (req, res, next) => {
+    const id = req.params.id
     producers
       .findOneAndUpdate(
         { id: id },
@@ -30,13 +39,14 @@ module.exports = function producersRouter(producers) {
       .catch(err => next(err))
   })
 
-  router.post('/', (req, res, next) => {
-    const userProfile = Object.assign(req.body, { id: uuid() })
-    console.log(req.body)
+  router.delete('/:id', (req, res, next) => {
+    const id = req.params.id
     producers
-      .insertOne(userProfile)
-      .then(({ ops: [ created ] }) => {
-        res.status(201).json(created)
+      .findOneAndDelete({ id: id })
+      .then(({ value }) => {
+        value
+          ? res.sendStatus(204)
+          : res.sendStatus(404)
       })
       .catch(err => next(err))
   })

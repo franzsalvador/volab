@@ -5,6 +5,7 @@ import NavBar from './components/nav-bar'
 import Home from './views/home'
 import UserProfile from './containers/user-profile'
 import ViewProfile from './containers/view-profile'
+import AccountSettings from './containers/account-settings'
 
 export default class App extends Component {
   constructor(props) {
@@ -13,11 +14,13 @@ export default class App extends Component {
     this.state = {
       path,
       params,
+      registeredUser: false,
       user: {}
     }
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
     this.editProfile = this.editProfile.bind(this)
+    this.deleteProfile = this.deleteProfile.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -36,30 +39,44 @@ export default class App extends Component {
     }
     fetch('/producers', req)
       .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({user}))
+      .then(user => user && this.setState({ user, registeredUser: true }))
       .catch(err => console.error(err))
   }
   editProfile(userDetails) {
     const { id } = this.state.user
+    const url = '/producers/' + id
     const req = {
       method: 'PUT',
       body: JSON.stringify(userDetails),
-      headers: {'Content-Type': 'application/json',
-        'id': id
-      }
+      headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/producers', req)
+    fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
   }
+  deleteProfile() {
+    const { id } = this.state.user
+    const url = '/producers/' + id
+    const req = { method: 'DELETE' }
+    fetch(url, req)
+      .then(res => res.ok
+        ? this.setState({
+          user: {},
+          registeredUser: false
+        })
+        : alert(res.status))
+      .catch(err => console.error(err))
+  }
   renderView() {
     const { user, path } = this.state
-    const { createProfile, editProfile, navigate } = this
+    const { createProfile, editProfile, deleteProfile, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
-          <Home navigate = { navigate }/>
+          <Home
+            navigate = { navigate }
+            path = { path }/>
         )
       case 'create-profile' :
         return (
@@ -81,12 +98,22 @@ export default class App extends Component {
             user = { user }
             path = { path }/>
         )
+      case 'account-settings' :
+        return (
+          <AccountSettings
+            deleteProfile = { deleteProfile }
+            navigate = { navigate }
+            user = { user }/>
+        )
     }
   }
   render() {
+    const { registeredUser, path } = this.state
     return (
       <div>
-        <NavBar/>
+        <NavBar
+          registeredUser = { registeredUser }
+          path = { path } />
         { this.renderView() }
       </div>
     )

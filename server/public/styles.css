@@ -4,20 +4,27 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.container {
-  background-color: white;
+  background-color: #eee;
 }
 
 .nav-bar {
   height: 46px;
 }
 
+.drop-down-icons {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+  color: white;
+}
+
+.drop-down-print {
+  font-size: 0.9rem;
+}
+
 #brand {
   font-family: 'Pacifico', cursive;
   font-size: 1.5rem;
-  color: black;
+  color: white;
 }
 
 #home-section {
@@ -30,7 +37,6 @@ body {
 }
 
 #home-section .dark-overlay {
-  position: absolute;
   min-height: 100vh;
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
@@ -57,19 +63,10 @@ body {
   padding-top: 8rem;
 }
 
-.image-preview-box {
-  display: block;
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  text-align: center;
-}
-
 .image-preview-box-empty {
   display: block;
   height: 200px;
   width: 200px;
-  border-radius: 50%;
   background-color: white;
   text-align: center;
 }
@@ -80,9 +77,10 @@ body {
 }
 
 .profile-image {
-  height: auto;
-  width: 300px;
-  margin: 0 auto;
+  background-position: center;
+  background-size: cover;
+  height: 200px;
+  width: 200px;
   margin-right: 2rem;
 }
 
@@ -104,6 +102,16 @@ body {
 
 .contact-icons:hover {
   color: rgb(253, 104, 33);
+}
+
+@media (max-width: 768px) {
+  .profile-image {
+    margin: 0 auto;
+  }
+
+  .profile-details {
+    text-align: center;
+  }
 }
 
 .clear-border {

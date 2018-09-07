@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
+import { Jumbotron, Container } from 'reactstrap'
 
 export default class ViewProfile extends Component {
   render() {
     const { displayName, firstName, lastName, city, country, imageUrl, bio, facebook, twitter, instagram, soundcloud } = this.props.user
     return (
-      <div>
-        <div className="jumbotron container">
-          <img className="img-fluid profile-image float-md-left" src={imageUrl}/>
-          <h3 className="display-4">{displayName}</h3>
-          <p className="lead">{firstName + ' ' + lastName}</p>
-          <p className="lead">{city + ', ' + country}</p>
-          <div className="lead">
+      <Container className="container px-0">
+        <Jumbotron className="bg-white">
+          <div className="profile-image float-md-left rounded-circle" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+          <h3 className="display-4 profile-details">{displayName}</h3>
+          <p className="lead profile-details">{firstName + ' ' + lastName}</p>
+          <p className="lead profile-details">{city + ', ' + country}</p>
+          <div className="lead profile-details">
             <ul className="detail-list-items">
               <li>
                 <a target="_blank" rel="noopener noreferrer" href={facebook}>
@@ -29,9 +30,9 @@ export default class ViewProfile extends Component {
             </ul>
           </div>
           <hr className="my-4"/>
-          <p>{bio}</p>
-        </div>
-      </div>
+          <p className="profile-details">{bio}</p>
+        </Jumbotron>
+      </Container>
     )
   }
 }
