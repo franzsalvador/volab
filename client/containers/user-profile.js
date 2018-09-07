@@ -3,12 +3,13 @@ import ProfileForm from '../components/profile-form'
 
 export default class userProfile extends Component {
   render() {
-    const { createProfile, editProfile, navigate, user, path } = this.props
+    const { createProfile, editProfile, deleteProfile, navigate, user, path } = this.props
     return (
       <div className="container bg-white">
         <ProfileForm
           createProfile = { createProfile }
           editProfile = { editProfile }
+          deleteProfile = { deleteProfile }
           navigate = { navigate }
           user={ user }
           path={ path }/>

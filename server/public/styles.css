@@ -14,6 +14,15 @@ body {
   height: 46px;
 }
 
+.drop-down-icons {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+.drop-down-print {
+  font-size: 0.9rem;
+}
+
 #brand {
   font-family: 'Pacifico', cursive;
   font-size: 1.5rem;

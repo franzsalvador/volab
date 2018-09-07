@@ -5,6 +5,7 @@ import NavBar from './components/nav-bar'
 import Home from './views/home'
 import UserProfile from './containers/user-profile'
 import ViewProfile from './containers/view-profile'
+import AccountSettings from './containers/account-settings'
 
 export default class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export default class App extends Component {
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
     this.editProfile = this.editProfile.bind(this)
+    this.deleteProfile = this.deleteProfile.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -29,6 +31,7 @@ export default class App extends Component {
     window.location.hash = path + queryString.stringify(params)
   }
   createProfile(userDetails) {
+    console.log(this.state)
     const req = {
       method: 'POST',
       body: JSON.stringify(userDetails),
@@ -36,10 +39,11 @@ export default class App extends Component {
     }
     fetch('/producers', req)
       .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({user}))
+      .then(user => user && this.setState({ user }))
       .catch(err => console.error(err))
   }
   editProfile(userDetails) {
+    console.log(this.state)
     const { id } = this.state.user
     const req = {
       method: 'PUT',
@@ -53,9 +57,17 @@ export default class App extends Component {
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
   }
+  deleteProfile() {
+    const { id } = this.state.user
+    const url = '/producers/' + id
+    const req = { method: 'DELETE' }
+    fetch(url, req)
+      .then(res => res.ok ? this.setState({ user: {} }) : alert(res.status))
+      .catch(err => console.error(err))
+  }
   renderView() {
     const { user, path } = this.state
-    const { createProfile, editProfile, navigate } = this
+    const { createProfile, editProfile, deleteProfile, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -80,6 +92,13 @@ export default class App extends Component {
             navigate = { navigate }
             user = { user }
             path = { path }/>
+        )
+      case 'account-settings' :
+        return (
+          <AccountSettings
+            deleteProfile = { deleteProfile }
+            navigate = { navigate }
+            user = { user }/>
         )
     }
   }
