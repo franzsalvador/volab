@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { Jumbotron, Container } from 'reactstrap'
 
 export default class ViewProfile extends Component {
   render() {
     const { displayName, firstName, lastName, city, country, imageUrl, bio, facebook, twitter, instagram, soundcloud } = this.props.user
     return (
-      <div className="container">
-        <div className="jumbotron bg-white">
+      <Container className="container px-0">
+        <Jumbotron className="bg-white">
           <div className="profile-image float-md-left" style={{ backgroundImage: `url(${imageUrl})` }}></div>
           <h3 className="display-4 profile-details">{displayName}</h3>
           <p className="lead profile-details">{firstName + ' ' + lastName}</p>
@@ -30,8 +31,8 @@ export default class ViewProfile extends Component {
           </div>
           <hr className="my-4"/>
           <p className="profile-details">{bio}</p>
-        </div>
-      </div>
+        </Jumbotron>
+      </Container>
     )
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input, Row, Container, Col } from 'reactstrap'
 
 export default class ProfileForm extends React.Component {
   constructor(props) {
@@ -47,18 +47,18 @@ export default class ProfileForm extends React.Component {
     const { user } = this.props
     const { imageUrl } = this.state
     return (
-      <div className="form-container mx-auto">
-        <div className="row">
-          <div className="col">
+      <Container className="pt-5">
+        <Row>
+          <Col className = "mt-5">
             {imageUrl ? (
-              <div className="profile-image float-md-left" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+              <div className="profile-image rounded-circle mx-auto" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             ) : (
-              <div className="image-preview-box-empty mx-auto mb-5 border float-md-left">
+              <div className="image-preview-box-empty mx-auto rounded-circle mb-5 border">
                 <i className="fas fa-camera upload-photo-icon"></i>
               </div>
             )}
-          </div>
-          <div className="col-6 mx-auto ">
+          </Col>
+          <Col md="6" className="mx-auto mt-5">
             <Form onSubmit={ path === 'edit-profile' ? handleUpdate : handleSubmit } className="mb-5">
               <FormGroup>
                 <Input type="text" name="displayName" id="display-name" placeholder="Display Name" defaultValue={ path === 'edit-profile' ? user.displayName : '' }/>
@@ -110,9 +110,9 @@ export default class ProfileForm extends React.Component {
               </FormGroup>
               <Button className="btn btn-outline-dark btn-sm" type="submit">{ path === 'edit-profile' ? 'Save Changes' : 'Save' }</Button>
             </Form>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

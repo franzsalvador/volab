@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -19,8 +19,8 @@ export default class NavBar extends Component {
     const styleWhite = { color: 'white' }
     const styleBlack = { color: 'black' }
     return (
-      <div className="nav-container">
-        <div className={ path === '' ? 'container bg-white' : 'container bg-dark' }>
+      <Container className="nav-container bg-white px-0">
+        <Container className={ path === '' ? 'container bg-white px-0' : 'container bg-dark px-0' }>
           <Navbar className="navbar-dark" light expand="md">
             <NavbarBrand className="font-weight-bold" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
@@ -49,8 +49,8 @@ export default class NavBar extends Component {
               </Nav>
             </Collapse>
           </Navbar>
-        </div>
-      </div>
+        </Container>
+      </Container>
 
     )
   }

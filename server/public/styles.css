@@ -7,17 +7,8 @@ body {
   background-color: #eee;
 }
 
-.container {
-  background-color: white;
-  padding: 0;
-}
-
 .nav-bar {
   height: 46px;
-}
-
-.nav-container {
-  background-color: white;
 }
 
 .drop-down-icons {
@@ -72,19 +63,10 @@ body {
   padding-top: 8rem;
 }
 
-.image-preview-box {
-  display: block;
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  text-align: center;
-}
-
 .image-preview-box-empty {
   display: block;
   height: 200px;
   width: 200px;
-  border-radius: 50%;
   background-color: white;
   text-align: center;
 }
@@ -99,7 +81,6 @@ body {
   background-size: cover;
   height: 200px;
   width: 200px;
-  border-radius: 50%;
   margin-right: 2rem;
 }
 
