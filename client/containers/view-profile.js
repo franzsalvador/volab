@@ -7,10 +7,10 @@ export default class ViewProfile extends Component {
       <div>
         <div className="jumbotron container">
           <div className="profile-image float-md-left" style={{ backgroundImage: `url(${imageUrl})` }}></div>
-          <h3 className="display-4">{displayName}</h3>
-          <p className="lead">{firstName + ' ' + lastName}</p>
-          <p className="lead">{city + ', ' + country}</p>
-          <div className="lead">
+          <h3 className="display-4 profile-details">{displayName}</h3>
+          <p className="lead profile-details">{firstName + ' ' + lastName}</p>
+          <p className="lead profile-details">{city + ', ' + country}</p>
+          <div className="lead profile-details">
             <ul className="detail-list-items">
               <li>
                 <a target="_blank" rel="noopener noreferrer" href={facebook}>
@@ -29,7 +29,7 @@ export default class ViewProfile extends Component {
             </ul>
           </div>
           <hr className="my-4"/>
-          <p>{bio}</p>
+          <p className="profile-details">{bio}</p>
         </div>
       </div>
     )

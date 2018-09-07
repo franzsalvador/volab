@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ProfileForm from '../components/profile-form'
 
-export default class userProfile extends Component {
+export default class UserProfile extends Component {
   render() {
     const { createProfile, editProfile, deleteProfile, navigate, user, path } = this.props
     return (
