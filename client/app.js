@@ -14,6 +14,7 @@ export default class App extends Component {
     this.state = {
       path,
       params,
+      registeredUser: false,
       user: {}
     }
     this.navigate = this.navigate.bind(this)
@@ -31,7 +32,6 @@ export default class App extends Component {
     window.location.hash = path + queryString.stringify(params)
   }
   createProfile(userDetails) {
-    console.log(this.state)
     const req = {
       method: 'POST',
       body: JSON.stringify(userDetails),
@@ -39,20 +39,18 @@ export default class App extends Component {
     }
     fetch('/producers', req)
       .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({ user }))
+      .then(user => user && this.setState({ user, registeredUser: true }))
       .catch(err => console.error(err))
   }
   editProfile(userDetails) {
-    console.log(this.state)
     const { id } = this.state.user
+    const url = '/producers/' + id
     const req = {
       method: 'PUT',
       body: JSON.stringify(userDetails),
-      headers: {'Content-Type': 'application/json',
-        'id': id
-      }
+      headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/producers', req)
+    fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
@@ -62,7 +60,12 @@ export default class App extends Component {
     const url = '/producers/' + id
     const req = { method: 'DELETE' }
     fetch(url, req)
-      .then(res => res.ok ? this.setState({ user: {} }) : alert(res.status))
+      .then(res => res.ok
+        ? this.setState({
+          user: {},
+          registeredUser: false
+        })
+        : alert(res.status))
       .catch(err => console.error(err))
   }
   renderView() {
@@ -71,7 +74,8 @@ export default class App extends Component {
     switch (this.state.path) {
       case '' :
         return (
-          <Home navigate = { navigate }/>
+          <Home
+            navigate = { navigate }/>
         )
       case 'create-profile' :
         return (
@@ -103,9 +107,10 @@ export default class App extends Component {
     }
   }
   render() {
+    const { registeredUser } = this.state
     return (
       <div>
-        <NavBar/>
+        <NavBar registeredUser = { registeredUser } />
         { this.renderView() }
       </div>
     )

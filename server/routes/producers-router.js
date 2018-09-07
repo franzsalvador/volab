@@ -15,6 +15,7 @@ module.exports = function producersRouter(producers) {
 
   router.post('/', (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
+    console.log(req.body)
     producers
       .insertOne(userProfile)
       .then(({ ops: [ created ] }) => {
@@ -24,7 +25,8 @@ module.exports = function producersRouter(producers) {
   })
 
   router.put('/:id', (req, res, next) => {
-    const id = req.get('id')
+    console.log(req.params.id)
+    const id = req.params.id
     producers
       .findOneAndUpdate(
         { id: id },

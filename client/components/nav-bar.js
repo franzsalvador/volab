@@ -15,6 +15,7 @@ export default class NavBar extends Component {
     })
   }
   render() {
+    const { registeredUser } = this.props
     return (
       <div className="container">
         <Navbar className="navbar-white" light expand="md">
@@ -22,6 +23,7 @@ export default class NavBar extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              {registeredUser === true &&
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   <i className="fas fa-user-circle drop-down-icons"></i>
@@ -40,6 +42,7 @@ export default class NavBar extends Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
+              }
             </Nav>
           </Collapse>
         </Navbar>
