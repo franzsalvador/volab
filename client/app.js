@@ -11,11 +11,13 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     const { path, params } = parseHash(window.location.hash)
+    const user = window.localStorage.getItem('user')
+    const registeredUser = window.localStorage.getItem('registeredUser')
     this.state = {
       path,
       params,
-      registeredUser: false,
-      user: {}
+      user: JSON.parse(user) || {},
+      registeredUser: JSON.parse(registeredUser) || false
     }
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
@@ -26,6 +28,11 @@ export default class App extends Component {
     window.addEventListener('hashchange', () => {
       const { path, params } = parseHash(window.location.hash)
       this.setState({ path, params })
+    })
+    window.addEventListener('beforeunload', () => {
+      for (var key in this.state) {
+        localStorage.setItem(key, JSON.stringify(this.state[key]))
+      }
     })
   }
   navigate({ path, params }) {

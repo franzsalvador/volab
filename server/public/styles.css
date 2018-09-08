@@ -67,6 +67,10 @@ body {
   padding-top: 8rem;
 }
 
+#bio-section {
+  height: 5rem;
+}
+
 .image-preview-box-empty {
   display: block;
   height: 200px;

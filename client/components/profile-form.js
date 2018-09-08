@@ -106,7 +106,7 @@ export default class ProfileForm extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Label for="Bio">Bio</Label>
-                <Input type="textarea" name="bio" id="bio" defaultValue={ path === 'edit-profile' ? user.bio : '' }/>
+                <Input type="textarea" name="bio" id="bio-section" defaultValue={ path === 'edit-profile' ? user.bio : '' }/>
               </FormGroup>
               <Button className="btn btn-outline-dark btn-sm" type="submit">{ path === 'edit-profile' ? 'Save Changes' : 'Save' }</Button>
             </Form>
