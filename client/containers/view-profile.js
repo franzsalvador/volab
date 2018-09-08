@@ -7,23 +7,29 @@ export default class ViewProfile extends Component {
     return (
       <div>
         <Container className="container bg-white px-0">
-          <Jumbotron className="bg-white mb-0">
+          <Jumbotron className="bg-white pt-4 mb-0">
             <div className="profile-image float-md-left rounded-circle" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             <p className="profile-display-name mb-0 profile-details">{displayName}</p>
-            <p className="lead profile-details">{firstName + ' ' + lastName}</p>
-            <p className="lead profile-details">{city + ', ' + country}</p>
-            <div className="lead profile-details">
-              <ul className="detail-list-items">
-                <li>
+            <p className="profile-details mb-0">{firstName + ' ' + lastName}</p>
+            <p className="profile-details details-location">{city + ', ' + country}</p>
+            <div className="lead profile-details mb-0">
+              <ul className="list-inline list-unstyled">
+                <li className="list-inline-item">
                   <a target="_blank" rel="noopener noreferrer" href={facebook}>
                     <i className="fab fa-facebook-square contact-icons"></i>
                   </a>
+                </li>
+                <li className="list-inline-item">
                   <a target="_blank" rel="noopener noreferrer" href={instagram}>
                     <i className="fab fa-instagram contact-icons"></i>
                   </a>
+                </li>
+                <li className="list-inline-item">
                   <a target="_blank" rel="noopener noreferrer" href={twitter}>
                     <i className="fab fa-twitter contact-icons"></i>
                   </a>
+                </li>
+                <li className="list-inline-item">
                   <a target="_blank" rel="noopener noreferrer" href={soundcloud}>
                     <i className="fab fa-soundcloud contact-icons"></i>
                   </a>

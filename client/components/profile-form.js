@@ -20,7 +20,7 @@ export default class ProfileForm extends React.Component {
     const createProfileForm = event.target
     const formData = new FormData(createProfileForm)
     const user = {}
-    for (var pair of formData.entries()) {
+    for (const pair of formData.entries()) {
       user[pair[0]] = pair[1]
     }
     createProfile(user)
@@ -34,7 +34,7 @@ export default class ProfileForm extends React.Component {
     const createProfileForm = event.target
     const formData = new FormData(createProfileForm)
     const user = {}
-    for (var pair of formData.entries()) {
+    for (const pair of formData.entries()) {
       user[pair[0]] = pair[1]
     }
     editProfile(user)
@@ -43,12 +43,11 @@ export default class ProfileForm extends React.Component {
   }
   render() {
     const { handleChange, handleSubmit, handleUpdate } = this
-    const { path } = this.props
-    const { user } = this.props
+    const { path, user, registeredUser } = this.props
     const { imageUrl } = this.state
     return (
       <Container>
-        <h5 className="save-edit-header font-weight-bold">{ path === 'create-profile' ? 'Create Profile' : 'Edit Profile' }</h5>
+        <h5 className="save-edit-header font-weight-bold">{ registeredUser !== true ? 'Create Profile' : 'Edit Profile' }</h5>
         <Row>
           <Col>
             {imageUrl ? (

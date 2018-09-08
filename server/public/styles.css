@@ -97,20 +97,20 @@ body {
 }
 
 .profile-display-name {
-  font-size: 2rem;
-}
-
-.detail-list-items {
-  list-style-type: none;
-  padding-left: 0;
+  font-size: 2.5rem;
+  font-weight: bolder;
 }
 
 .details {
   text-align: center;
 }
 
+.details-location {
+  margin-bottom: 4rem;
+}
+
 .contact-icons {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   color: gray;
@@ -127,6 +127,10 @@ body {
 
   .profile-details {
     text-align: center;
+  }
+
+  .details-location {
+    margin-bottom: 0;
   }
 }
 

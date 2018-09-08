@@ -23,7 +23,8 @@ export default class NavBar extends Component {
         <Container className="bg-white px-0">
           <Navbar className={ path === '' ? 'container bg-white' : 'container bg-dark' } light expand="md">
             <NavbarBrand className="font-weight-bold" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+            <NavbarToggler onClick={this.toggle}/>
+            {registeredUser === true &&
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
@@ -32,7 +33,6 @@ export default class NavBar extends Component {
                     Add Music
                   </NavLink>
                 </NavItem>
-                {registeredUser === true &&
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-user-circle drop-down-icons"></i>
@@ -51,9 +51,9 @@ export default class NavBar extends Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                }
               </Nav>
             </Collapse>
+            }
           </Navbar>
         </Container>
       </div>

@@ -12,18 +12,17 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     const { path, params } = parseHash(window.location.hash)
-    const user = window.localStorage.getItem('user')
-    const registeredUser = window.localStorage.getItem('registeredUser')
     this.state = {
       path,
       params,
-      user: JSON.parse(user) || {},
-      registeredUser: JSON.parse(registeredUser) || false
+      user: {},
+      registeredUser: false
     }
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
     this.editProfile = this.editProfile.bind(this)
     this.deleteProfile = this.deleteProfile.bind(this)
+    this.addMusic = this.addMusic.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -48,6 +47,7 @@ export default class App extends Component {
     fetch('/producers', req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({ user, registeredUser: true }))
+      .then(console.log(this.state))
       .catch(err => console.error(err))
   }
   editProfile(userDetails) {
@@ -76,9 +76,23 @@ export default class App extends Component {
         : alert(res.status))
       .catch(err => console.error(err))
   }
+  addMusic(music) {
+    const { id } = this.state.user
+    const url = '/producers/' + id
+    const req = {
+      method: 'PUT',
+      body: JSON.stringify(music),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(url, req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && this.setState({user}))
+      .then(console.log(this.state))
+      .catch(err => console.error(err))
+  }
   renderView() {
     const { user, path, registeredUser } = this.state
-    const { createProfile, editProfile, deleteProfile, navigate } = this
+    const { createProfile, editProfile, deleteProfile, addMusic, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -92,7 +106,8 @@ export default class App extends Component {
           <CreateEditProfile
             createProfile = { createProfile }
             navigate = { navigate }
-            user = { user }/>
+            user = { user }
+            registeredUser = { registeredUser }/>
         )
       case 'view-profile' :
         return (
@@ -105,6 +120,7 @@ export default class App extends Component {
             editProfile = { editProfile }
             navigate = { navigate }
             user = { user }
+            registeredUser = { registeredUser }
             path = { path }/>
         )
       case 'account-settings' :
@@ -117,8 +133,8 @@ export default class App extends Component {
       case 'add-music' :
         return (
           <AddMusic
+            addMusic = { addMusic }
             navigate = { navigate }
-            user = { user }
             path = { path }/>
         )
     }
