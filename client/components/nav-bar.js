@@ -19,9 +19,9 @@ export default class NavBar extends Component {
     const styleWhite = { color: 'white' }
     const styleBlack = { color: 'black' }
     return (
-      <Container className="nav-container bg-white px-0">
-        <Container className={ path === '' ? 'container bg-white px-0' : 'container bg-dark px-0' }>
-          <Navbar className="navbar-dark" light expand="md">
+      <div className="nav-container">
+        <Container className="bg-white px-0">
+          <Navbar className={ path === '' ? 'container bg-white' : 'container bg-dark' } light expand="md">
             <NavbarBrand className="font-weight-bold" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -50,7 +50,7 @@ export default class NavBar extends Component {
             </Collapse>
           </Navbar>
         </Container>
-      </Container>
+      </div>
 
     )
   }
