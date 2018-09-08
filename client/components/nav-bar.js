@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Container, Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -26,9 +26,15 @@ export default class NavBar extends Component {
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
+                <NavItem>
+                  <NavLink className="mr-3" style={ path === '' ? styleBlack : styleWhite } href="/components/">
+                    <i className="fas fa-music drop-down-icons"></i>
+                    Add Music
+                  </NavLink>
+                </NavItem>
                 {registeredUser === true &&
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
+                  <DropdownToggle nav caret style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-user-circle drop-down-icons"></i>
                     Me
                   </DropdownToggle>

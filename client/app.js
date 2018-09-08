@@ -76,14 +76,15 @@ export default class App extends Component {
       .catch(err => console.error(err))
   }
   renderView() {
-    const { user, path } = this.state
+    const { user, path, registeredUser } = this.state
     const { createProfile, editProfile, deleteProfile, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
           <Home
             navigate = { navigate }
-            path = { path }/>
+            path = { path }
+            registeredUser = { registeredUser }/>
         )
       case 'create-profile' :
         return (
