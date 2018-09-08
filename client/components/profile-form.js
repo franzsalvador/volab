@@ -47,9 +47,10 @@ export default class ProfileForm extends React.Component {
     const { user } = this.props
     const { imageUrl } = this.state
     return (
-      <Container className="pt-5">
+      <Container>
+        <h5 className="save-edit-header font-weight-bold">{ path === 'create-profile' ? 'Create Profile' : 'Edit Profile' }</h5>
         <Row>
-          <Col className = "mt-5">
+          <Col>
             {imageUrl ? (
               <div className="profile-image rounded-circle mx-auto" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             ) : (
@@ -58,7 +59,7 @@ export default class ProfileForm extends React.Component {
               </div>
             )}
           </Col>
-          <Col md="6" className="mx-auto mt-5">
+          <Col md="6" className="mx-auto">
             <Form onSubmit={ path === 'edit-profile' ? handleUpdate : handleSubmit } className="mb-5">
               <FormGroup>
                 <Input type="text" name="displayName" id="display-name" placeholder="Display Name" defaultValue={ path === 'edit-profile' ? user.displayName : '' }/>

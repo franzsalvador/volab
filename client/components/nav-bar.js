@@ -27,7 +27,7 @@ export default class NavBar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink className="mr-3" style={ path === '' ? styleBlack : styleWhite } href="/components/">
+                  <NavLink className="mr-3" href="#add-music"style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-music drop-down-icons"></i>
                     Add Music
                   </NavLink>

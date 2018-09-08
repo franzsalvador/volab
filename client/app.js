@@ -3,9 +3,10 @@ import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
-import UserProfile from './containers/user-profile'
+import CreateEditProfile from './containers/create-edit-profile'
 import ViewProfile from './containers/view-profile'
 import AccountSettings from './containers/account-settings'
+import AddMusic from './containers/add-music'
 
 export default class App extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ export default class App extends Component {
         )
       case 'create-profile' :
         return (
-          <UserProfile
+          <CreateEditProfile
             createProfile = { createProfile }
             navigate = { navigate }
             user = { user }/>
@@ -100,7 +101,7 @@ export default class App extends Component {
         )
       case 'edit-profile' :
         return (
-          <UserProfile
+          <CreateEditProfile
             editProfile = { editProfile }
             navigate = { navigate }
             user = { user }
@@ -112,6 +113,13 @@ export default class App extends Component {
             deleteProfile = { deleteProfile }
             navigate = { navigate }
             user = { user }/>
+        )
+      case 'add-music' :
+        return (
+          <AddMusic
+            navigate = { navigate }
+            user = { user }
+            path = { path }/>
         )
     }
   }
