@@ -39,11 +39,13 @@ export default class NavBar extends Component {
                     Me
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" href="#edit-profile">
-                      <i className="fas fa-user-edit mr-2"></i>
-                      Edit Profile
+                    <DropdownItem className="drop-down-print" href="#view-profile">
+                      <i className="far fa-user-circle mr-2"></i>
+                      Profile
                     </DropdownItem>
-                    <DropdownItem href="#edit-profile">
+                    <DropdownItem className="drop-down-print" href="#edit-profile">
+                      <i className="fas fa-user-edit mr-1"></i>
+                      Edit Profile
                     </DropdownItem>
                     <DropdownItem className="drop-down-print" href="#account-settings">
                       <i className="fas fa-ellipsis-h mr-2"></i>
