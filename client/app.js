@@ -47,7 +47,6 @@ export default class App extends Component {
     fetch('/producers', req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({ user, registeredUser: true }))
-      .then(console.log(this.state))
       .catch(err => console.error(err))
   }
   editProfile(userDetails) {
@@ -87,7 +86,6 @@ export default class App extends Component {
     fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({user}))
-      .then(console.log(this.state.user.soundcloudLink1))
       .catch(err => console.error(err))
   }
   renderView() {
@@ -135,7 +133,8 @@ export default class App extends Component {
           <AddMusic
             addMusic = { addMusic }
             navigate = { navigate }
-            path = { path }/>
+            path = { path }
+            user = { user }/>
         )
     }
   }

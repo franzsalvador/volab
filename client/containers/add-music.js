@@ -23,6 +23,13 @@ export default class AddMusic extends Component {
   }
   render() {
     const { handleAddMusic } = this
+    const { user } = this.props
+    const links = []
+    for (const key in user) {
+      if (key.startsWith('soundcloudLink')) {
+        links.push(user[key])
+      }
+    }
     return (
       <Container>
         <Row>
@@ -30,19 +37,19 @@ export default class AddMusic extends Component {
             <h5 className="font-weight-bold">Add Music</h5>
             <Form onSubmit={ handleAddMusic } className="mb-5">
               <FormGroup>
-                <Input type="text" placeholder="Add your Soundcloud embedd links here." name="soundcloudLink1"/>
+                <Input type="text" defaultValue={ links[0] ? links[0] : '' } placeholder="Add your Soundcloud embedd links here." name="soundcloudLink1"/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="soundcloudLink2"/>
+                <Input type="text" defaultValue={ links[1] ? links[1] : '' } name="soundcloudLink2"/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="soundcloudLink3"/>
+                <Input type="text" defaultValue={ links[2] ? links[2] : '' } name="soundcloudLink3"/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="soundcloudLink4"/>
+                <Input type="text" defaultValue={ links[3] ? links[3] : '' } name="soundcloudLink4"/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="soundcloudLink5"/>
+                <Input type="text" defaultValue={ links[4] ? links[4] : '' } name="soundcloudLink5"/>
               </FormGroup>
               <Button className="btn btn-outline-dark btn-sm" type="submit">Add Music</Button>
             </Form>

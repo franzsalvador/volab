@@ -12,7 +12,12 @@ export default class MusicSection extends Component {
     }
     return (
       <div>
-        {links.map((link, index) => <div key={ index }>{ link }</div>)}
+        {links.map((link, index) => {
+          return (
+            <div key={ index }>
+              { link }
+            </div>)
+        })}
       </div>
     )
   }
