@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Jumbotron, Container } from 'reactstrap'
+import MusicSection from '../components/music-section'
 
 export default class ViewProfile extends Component {
   render() {
+    const { user } = this.props
     const { displayName, firstName, lastName, city, country, imageUrl, bio, facebook, twitter, instagram, soundcloud } = this.props.user
     return (
       <div>
@@ -39,6 +41,7 @@ export default class ViewProfile extends Component {
             <hr className="my-4"/>
             <p className="profile-details">{bio}</p>
           </Jumbotron>
+          <MusicSection user = { user }/>
         </Container>
       </div>
     )

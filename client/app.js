@@ -87,7 +87,7 @@ export default class App extends Component {
     fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({user}))
-      .then(console.log(this.state))
+      .then(console.log(this.state.user.soundcloudLink1))
       .catch(err => console.error(err))
   }
   renderView() {

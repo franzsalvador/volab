@@ -25,7 +25,7 @@ export default class ProfileForm extends React.Component {
     }
     createProfile(user)
     alert('Your profile has been saved.')
-    navigate({ path: 'view-profile', params: { displayName } })
+    navigate({ path: 'add-music', params: { displayName } })
   }
   handleUpdate(event) {
     event.preventDefault()

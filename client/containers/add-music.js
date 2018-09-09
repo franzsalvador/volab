@@ -30,7 +30,7 @@ export default class AddMusic extends Component {
             <h5 className="font-weight-bold">Add Music</h5>
             <Form onSubmit={ handleAddMusic } className="mb-5">
               <FormGroup>
-                <Input type="text" placeholder="Add your Soundcloud embedd links here." name="soundloudLink1"/>
+                <Input type="text" placeholder="Add your Soundcloud embedd links here." name="soundcloudLink1"/>
               </FormGroup>
               <FormGroup>
                 <Input type="text" name="soundcloudLink2"/>

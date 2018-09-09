@@ -57,6 +57,7 @@
     "body-parser": "1.18.3",
     "dotenv": "6.0.0",
     "express": "4.16.3",
+    "html-react-parser": "^0.4.6",
     "mongodb": "3.1.1",
     "react": "16.4.1",
     "react-dom": "16.4.1",
