@@ -16,7 +16,6 @@ export default class AddMusic extends Component {
     for (const pair of formData.entries()) {
       music[pair[0]] = pair[1]
     }
-    console.log(music)
     addMusic(music)
     alert('Your music has been updated.')
     navigate({ path: 'view-profile' })
