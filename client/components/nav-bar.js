@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Container, Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -19,25 +19,33 @@ export default class NavBar extends Component {
     const styleWhite = { color: 'white' }
     const styleBlack = { color: 'black' }
     return (
-      <Container className="nav-container bg-white px-0">
-        <Container className={ path === '' ? 'container bg-white px-0' : 'container bg-dark px-0' }>
-          <Navbar className="navbar-dark" light expand="md">
+      <div className="nav-container">
+        <Container className="bg-white px-0">
+          <Navbar className={ path === '' ? 'container bg-white' : 'container bg-dark' } light expand="md">
             <NavbarBrand className="font-weight-bold" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+            <NavbarToggler onClick={this.toggle}/>
+            {registeredUser === true &&
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                {registeredUser === true &&
+                <NavItem>
+                  <NavLink className="mr-3" href="#add-music"style={ path === '' ? styleBlack : styleWhite }>
+                    <i className="fas fa-music drop-down-icons"></i>
+                    Add Music
+                  </NavLink>
+                </NavItem>
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
+                  <DropdownToggle nav caret style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-user-circle drop-down-icons"></i>
                     Me
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" href="#edit-profile">
-                      <i className="fas fa-user-edit mr-2"></i>
-                      Edit Profile
+                    <DropdownItem className="drop-down-print" href="#view-profile">
+                      <i className="far fa-user-circle mr-2"></i>
+                      Profile
                     </DropdownItem>
-                    <DropdownItem href="#edit-profile">
+                    <DropdownItem className="drop-down-print" href="#edit-profile">
+                      <i className="fas fa-user-edit mr-1"></i>
+                      Edit Profile
                     </DropdownItem>
                     <DropdownItem className="drop-down-print" href="#account-settings">
                       <i className="fas fa-ellipsis-h mr-2"></i>
@@ -45,13 +53,12 @@ export default class NavBar extends Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                }
               </Nav>
             </Collapse>
+            }
           </Navbar>
         </Container>
-      </Container>
-
+      </div>
     )
   }
 }

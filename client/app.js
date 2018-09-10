@@ -3,9 +3,10 @@ import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
-import UserProfile from './containers/user-profile'
+import CreateEditProfile from './containers/create-edit-profile'
 import ViewProfile from './containers/view-profile'
 import AccountSettings from './containers/account-settings'
+import AddMusic from './containers/add-music'
 
 export default class App extends Component {
   constructor(props) {
@@ -14,18 +15,24 @@ export default class App extends Component {
     this.state = {
       path,
       params,
-      registeredUser: false,
-      user: {}
+      user: {},
+      registeredUser: false
     }
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
     this.editProfile = this.editProfile.bind(this)
     this.deleteProfile = this.deleteProfile.bind(this)
+    this.addMusic = this.addMusic.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       const { path, params } = parseHash(window.location.hash)
       this.setState({ path, params })
+    })
+    window.addEventListener('beforeunload', () => {
+      for (var key in this.state) {
+        localStorage.setItem(key, JSON.stringify(this.state[key]))
+      }
     })
   }
   navigate({ path, params }) {
@@ -68,22 +75,37 @@ export default class App extends Component {
         : alert(res.status))
       .catch(err => console.error(err))
   }
+  addMusic(music) {
+    const { id } = this.state.user
+    const url = '/producers/' + id
+    const req = {
+      method: 'PUT',
+      body: JSON.stringify(music),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(url, req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && this.setState({user}))
+      .catch(err => console.error(err))
+  }
   renderView() {
-    const { user, path } = this.state
-    const { createProfile, editProfile, deleteProfile, navigate } = this
+    const { user, path, registeredUser } = this.state
+    const { createProfile, editProfile, deleteProfile, addMusic, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
           <Home
             navigate = { navigate }
-            path = { path }/>
+            path = { path }
+            registeredUser = { registeredUser }/>
         )
       case 'create-profile' :
         return (
-          <UserProfile
+          <CreateEditProfile
             createProfile = { createProfile }
             navigate = { navigate }
-            user = { user }/>
+            user = { user }
+            registeredUser = { registeredUser }/>
         )
       case 'view-profile' :
         return (
@@ -92,10 +114,11 @@ export default class App extends Component {
         )
       case 'edit-profile' :
         return (
-          <UserProfile
+          <CreateEditProfile
             editProfile = { editProfile }
             navigate = { navigate }
             user = { user }
+            registeredUser = { registeredUser }
             path = { path }/>
         )
       case 'account-settings' :
@@ -103,6 +126,14 @@ export default class App extends Component {
           <AccountSettings
             deleteProfile = { deleteProfile }
             navigate = { navigate }
+            user = { user }/>
+        )
+      case 'add-music' :
+        return (
+          <AddMusic
+            addMusic = { addMusic }
+            navigate = { navigate }
+            path = { path }
             user = { user }/>
         )
     }

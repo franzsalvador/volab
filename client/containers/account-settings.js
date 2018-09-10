@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, FormGroup, Input } from 'reactstrap'
+import { Row, Col, Button, Form, FormGroup, Input, Container } from 'reactstrap'
 
 export default class AccountSettings extends Component {
   constructor(props) {
@@ -18,9 +18,10 @@ export default class AccountSettings extends Component {
     const { handleDelete } = this
     const { user } = this.props
     return (
-      <div className="form-container mx-auto">
-        <div className="row">
-          <div className="col-6 mx-auto ">
+      <Container>
+        <Row>
+          <Col className="mx-auto form-top-margin" md="6">
+            <h5 className="font-weight-bold">Account Settings</h5>
             <Form onSubmit={ handleDelete } className="mb-5">
               <FormGroup>
                 <Input type="text" name="firstName" id="first-name" defaultValue={ user.firstName }/>
@@ -33,9 +34,9 @@ export default class AccountSettings extends Component {
               </FormGroup>
               <Button className="btn btn-outline-dark btn-sm" type="submit">Delete Account</Button>
             </Form>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

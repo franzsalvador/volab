@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import ProfileForm from '../components/profile-form'
 
-export default class UserProfile extends Component {
+export default class CreateEditProfile extends Component {
   render() {
-    const { createProfile, editProfile, deleteProfile, navigate, user, path } = this.props
+    const { createProfile, editProfile, navigate, user, registeredUser, path } = this.props
     return (
-      <div className="container bg-white">
+      <div>
         <ProfileForm
           createProfile = { createProfile }
           editProfile = { editProfile }
-          deleteProfile = { deleteProfile }
+          registeredUser= { registeredUser }
           navigate = { navigate }
           user={ user }
           path={ path }/>

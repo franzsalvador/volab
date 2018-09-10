@@ -20,12 +20,12 @@ export default class ProfileForm extends React.Component {
     const createProfileForm = event.target
     const formData = new FormData(createProfileForm)
     const user = {}
-    for (var pair of formData.entries()) {
+    for (const pair of formData.entries()) {
       user[pair[0]] = pair[1]
     }
     createProfile(user)
     alert('Your profile has been saved.')
-    navigate({ path: 'view-profile', params: { displayName } })
+    navigate({ path: 'add-music', params: { displayName } })
   }
   handleUpdate(event) {
     event.preventDefault()
@@ -34,7 +34,7 @@ export default class ProfileForm extends React.Component {
     const createProfileForm = event.target
     const formData = new FormData(createProfileForm)
     const user = {}
-    for (var pair of formData.entries()) {
+    for (const pair of formData.entries()) {
       user[pair[0]] = pair[1]
     }
     editProfile(user)
@@ -43,13 +43,13 @@ export default class ProfileForm extends React.Component {
   }
   render() {
     const { handleChange, handleSubmit, handleUpdate } = this
-    const { path } = this.props
-    const { user } = this.props
+    const { path, user, registeredUser } = this.props
     const { imageUrl } = this.state
     return (
-      <Container className="pt-5">
+      <Container>
+        <h5 className="save-edit-header font-weight-bold">{ registeredUser !== true ? 'Create Profile' : 'Edit Profile' }</h5>
         <Row>
-          <Col className = "mt-5">
+          <Col>
             {imageUrl ? (
               <div className="profile-image rounded-circle mx-auto" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             ) : (
@@ -58,7 +58,7 @@ export default class ProfileForm extends React.Component {
               </div>
             )}
           </Col>
-          <Col md="6" className="mx-auto mt-5">
+          <Col md="6" className="mx-auto">
             <Form onSubmit={ path === 'edit-profile' ? handleUpdate : handleSubmit } className="mb-5">
               <FormGroup>
                 <Input type="text" name="displayName" id="display-name" placeholder="Display Name" defaultValue={ path === 'edit-profile' ? user.displayName : '' }/>
@@ -106,7 +106,7 @@ export default class ProfileForm extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Label for="Bio">Bio</Label>
-                <Input type="textarea" name="bio" id="bio" defaultValue={ path === 'edit-profile' ? user.bio : '' }/>
+                <Input type="textarea" name="bio" id="bio-section" defaultValue={ path === 'edit-profile' ? user.bio : '' }/>
               </FormGroup>
               <Button className="btn btn-outline-dark btn-sm" type="submit">{ path === 'edit-profile' ? 'Save Changes' : 'Save' }</Button>
             </Form>
