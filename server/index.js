@@ -14,11 +14,13 @@ MongoClient
   .then(client => {
     const db = client.db('volab-app')
     const producers = db.collection('producers')
+    const vocalists = db.collection('vocalists')
     const publicPath = path.join(__dirname, 'public/')
     express()
       .use(express.static(publicPath))
       .use(bodyParser.json())
       .use('/producers', producersRouter(producers))
+      .use('/vocalists', producersRouter(vocalists))
       .use((err, req, res, next) => {
         console.error(err)
         res.status(500).json({

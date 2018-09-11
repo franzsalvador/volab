@@ -3,20 +3,26 @@ import React from 'react'
 export default class ProfileSelectors extends React.Component {
   constructor(props) {
     super(props)
-    this.handleClickProducers = this.handleClickProducers.bind(this)
+    this.handleClickProducer = this.handleClickProducer.bind(this)
+    this.handleClickVocalist = this.handleClickVocalist.bind(this)
   }
 
-  handleClickProducers() {
+  handleClickProducer() {
     const { navigate } = this.props
-    navigate({ path: '#create-profile?producer' })
+    navigate({ path: 'create-producer-profile' })
+  }
+
+  handleClickVocalist() {
+    const { navigate } = this.props
+    navigate({ path: 'create-vocalist-profile' })
   }
 
   render() {
-    const { handleClickProducers } = this
+    const { handleClickProducer, handleClickVocalist } = this
     return (
       <div className="mb-5" id="profile-selectors">
-        <button className="mr-2 btn btn-outline-light" onClick={ handleClickProducers } type="button">Producer</button>
-        <button className="ml-2 btn btn-outline-light" type="button">Vocalist</button>
+        <button className="mr-2 btn btn-outline-light" onClick={ handleClickProducer } type="button">Producer</button>
+        <button className="ml-2 btn btn-outline-light" onClick={ handleClickVocalist }type="button">Vocalist</button>
       </div>
     )
   }
