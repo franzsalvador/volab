@@ -39,12 +39,14 @@ export default class App extends Component {
     window.location.hash = path + queryString.stringify(params)
   }
   createProfile(userDetails) {
+    const { path } = this.state
+    const url = path === 'create-producer-profile' ? '/producers' : '/vocalists'
     const req = {
       method: 'POST',
       body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/producers', req)
+    fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({ user, registeredUser: true }))
       .catch(err => console.error(err))
