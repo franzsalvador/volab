@@ -22,7 +22,7 @@ export default class ProfileSelectors extends React.Component {
     return (
       <div className="mb-5" id="profile-selectors">
         <button className="mr-2 btn btn-outline-light" onClick={ handleClickProducer } type="button">Producer</button>
-        <button className="ml-2 btn btn-outline-light" onClick={ handleClickVocalist}type="button">Vocalist</button>
+        <button className="ml-2 btn btn-outline-light" onClick={ handleClickVocalist }type="button">Vocalist</button>
       </div>
     )
   }
