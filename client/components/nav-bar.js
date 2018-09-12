@@ -33,11 +33,11 @@ export default class NavBar extends Component {
                     Explore
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" href="#view-profile">
+                    <DropdownItem className="drop-down-print" href="#explore-producers">
                       <i className="fas fa-drum-steelpan drop-down-icons mr-2"></i>
                       Music Producers
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" href="#edit-profile">
+                    <DropdownItem className="drop-down-print" href="#edit-vocalists">
                       <i className="fas fa-microphone drop-down-icons mr-3"></i>
                       Vocalists
                     </DropdownItem>
