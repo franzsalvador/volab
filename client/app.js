@@ -101,15 +101,7 @@ export default class App extends Component {
             path = { path }
             registeredUser = { registeredUser }/>
         )
-      case 'create-producer-profile' :
-        return (
-          <CreateEditProfile
-            createProfile = { createProfile }
-            navigate = { navigate }
-            user = { user }
-            registeredUser = { registeredUser }/>
-        )
-      case 'create-vocalist-profile' :
+      case 'create-profile' :
         return (
           <CreateEditProfile
             createProfile = { createProfile }
