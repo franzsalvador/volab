@@ -15,7 +15,7 @@ export default class ProfileSelectors extends React.Component {
     const { handleCreateProfile } = this
     return (
       <div className="mb-5" id="profile-selectors">
-        <button className="mr-2 btn btn-outline-light" onClick={ handleCreateProfile } type="button">Create Profile</button>
+        <button className="mr-2 btn btn-outline-light" onClick={ handleCreateProfile } type="button">Get Started!</button>
       </div>
     )
   }

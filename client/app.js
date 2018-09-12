@@ -52,7 +52,7 @@ export default class App extends Component {
   }
   editProfile(userDetails) {
     const { id } = this.state.user
-    const url = '/artists' + id
+    const url = '/artists/' + id
     const req = {
       method: 'PUT',
       body: JSON.stringify(userDetails),
@@ -65,7 +65,7 @@ export default class App extends Component {
   }
   deleteProfile() {
     const { id } = this.state.user
-    const url = '/artists' + id
+    const url = '/artists/' + id
     const req = { method: 'DELETE' }
     fetch(url, req)
       .then(res => res.ok
@@ -77,8 +77,9 @@ export default class App extends Component {
       .catch(err => console.error(err))
   }
   addMusic(music) {
+    console.log(this.state)
     const { id } = this.state.user
-    const url = '/artists' + id
+    const url = '/artists/' + id
     const req = {
       method: 'PUT',
       body: JSON.stringify(music),

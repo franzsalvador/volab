@@ -63,8 +63,8 @@ export default class ProfileForm extends React.Component {
               <FormGroup>
                 <Label for="artistType">Choose One</Label>
                 <Input type="select" name="artistType" id="artistType" defaultValue={ path === 'edit-profile' ? user.artistType : '' }>
-                  <option>Vocalist</option>
                   <option>Music Producer</option>
+                  <option>Vocalist</option>
                 </Input>
               </FormGroup>
               <FormGroup>
