@@ -8,7 +8,7 @@ export default class ProfileSelectors extends React.Component {
 
   handleCreateProfile() {
     const { navigate } = this.props
-    navigate({ path: 'create--profile' })
+    navigate({ path: 'create-profile' })
   }
 
   render() {
