@@ -39,19 +39,20 @@ export default class App extends Component {
     window.location.hash = path + queryString.stringify(params)
   }
   createProfile(userDetails) {
+    const url = '/artists'
     const req = {
       method: 'POST',
       body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch('/producers', req)
+    fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({ user, registeredUser: true }))
       .catch(err => console.error(err))
   }
   editProfile(userDetails) {
     const { id } = this.state.user
-    const url = '/producers/' + id
+    const url = '/artists/' + id
     const req = {
       method: 'PUT',
       body: JSON.stringify(userDetails),
@@ -64,7 +65,7 @@ export default class App extends Component {
   }
   deleteProfile() {
     const { id } = this.state.user
-    const url = '/producers/' + id
+    const url = '/artists/' + id
     const req = { method: 'DELETE' }
     fetch(url, req)
       .then(res => res.ok
@@ -76,8 +77,9 @@ export default class App extends Component {
       .catch(err => console.error(err))
   }
   addMusic(music) {
+    console.log(this.state)
     const { id } = this.state.user
-    const url = '/producers/' + id
+    const url = '/artists/' + id
     const req = {
       method: 'PUT',
       body: JSON.stringify(music),

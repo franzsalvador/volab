@@ -3,7 +3,7 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const { MongoClient } = require('mongodb')
-const producersRouter = require('./routes/producers-router')
+const artistsRouter = require('./routes/artists-router')
 
 MongoClient
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
@@ -13,12 +13,12 @@ MongoClient
   })
   .then(client => {
     const db = client.db('volab-app')
-    const producers = db.collection('producers')
+    const artists = db.collection('artists')
     const publicPath = path.join(__dirname, 'public/')
     express()
       .use(express.static(publicPath))
       .use(bodyParser.json())
-      .use('/producers', producersRouter(producers))
+      .use('/artists', artistsRouter(artists))
       .use((err, req, res, next) => {
         console.error(err)
         res.status(500).json({

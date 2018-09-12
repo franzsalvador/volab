@@ -25,7 +25,7 @@ export default class ProfileForm extends React.Component {
     }
     createProfile(user)
     alert('Your profile has been saved.')
-    navigate({ path: 'add-music', params: { displayName } })
+    navigate({ path: 'view-profile', params: { displayName } })
   }
   handleUpdate(event) {
     event.preventDefault()
@@ -60,6 +60,13 @@ export default class ProfileForm extends React.Component {
           </Col>
           <Col md="6" className="mx-auto">
             <Form onSubmit={ path === 'edit-profile' ? handleUpdate : handleSubmit } className="mb-5">
+              <FormGroup>
+                <Label for="artistType">Choose One</Label>
+                <Input type="select" name="artistType" id="artistType" defaultValue={ path === 'edit-profile' ? user.artistType : '' }>
+                  <option>Music Producer</option>
+                  <option>Vocalist</option>
+                </Input>
+              </FormGroup>
               <FormGroup>
                 <Input type="text" name="displayName" id="display-name" placeholder="Display Name" defaultValue={ path === 'edit-profile' ? user.displayName : '' }/>
               </FormGroup>
