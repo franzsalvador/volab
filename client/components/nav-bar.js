@@ -31,7 +31,7 @@ export default class NavBar extends Component {
     const styleWhite = { color: 'white' }
     const styleBlack = { color: 'black' }
     return (
-      <div className="nav-container">
+      <div className={ path === '' ? 'nav-container' : 'nav-container bg-dark' }>
         <Container className="bg-white px-0">
           <Navbar className={ path === '' ? 'container bg-white py-2' : 'container bg-dark py-2' } light expand="md">
             <NavbarBrand className="font-weight-bold py-0 nav-items" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>

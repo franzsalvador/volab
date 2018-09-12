@@ -123,6 +123,10 @@ body {
   color: rgb(253, 104, 33);
 }
 
+.explore-view-city {
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 768px) {
   .profile-image {
     margin: 0 auto;
@@ -135,6 +139,32 @@ body {
   .details-location {
     margin-bottom: 0;
   }
+
+  .explore-view-city {
+    margin-bottom: 1rem;
+  }
+
+  .theme-break {
+    margin-top: 0;
+  }
+}
+
+.profile-image-explore-view {
+  background-position: center;
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  margin-right: 2rem;
+}
+
+.profile-display-name-explore-view {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.profile-details-explore-view {
+  font-size: 0.85rem;
+  color: gray;
 }
 
 .clear-border {
