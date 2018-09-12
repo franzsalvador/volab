@@ -61,6 +61,13 @@ export default class ProfileForm extends React.Component {
           <Col md="6" className="mx-auto">
             <Form onSubmit={ path === 'edit-profile' ? handleUpdate : handleSubmit } className="mb-5">
               <FormGroup>
+                <Label for="artistType">Choose One</Label>
+                <Input type="select" name="artistType" id="artistType" defaultValue={ path === 'edit-profile' ? user.artistType : '' }>
+                  <option>Vocalist</option>
+                  <option>Music Producer</option>
+                </Input>
+              </FormGroup>
+              <FormGroup>
                 <Input type="text" name="displayName" id="display-name" placeholder="Display Name" defaultValue={ path === 'edit-profile' ? user.displayName : '' }/>
               </FormGroup>
               <FormGroup>
