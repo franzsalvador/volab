@@ -8,14 +8,26 @@ export default class NavBar extends Component {
     this.state = {
       isOpen: false
     }
+    this.handleExploreArtists = this.handleExploreArtists.bind(this)
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
+  handleExploreArtists(event) {
+    const artistType = event.target.id
+    const path = event.target.name
+    const { explore } = this.props
+    console.log(artistType)
+    fetch('/artists/' + artistType)
+      .then(res => res.ok ? res.json() : null)
+      .then(filteredArtists => explore(filteredArtists, path))
+      .catch(err => console.error(err))
+  }
   render() {
     const { registeredUser, path } = this.props
+    const { handleExploreArtists } = this
     const styleWhite = { color: 'white' }
     const styleBlack = { color: 'black' }
     return (
@@ -33,12 +45,12 @@ export default class NavBar extends Component {
                     Explore
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" href="#explore-producers">
-                      {/* <i className="fas fa-drum-steelpan drop-down-icons mr-2"></i> */}
+                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={ handleExploreArtists }>
+                      <i className="fas fa-drum-steelpan drop-down-icons mr-2"></i>
                       Music Producers
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" href="#explore-vocalists">
-                      {/* <i className="fas fa-microphone drop-down-icons mr-3"></i> */}
+                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={ handleExploreArtists }>
+                      <i className="fas fa-microphone drop-down-icons mr-3"></i>
                       Vocalists
                     </DropdownItem>
                   </DropdownMenu>
