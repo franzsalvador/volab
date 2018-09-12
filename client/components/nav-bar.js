@@ -22,11 +22,27 @@ export default class NavBar extends Component {
       <div className="nav-container">
         <Container className="bg-white px-0">
           <Navbar className={ path === '' ? 'container bg-white' : 'container bg-dark' } light expand="md">
-            <NavbarBrand className="font-weight-bold" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
+            <NavbarBrand className="font-weight-bold py-0 nav-items" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             {registeredUser === true &&
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle href="#explore" nav caret style={ path === '' ? styleBlack : styleWhite }>
+                    <i className="fas fa-search drop-down-icons"></i>
+                    Explore
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem className="drop-down-print" href="#view-profile">
+                      <i className="fas fa-drum-steelpan drop-down-icons mr-2"></i>
+                      Music Producers
+                    </DropdownItem>
+                    <DropdownItem className="drop-down-print" href="#edit-profile">
+                      <i className="fas fa-microphone drop-down-icons mr-3"></i>
+                      Vocalists
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
                 <NavItem>
                   <NavLink className="mr-3" href="#add-music"style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-music drop-down-icons"></i>

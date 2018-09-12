@@ -7,16 +7,11 @@ body {
   background-color: #eee;
 }
 
-.nav-bar {
-  height: 46px;
-}
-
 .nav-container {
   background-color: white;
 }
 
 .drop-down-icons {
-  font-size: 1rem;
   margin-right: 0.5rem;
 }
 
@@ -26,7 +21,7 @@ body {
 
 #brand {
   font-family: 'Pacifico', cursive;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: white;
 }
 
