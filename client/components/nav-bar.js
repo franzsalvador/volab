@@ -21,36 +21,36 @@ export default class NavBar extends Component {
     return (
       <div className="nav-container">
         <Container className="bg-white px-0">
-          <Navbar className={ path === '' ? 'container bg-white' : 'container bg-dark' } light expand="md">
+          <Navbar className={ path === '' ? 'container bg-white py-2' : 'container bg-dark py-2' } light expand="md">
             <NavbarBrand className="font-weight-bold py-0 nav-items" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             {registeredUser === true &&
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle href="#explore" nav caret style={ path === '' ? styleBlack : styleWhite }>
+                  <DropdownToggle href="#explore" className="menu-items" nav caret style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-search drop-down-icons"></i>
                     Explore
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem className="drop-down-print" href="#explore-producers">
-                      <i className="fas fa-drum-steelpan drop-down-icons mr-2"></i>
+                      {/* <i className="fas fa-drum-steelpan drop-down-icons mr-2"></i> */}
                       Music Producers
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" href="#edit-vocalists">
-                      <i className="fas fa-microphone drop-down-icons mr-3"></i>
+                    <DropdownItem className="drop-down-print" href="#explore-vocalists">
+                      {/* <i className="fas fa-microphone drop-down-icons mr-3"></i> */}
                       Vocalists
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
                 <NavItem>
-                  <NavLink className="mr-3" href="#add-music"style={ path === '' ? styleBlack : styleWhite }>
+                  <NavLink className="mr-3 menu-items" href="#add-music"style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-music drop-down-icons"></i>
                     Add Music
                   </NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret style={ path === '' ? styleBlack : styleWhite }>
+                  <DropdownToggle nav caret className="menu-items" style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-user-circle drop-down-icons"></i>
                     Me
                   </DropdownToggle>

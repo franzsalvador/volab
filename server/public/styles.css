@@ -7,8 +7,16 @@ body {
   background-color: #eee;
 }
 
+.container {
+  background-color: white;
+}
+
 .nav-container {
   background-color: white;
+}
+
+.menu-items {
+  font-size: 0.9rem;
 }
 
 .drop-down-icons {
@@ -16,12 +24,12 @@ body {
 }
 
 .drop-down-print {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 #brand {
   font-family: 'Pacifico', cursive;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: white;
 }
 

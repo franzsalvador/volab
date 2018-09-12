@@ -118,10 +118,10 @@ export default class App extends Component {
         return (
           <CreateEditProfile
             editProfile = { editProfile }
-            navigate = { navigate }
-            user = { user }
             registeredUser = { registeredUser }
-            path = { path }/>
+            navigate = { navigate }
+            path = { path }
+            user = { user }/>
         )
       case 'account-settings' :
         return (
@@ -134,6 +134,13 @@ export default class App extends Component {
         return (
           <AddMusic
             addMusic = { addMusic }
+            navigate = { navigate }
+            path = { path }
+            user = { user }/>
+        )
+      case 'explore-artists' :
+        return (
+          <AddMusic
             navigate = { navigate }
             path = { path }
             user = { user }/>
