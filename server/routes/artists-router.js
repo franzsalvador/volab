@@ -1,13 +1,14 @@
 const { Router } = require('express')
 const uuid = require('uuid/v4')
 
-module.exports = function producersRouter(producers) {
+module.exports = function producersRouter(artists) {
 
   const router = new Router()
 
-  router.get('/', (req, res, next) => {
-    producers
-      .find()
+  router.get('/:artistType', (req, res, next) => {
+    const artistType = req.params.artistType
+    artists
+      .find({ artistType: artistType })
       .toArray()
       .then(found => res.json(found))
       .catch(err => next(err))
@@ -15,7 +16,7 @@ module.exports = function producersRouter(producers) {
 
   router.post('/', (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
-    producers
+    artists
       .insertOne(userProfile)
       .then(({ ops: [ created ] }) => {
         res.status(201).json(created)
@@ -25,7 +26,7 @@ module.exports = function producersRouter(producers) {
 
   router.put('/:id', (req, res, next) => {
     const id = req.params.id
-    producers
+    artists
       .findOneAndUpdate(
         { id: id },
         { $set: req.body },
@@ -41,7 +42,7 @@ module.exports = function producersRouter(producers) {
 
   router.delete('/:id', (req, res, next) => {
     const id = req.params.id
-    producers
+    artists
       .findOneAndDelete({ id: id })
       .then(({ value }) => {
         value
