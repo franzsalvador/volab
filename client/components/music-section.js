@@ -3,11 +3,11 @@ import Parser from 'html-react-parser'
 
 export default class MusicSection extends Component {
   render() {
-    const { user } = this.props
+    const { artist } = this.props
     const links = []
-    for (const key in user) {
+    for (const key in artist) {
       if (key.startsWith('soundcloudLink')) {
-        links.push(Parser((user[key]).replace(/'/, "'")))
+        links.push(Parser((artist[key]).replace(/'/, "'")))
       }
     }
     return (

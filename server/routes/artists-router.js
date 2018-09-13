@@ -5,6 +5,14 @@ module.exports = function producersRouter(artists) {
 
   const router = new Router()
 
+  router.get('/displayName/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
+    artists
+      .findOne({ displayName: displayName })
+      .then(found => res.json(found))
+      .catch(err => next(err))
+  })
+
   router.get('/:artistType', (req, res, next) => {
     const artistType = req.params.artistType
     artists

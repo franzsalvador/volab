@@ -8,7 +8,9 @@ export default class DiscoverArtists extends Component {
   }
 
   handleViewProfile(event) {
-    console.log(this.props.params.artistType)
+    const { navigate } = this.props
+    const displayName = event.target.name
+    navigate({ path: 'view-profile', params: { 'displayName': displayName } })
   }
 
   render() {
@@ -27,7 +29,7 @@ export default class DiscoverArtists extends Component {
                   <p className="profile-display-name-explore-view mb-0">{artist.displayName + ' (' + artist.artistType + ')'}</p>
                   <p className="profile-details-explore-view mb-0">{artist.firstName + ' ' + artist.lastName}</p>
                   <p className="profile-details-explore-view explore-view-city">{artist.city + ', ' + artist.country}</p>
-                  <Button className="btn btn-outline-dark btn-sm view-profile-button" onClick={ handleViewProfile } name={ artist.id }>View Profile</Button>
+                  <Button className="btn btn-outline-dark btn-sm view-profile-button" onClick={ handleViewProfile } name={ artist.displayName }>View Profile</Button>
                   <hr className="theme-break"/>
                 </div>
               )

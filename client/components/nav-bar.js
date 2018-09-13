@@ -9,6 +9,7 @@ export default class NavBar extends Component {
       isOpen: false
     }
     this.handleDiscoverArtists = this.handleDiscoverArtists.bind(this)
+    this.handleViewProfile = this.handleViewProfile.bind(this)
   }
   toggle() {
     this.setState({
@@ -24,9 +25,13 @@ export default class NavBar extends Component {
       .then(filteredArtists => discover(filteredArtists, path))
       .catch(err => console.error(err))
   }
+  handleViewProfile() {
+    const { user, navigate } = this.props
+    navigate({path: 'view-profile', params: { 'displayName': user.displayName }})
+  }
   render() {
     const { registeredUser, path } = this.props
-    const { handleDiscoverArtists } = this
+    const { handleDiscoverArtists, handleViewProfile } = this
     const styleWhite = { color: 'white' }
     const styleBlack = { color: 'black' }
     return (
@@ -53,7 +58,7 @@ export default class NavBar extends Component {
                   </DropdownMenu>
                 </UncontrolledDropdown>
                 <NavItem>
-                  <NavLink className="mr-3 menu-items" href="#add-music"style={ path === '' ? styleBlack : styleWhite }>
+                  <NavLink className="mr-3 menu-items" href="#add-music" style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-music drop-down-icons"></i>
                     Add Music
                   </NavLink>
@@ -64,13 +69,13 @@ export default class NavBar extends Component {
                     Me
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" href="#view-profile">
+                    <DropdownItem className="drop-down-print" onClick={ handleViewProfile }>
                       <i className="far fa-user-circle mr-2"></i>
                       Profile
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" href="#edit-profile">
+                    <DropdownItem className="drop-down-print" href='#update-profile'>
                       <i className="fas fa-user-edit mr-1"></i>
-                      Edit Profile
+                      Update Profile
                     </DropdownItem>
                     <DropdownItem className="drop-down-print" href="#account-settings">
                       <i className="fas fa-ellipsis-h mr-2"></i>

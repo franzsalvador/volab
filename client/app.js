@@ -3,7 +3,7 @@ import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
-import CreateEditProfile from './containers/create-edit-profile'
+import CreateUpdateProfile from './containers/create-update-profile'
 import ViewProfile from './containers/view-profile'
 import AccountSettings from './containers/account-settings'
 import AddMusic from './containers/add-music'
@@ -22,7 +22,7 @@ export default class App extends Component {
     }
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
-    this.editProfile = this.editProfile.bind(this)
+    this.updateProfile = this.updateProfile.bind(this)
     this.deleteProfile = this.deleteProfile.bind(this)
     this.addMusic = this.addMusic.bind(this)
     this.discover = this.discover.bind(this)
@@ -53,7 +53,7 @@ export default class App extends Component {
       .then(user => user && this.setState({ user, registeredUser: true }))
       .catch(err => console.error(err))
   }
-  editProfile(userDetails) {
+  updateProfile(userDetails) {
     const { id } = this.state.user
     const url = '/artists/' + id
     const req = {
@@ -96,11 +96,10 @@ export default class App extends Component {
     const { navigate } = this
     this.setState({ filteredArtists })
     navigate({ path: 'discover', params: { 'artistType': filteredBy } })
-    console.log(this.state.params)
   }
   renderView() {
     const { user, path, params, registeredUser, filteredArtists } = this.state
-    const { createProfile, editProfile, deleteProfile, addMusic, navigate } = this
+    const { createProfile, retrieveProfile, updateProfile, deleteProfile, addMusic, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -111,7 +110,7 @@ export default class App extends Component {
         )
       case 'create-profile' :
         return (
-          <CreateEditProfile
+          <CreateUpdateProfile
             createProfile = { createProfile }
             navigate = { navigate }
             user = { user }
@@ -120,12 +119,13 @@ export default class App extends Component {
       case 'view-profile' :
         return (
           <ViewProfile
-            user = { user }/>
+            user = { user }
+            params = { params }/>
         )
-      case 'edit-profile' :
+      case 'update-profile' :
         return (
-          <CreateEditProfile
-            editProfile = { editProfile }
+          <CreateUpdateProfile
+            updateProfile = { updateProfile }
             registeredUser = { registeredUser }
             navigate = { navigate }
             path = { path }
@@ -149,21 +149,25 @@ export default class App extends Component {
       case 'discover' :
         return (
           <DiscoverArtists
+            retrieveProfile = { retrieveProfile }
             path = { path }
             params = { params }
+            navigate = { navigate }
             filteredArtists = { filteredArtists }/>
         )
     }
   }
   render() {
-    const { registeredUser, path } = this.state
-    const { discover } = this
+    const { registeredUser, path, user } = this.state
+    const { discover, navigate } = this
     return (
       <div>
         <NavBar
           registeredUser = { registeredUser }
           path = { path }
-          discover = { discover }/>
+          user = { user }
+          discover = { discover }
+          navigate = { navigate }/>
         { this.renderView() }
       </div>
     )

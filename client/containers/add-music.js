@@ -9,7 +9,7 @@ export default class AddMusic extends Component {
   }
   handleAddMusic(event) {
     event.preventDefault()
-    const { navigate, addMusic } = this.props
+    const { navigate, addMusic, user } = this.props
     const addMusicForm = event.target
     const formData = new FormData(addMusicForm)
     const music = {}
@@ -18,7 +18,7 @@ export default class AddMusic extends Component {
     }
     addMusic(music)
     alert('Your music has been updated.')
-    navigate({ path: 'view-profile' })
+    navigate({ path: 'view-profile', params: { 'displayName': user.displayName } })
   }
   render() {
     const { handleAddMusic } = this
