@@ -13,12 +13,13 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     const { path, params } = parseHash(window.location.hash)
+    const user = window.localStorage.getItem('user')
+    const registeredUser = window.localStorage.getItem('registeredUser')
     this.state = {
       path,
       params,
-      user: {},
-      registeredUser: false,
-      filteredArtists: []
+      user: JSON.parse(user) || {},
+      registeredUser: JSON.parse(registeredUser) || false
     }
     this.navigate = this.navigate.bind(this)
     this.createProfile = this.createProfile.bind(this)
