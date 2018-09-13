@@ -67,17 +67,10 @@ export default class App extends Component {
       .catch(err => console.error(err))
   }
   deleteProfile() {
-    const { id } = this.state.user
-    const url = '/artists/' + id
-    const req = { method: 'DELETE' }
-    fetch(url, req)
-      .then(res => res.ok
-        ? this.setState({
-          user: {},
-          registeredUser: false
-        })
-        : alert(res.status))
-      .catch(err => console.error(err))
+    this.setState({
+      user: {},
+      registeredUser: false
+    })
   }
   addMusic(music) {
     const { id } = this.state.user

@@ -9,8 +9,13 @@ export default class AccountSettings extends Component {
   }
   handleDelete(event) {
     event.preventDefault()
-    const { deleteProfile, navigate } = this.props
-    deleteProfile()
+    const { navigate, deleteProfile, user: { id } } = this.props
+    const url = '/artists/' + id
+    const req = { method: 'DELETE' }
+    fetch(url, req)
+      .then(res => res.ok)
+      .then(deleteProfile())
+      .catch(err => console.error(err))
     alert('Your profile has been deleted.')
     navigate({ path: '' })
   }
