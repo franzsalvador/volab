@@ -99,7 +99,7 @@ export default class App extends Component {
   }
   renderView() {
     const { user, path, params, registeredUser, filteredArtists } = this.state
-    const { createProfile, retrieveProfile, updateProfile, deleteProfile, addMusic, navigate } = this
+    const { createProfile, updateProfile, deleteProfile, addMusic, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -149,7 +149,6 @@ export default class App extends Component {
       case 'discover' :
         return (
           <DiscoverArtists
-            retrieveProfile = { retrieveProfile }
             path = { path }
             params = { params }
             navigate = { navigate }
