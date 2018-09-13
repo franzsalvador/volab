@@ -8,6 +8,7 @@ export default class DiscoverArtists extends Component {
     this.handleViewProfile = this.handleViewProfile.bind(this)
   }
   componentDidMount() {
+    window.addEventListener('hashchange', () => location.reload())
     const { artistType } = this.props.params
     console.log(artistType)
     fetch('/artists/' + artistType)
