@@ -11,11 +11,9 @@ export default class ProfileForm extends React.Component {
   }
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value })
-    console.log(this.state)
   }
   handleSubmit(event) {
     event.preventDefault()
-    const { displayName } = this.props.user
     const { createProfile, navigate } = this.props
     const createProfileForm = event.target
     const formData = new FormData(createProfileForm)
@@ -24,22 +22,22 @@ export default class ProfileForm extends React.Component {
       user[pair[0]] = pair[1]
     }
     createProfile(user)
+    navigate({ path: 'add-music' })
     alert('Your profile has been saved.')
-    navigate({ path: 'view-profile', params: { displayName } })
   }
   handleUpdate(event) {
     event.preventDefault()
-    const { id } = this.props.user
-    const { editProfile, navigate } = this.props
+    const { displayName } = this.props.user
+    const { updateProfile, navigate } = this.props
     const createProfileForm = event.target
     const formData = new FormData(createProfileForm)
     const user = {}
     for (const pair of formData.entries()) {
       user[pair[0]] = pair[1]
     }
-    editProfile(user)
+    updateProfile(user)
     alert('Your profile has been updated.')
-    navigate({ path: 'view-profile', params: { id } })
+    navigate({ path: 'view-profile', params: { displayName } })
   }
   render() {
     const { handleChange, handleSubmit, handleUpdate } = this
@@ -59,7 +57,7 @@ export default class ProfileForm extends React.Component {
             )}
           </Col>
           <Col md="6" className="mx-auto">
-            <Form onSubmit={ path === 'edit-profile' ? handleUpdate : handleSubmit } className="mb-5">
+            <Form onSubmit={ path === 'update-profile' ? handleUpdate : handleSubmit } className="mb-5">
               <FormGroup>
                 <Label for="artistType">Choose One</Label>
                 <Input type="select" name="artistType" id="artistType" defaultValue={ path === 'edit-profile' ? user.artistType : '' }>
@@ -68,41 +66,41 @@ export default class ProfileForm extends React.Component {
                 </Input>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="displayName" id="display-name" placeholder="Display Name" defaultValue={ path === 'edit-profile' ? user.displayName : '' }/>
+                <Input type="text" name="displayName" id="display-name" placeholder="Display Name" defaultValue={ path === 'update-profile' ? user.displayName : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="firstName" id="first-name" placeholder="First Name" defaultValue={ path === 'edit-profile' ? user.firstName : '' }/>
+                <Input type="text" name="firstName" id="first-name" placeholder="First Name" defaultValue={ path === 'update-profile' ? user.firstName : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="lastName" id="last-name" placeholder="Last Name" defaultValue={ path === 'edit-profile' ? user.lastName : '' }/>
+                <Input type="text" name="lastName" id="last-name" placeholder="Last Name" defaultValue={ path === 'update-profile' ? user.lastName : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="city" id="city" placeholder="City" defaultValue={ path === 'edit-profile' ? user.city : '' }/>
+                <Input type="text" name="city" id="city" placeholder="City" defaultValue={ path === 'update-profile' ? user.city : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="country" id="country" placeholder="Country" defaultValue={ path === 'edit-profile' ? user.country : '' }/>
+                <Input type="text" name="country" id="country" placeholder="Country" defaultValue={ path === 'update-profile' ? user.country : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="email" name="email" id="email" placeholder="Email Address" defaultValue={ path === 'edit-profile' ? user.email : '' }/>
+                <Input type="email" name="email" id="email" placeholder="Email Address" defaultValue={ path === 'update-profile' ? user.email : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="facebook" id="facebook" placeholder="Facebook" defaultValue={ path === 'edit-profile' ? user.facebook : '' }/>
+                <Input type="text" name="facebook" id="facebook" placeholder="Facebook" defaultValue={ path === 'update-profile' ? user.facebook : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="instagram" id="instagram" placeholder="Instagram" defaultValue={ path === 'edit-profile' ? user.instagram : '' }/>
+                <Input type="text" name="instagram" id="instagram" placeholder="Instagram" defaultValue={ path === 'update-profile' ? user.instagram : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="twitter" id="twitter" placeholder="Twitter" defaultValue={ path === 'edit-profile' ? user.twitter : '' }/>
+                <Input type="text" name="twitter" id="twitter" placeholder="Twitter" defaultValue={ path === 'update-profile' ? user.twitter : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="soundcloud" id="soundcloud" placeholder="Soundcloud" defaultValue={ path === 'edit-profile' ? user.soundcloud : '' }/>
+                <Input type="text" name="soundcloud" id="soundcloud" placeholder="Soundcloud" defaultValue={ path === 'update-profile' ? user.soundcloud : '' }/>
               </FormGroup>
               <FormGroup>
-                <Input type="url" name="imageUrl" id="image-url" onChange={ handleChange } placeholder="Profile Image URL" defaultValue={ path === 'edit-profile' ? user.imageUrl : '' }/>
+                <Input type="url" name="imageUrl" id="image-url" onChange={ handleChange } placeholder="Profile Image URL" defaultValue={ path === 'update-profile' ? user.imageUrl : '' }/>
               </FormGroup>
               <FormGroup>
                 <Label for="genre">Genre</Label>
-                <Input type="select" name="genre" id="genre" defaultValue={ path === 'edit-profile' ? user.genre : '' }>
+                <Input type="select" name="genre" id="genre" defaultValue={ path === 'update-profile' ? user.genre : '' }>
                   <option>Rock</option>
                   <option>Pop</option>
                   <option>Hip Hop</option>
@@ -113,9 +111,9 @@ export default class ProfileForm extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Label for="Bio">Bio</Label>
-                <Input type="textarea" name="bio" id="bio-section" defaultValue={ path === 'edit-profile' ? user.bio : '' }/>
+                <Input type="textarea" name="bio" id="bio-section" defaultValue={ path === 'update-profile' ? user.bio : '' }/>
               </FormGroup>
-              <Button className="btn btn-outline-dark btn-sm" type="submit">{ path === 'edit-profile' ? 'Save Changes' : 'Save' }</Button>
+              <Button className="btn btn-outline-dark btn-sm" type="submit">{ path === 'update-profile' ? 'Save Changes' : 'Save' }</Button>
             </Form>
           </Col>
         </Row>

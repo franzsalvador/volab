@@ -3,26 +3,27 @@ import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
-import CreateEditProfile from './containers/create-edit-profile'
+import CreateupdateUser from './containers/create-update-profile'
 import ViewProfile from './containers/view-profile'
 import AccountSettings from './containers/account-settings'
 import AddMusic from './containers/add-music'
+import DiscoverArtists from './containers/discover-artists'
 
 export default class App extends Component {
   constructor(props) {
     super(props)
     const { path, params } = parseHash(window.location.hash)
+    const user = window.localStorage.getItem('user')
+    const registeredUser = window.localStorage.getItem('registeredUser')
     this.state = {
       path,
       params,
-      user: {},
-      registeredUser: false
+      user: JSON.parse(user) || {},
+      registeredUser: JSON.parse(registeredUser) || false
     }
     this.navigate = this.navigate.bind(this)
-    this.createProfile = this.createProfile.bind(this)
-    this.editProfile = this.editProfile.bind(this)
-    this.deleteProfile = this.deleteProfile.bind(this)
-    this.addMusic = this.addMusic.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+    this.deleteUser = this.deleteUser.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -38,61 +39,18 @@ export default class App extends Component {
   navigate({ path, params }) {
     window.location.hash = path + queryString.stringify(params)
   }
-  createProfile(userDetails) {
-    const url = '/artists'
-    const req = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({ user, registeredUser: true }))
-      .catch(err => console.error(err))
+  updateUser(user) {
+    this.setState({ user, registeredUser: true })
   }
-  editProfile(userDetails) {
-    const { id } = this.state.user
-    const url = '/artists/' + id
-    const req = {
-      method: 'PUT',
-      body: JSON.stringify(userDetails),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({user}))
-      .catch(err => console.error(err))
-  }
-  deleteProfile() {
-    const { id } = this.state.user
-    const url = '/artists/' + id
-    const req = { method: 'DELETE' }
-    fetch(url, req)
-      .then(res => res.ok
-        ? this.setState({
-          user: {},
-          registeredUser: false
-        })
-        : alert(res.status))
-      .catch(err => console.error(err))
-  }
-  addMusic(music) {
-    console.log(this.state)
-    const { id } = this.state.user
-    const url = '/artists/' + id
-    const req = {
-      method: 'PUT',
-      body: JSON.stringify(music),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({user}))
-      .catch(err => console.error(err))
+  deleteUser() {
+    this.setState({
+      user: {},
+      registeredUser: false
+    })
   }
   renderView() {
-    const { user, path, registeredUser } = this.state
-    const { createProfile, editProfile, deleteProfile, addMusic, navigate } = this
+    const { user, path, params, registeredUser, filteredArtists } = this.state
+    const { updateUser, deleteUser, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -103,8 +61,8 @@ export default class App extends Component {
         )
       case 'create-profile' :
         return (
-          <CreateEditProfile
-            createProfile = { createProfile }
+          <CreateupdateUser
+            updateUser = { updateUser }
             navigate = { navigate }
             user = { user }
             registeredUser = { registeredUser }/>
@@ -112,41 +70,53 @@ export default class App extends Component {
       case 'view-profile' :
         return (
           <ViewProfile
-            user = { user }/>
-        )
-      case 'edit-profile' :
-        return (
-          <CreateEditProfile
-            editProfile = { editProfile }
-            navigate = { navigate }
             user = { user }
+            params = { params }/>
+        )
+      case 'update-profile' :
+        return (
+          <CreateupdateUser
+            updateUser = { updateUser }
             registeredUser = { registeredUser }
-            path = { path }/>
+            navigate = { navigate }
+            path = { path }
+            user = { user }/>
         )
       case 'account-settings' :
         return (
           <AccountSettings
-            deleteProfile = { deleteProfile }
+            deleteUser = { deleteUser }
             navigate = { navigate }
             user = { user }/>
         )
       case 'add-music' :
         return (
           <AddMusic
-            addMusic = { addMusic }
             navigate = { navigate }
             path = { path }
             user = { user }/>
         )
+      case 'discover' :
+        return (
+          <DiscoverArtists
+            path = { path }
+            params = { params }
+            navigate = { navigate }
+            filteredArtists = { filteredArtists }/>
+        )
     }
   }
   render() {
-    const { registeredUser, path } = this.state
+    const { registeredUser, path, user } = this.state
+    const { discover, navigate } = this
     return (
       <div>
         <NavBar
           registeredUser = { registeredUser }
-          path = { path } />
+          path = { path }
+          user = { user }
+          discover = { discover }
+          navigate = { navigate }/>
         { this.renderView() }
       </div>
     )

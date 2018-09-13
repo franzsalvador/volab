@@ -7,26 +7,29 @@ body {
   background-color: #eee;
 }
 
-.nav-bar {
-  height: 46px;
+.container {
+  background-color: white;
 }
 
 .nav-container {
   background-color: white;
 }
 
+.menu-items {
+  font-size: 0.9rem;
+}
+
 .drop-down-icons {
-  font-size: 1rem;
   margin-right: 0.5rem;
 }
 
 .drop-down-print {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 #brand {
   font-family: 'Pacifico', cursive;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: white;
 }
 
@@ -132,6 +135,32 @@ body {
   .details-location {
     margin-bottom: 0;
   }
+
+  .view-profile-button {
+    margin-bottom: 1rem;
+  }
+
+  .theme-break {
+    margin-top: 0;
+  }
+}
+
+.profile-image-explore-view {
+  background-position: center;
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  margin-right: 2rem;
+}
+
+.profile-display-name-explore-view {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.profile-details-explore-view {
+  font-size: 0.85rem;
+  color: gray;
 }
 
 .clear-border {
