@@ -3,7 +3,7 @@ import parseHash from './util/parse-hash'
 import * as queryString from './util/query-string'
 import NavBar from './components/nav-bar'
 import Home from './views/home'
-import CreateUpdateProfile from './containers/create-update-profile'
+import CreateupdateUser from './containers/create-update-profile'
 import ViewProfile from './containers/view-profile'
 import AccountSettings from './containers/account-settings'
 import AddMusic from './containers/add-music'
@@ -22,9 +22,8 @@ export default class App extends Component {
       registeredUser: JSON.parse(registeredUser) || false
     }
     this.navigate = this.navigate.bind(this)
-    this.createProfile = this.createProfile.bind(this)
-    this.updateProfile = this.updateProfile.bind(this)
-    this.deleteProfile = this.deleteProfile.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+    this.deleteUser = this.deleteUser.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -40,32 +39,10 @@ export default class App extends Component {
   navigate({ path, params }) {
     window.location.hash = path + queryString.stringify(params)
   }
-  createProfile(userDetails) {
-    const url = '/artists'
-    const req = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({ user, registeredUser: true }))
-      .catch(err => console.error(err))
+  updateUser(user) {
+    this.setState({ user, registeredUser: true })
   }
-  updateProfile(userDetails) {
-    const { id } = this.state.user
-    const url = '/artists/' + id
-    const req = {
-      method: 'PUT',
-      body: JSON.stringify(userDetails),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({user}))
-      .catch(err => console.error(err))
-  }
-  deleteProfile() {
+  deleteUser() {
     this.setState({
       user: {},
       registeredUser: false
@@ -73,7 +50,7 @@ export default class App extends Component {
   }
   renderView() {
     const { user, path, params, registeredUser, filteredArtists } = this.state
-    const { createProfile, updateProfile, deleteProfile, navigate } = this
+    const { updateUser, deleteUser, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -84,8 +61,8 @@ export default class App extends Component {
         )
       case 'create-profile' :
         return (
-          <CreateUpdateProfile
-            createProfile = { createProfile }
+          <CreateupdateUser
+            updateUser = { updateUser }
             navigate = { navigate }
             user = { user }
             registeredUser = { registeredUser }/>
@@ -98,8 +75,8 @@ export default class App extends Component {
         )
       case 'update-profile' :
         return (
-          <CreateUpdateProfile
-            updateProfile = { updateProfile }
+          <CreateupdateUser
+            updateUser = { updateUser }
             registeredUser = { registeredUser }
             navigate = { navigate }
             path = { path }
@@ -108,7 +85,7 @@ export default class App extends Component {
       case 'account-settings' :
         return (
           <AccountSettings
-            deleteProfile = { deleteProfile }
+            deleteUser = { deleteUser }
             navigate = { navigate }
             user = { user }/>
         )
