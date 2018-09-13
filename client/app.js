@@ -25,7 +25,6 @@ export default class App extends Component {
     this.createProfile = this.createProfile.bind(this)
     this.updateProfile = this.updateProfile.bind(this)
     this.deleteProfile = this.deleteProfile.bind(this)
-    this.addMusic = this.addMusic.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -72,22 +71,9 @@ export default class App extends Component {
       registeredUser: false
     })
   }
-  addMusic(music) {
-    const { id } = this.state.user
-    const url = '/artists/' + id
-    const req = {
-      method: 'PUT',
-      body: JSON.stringify(music),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({user}))
-      .catch(err => console.error(err))
-  }
   renderView() {
     const { user, path, params, registeredUser, filteredArtists } = this.state
-    const { createProfile, updateProfile, deleteProfile, addMusic, navigate } = this
+    const { createProfile, updateProfile, deleteProfile, navigate } = this
     switch (this.state.path) {
       case '' :
         return (
@@ -129,7 +115,6 @@ export default class App extends Component {
       case 'add-music' :
         return (
           <AddMusic
-            addMusic = { addMusic }
             navigate = { navigate }
             path = { path }
             user = { user }/>

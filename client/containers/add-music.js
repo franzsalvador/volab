@@ -5,11 +5,28 @@ export default class AddMusic extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.handleAddMusic = this.handleAddMusic.bind(this)
+    this.addMusic = this.addMusic.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleAddMusic(event) {
+
+  addMusic(music) {
+    const { id } = this.props.user
+    const url = '/artists/' + id
+    const req = {
+      method: 'PUT',
+      body: JSON.stringify(music),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(url, req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && this.setState({user}))
+      .catch(err => console.error(err))
+  }
+
+  handleSubmit(event) {
     event.preventDefault()
-    const { navigate, addMusic, user } = this.props
+    const { addMusic } = this
+    const { navigate, user } = this.props
     const addMusicForm = event.target
     const formData = new FormData(addMusicForm)
     const music = {}
@@ -21,7 +38,7 @@ export default class AddMusic extends Component {
     navigate({ path: 'view-profile', params: { 'displayName': user.displayName } })
   }
   render() {
-    const { handleAddMusic } = this
+    const { handleSubmit } = this
     const { user } = this.props
     const links = []
     for (const key in user) {
@@ -34,7 +51,7 @@ export default class AddMusic extends Component {
         <Row>
           <Col className="mx-auto form-top-margin" md="6">
             <h5 className="font-weight-bold">Add Music</h5>
-            <Form onSubmit={ handleAddMusic } className="mb-5">
+            <Form onSubmit={ handleSubmit } className="mb-5">
               <FormGroup>
                 <Input type="text" defaultValue={ links[0] ? links[0] : '' } placeholder="Add your Soundcloud embedd links here." name="soundcloudLink1"/>
               </FormGroup>
