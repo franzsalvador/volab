@@ -25,7 +25,6 @@ export default class App extends Component {
     this.updateProfile = this.updateProfile.bind(this)
     this.deleteProfile = this.deleteProfile.bind(this)
     this.addMusic = this.addMusic.bind(this)
-    this.discover = this.discover.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -91,11 +90,6 @@ export default class App extends Component {
       .then(res => res.ok ? res.json() : null)
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
-  }
-  discover(filteredArtists, filteredBy) {
-    const { navigate } = this
-    this.setState({ filteredArtists })
-    navigate({ path: 'discover', params: { 'artistType': filteredBy } })
   }
   renderView() {
     const { user, path, params, registeredUser, filteredArtists } = this.state

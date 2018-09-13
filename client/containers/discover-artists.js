@@ -4,17 +4,24 @@ import { Jumbotron, Container, Button } from 'reactstrap'
 export default class DiscoverArtists extends Component {
   constructor(props) {
     super(props)
+    this.state = { filteredArtists: [] }
     this.handleViewProfile = this.handleViewProfile.bind(this)
   }
-
+  componentDidMount() {
+    const { artistType } = this.props.params
+    console.log(artistType)
+    fetch('/artists/' + artistType)
+      .then(res => res.ok ? res.json() : null)
+      .then(filteredArtists => this.setState({ filteredArtists }))
+      .catch(err => console.error(err))
+  }
   handleViewProfile(event) {
     const { navigate } = this.props
     const displayName = event.target.name
     navigate({ path: 'view-profile', params: { 'displayName': displayName } })
   }
-
   render() {
-    const { filteredArtists } = this.props
+    const { filteredArtists } = this.state
     const { artistType } = this.props.params
     const { handleViewProfile } = this
     return (

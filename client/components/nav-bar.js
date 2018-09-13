@@ -18,12 +18,8 @@ export default class NavBar extends Component {
   }
   handleDiscoverArtists(event) {
     const artistType = event.target.id
-    const path = event.target.name
-    const { discover } = this.props
-    fetch('/artists/' + artistType)
-      .then(res => res.ok ? res.json() : null)
-      .then(filteredArtists => discover(filteredArtists, path))
-      .catch(err => console.error(err))
+    const { navigate } = this.props
+    navigate({ path: 'discover', params: { 'artistType': artistType } })
   }
   handleViewProfile() {
     const { user, navigate } = this.props
