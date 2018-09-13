@@ -7,7 +7,7 @@ import CreateEditProfile from './containers/create-edit-profile'
 import ViewProfile from './containers/view-profile'
 import AccountSettings from './containers/account-settings'
 import AddMusic from './containers/add-music'
-import ExploreArtists from './containers/explore-artists'
+import DiscoverArtists from './containers/discover-artists'
 
 export default class App extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class App extends Component {
     this.editProfile = this.editProfile.bind(this)
     this.deleteProfile = this.deleteProfile.bind(this)
     this.addMusic = this.addMusic.bind(this)
-    this.explore = this.explore.bind(this)
+    this.discover = this.discover.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -92,14 +92,14 @@ export default class App extends Component {
       .then(user => user && this.setState({user}))
       .catch(err => console.error(err))
   }
-  explore(filteredArtists, filteredBy) {
+  discover(filteredArtists, filteredBy) {
     const { navigate } = this
-    const path = 'explore?' + filteredBy
     this.setState({ filteredArtists })
-    navigate({ path: path })
+    navigate({ path: 'discover', params: { 'artistType': filteredBy } })
+    console.log(this.state.params)
   }
   renderView() {
-    const { user, path, registeredUser, filteredArtists } = this.state
+    const { user, path, params, registeredUser, filteredArtists } = this.state
     const { createProfile, editProfile, deleteProfile, addMusic, navigate } = this
     switch (this.state.path) {
       case '' :
@@ -146,23 +146,24 @@ export default class App extends Component {
             path = { path }
             user = { user }/>
         )
-      case 'explore' :
+      case 'discover' :
         return (
-          <ExploreArtists
+          <DiscoverArtists
             path = { path }
+            params = { params }
             filteredArtists = { filteredArtists }/>
         )
     }
   }
   render() {
     const { registeredUser, path } = this.state
-    const { explore } = this
+    const { discover } = this
     return (
       <div>
         <NavBar
           registeredUser = { registeredUser }
           path = { path }
-          explore = { explore }/>
+          discover = { discover }/>
         { this.renderView() }
       </div>
     )

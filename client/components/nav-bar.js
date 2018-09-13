@@ -8,26 +8,25 @@ export default class NavBar extends Component {
     this.state = {
       isOpen: false
     }
-    this.handleExploreArtists = this.handleExploreArtists.bind(this)
+    this.handleDiscoverArtists = this.handleDiscoverArtists.bind(this)
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
-  handleExploreArtists(event) {
+  handleDiscoverArtists(event) {
     const artistType = event.target.id
     const path = event.target.name
-    const { explore } = this.props
-    console.log(artistType)
+    const { discover } = this.props
     fetch('/artists/' + artistType)
       .then(res => res.ok ? res.json() : null)
-      .then(filteredArtists => explore(filteredArtists, path))
+      .then(filteredArtists => discover(filteredArtists, path))
       .catch(err => console.error(err))
   }
   render() {
     const { registeredUser, path } = this.props
-    const { handleExploreArtists } = this
+    const { handleDiscoverArtists } = this
     const styleWhite = { color: 'white' }
     const styleBlack = { color: 'black' }
     return (
@@ -40,17 +39,15 @@ export default class NavBar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle href="#explore" className="menu-items" nav caret style={ path === '' ? styleBlack : styleWhite }>
+                  <DropdownToggle href="#Discover" className="menu-items" nav caret style={ path === '' ? styleBlack : styleWhite }>
                     <i className="fas fa-search drop-down-icons"></i>
-                    Explore
+                    Discover Artists
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={ handleExploreArtists }>
-                      <i className="fas fa-drum-steelpan drop-down-icons mr-2"></i>
+                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={ handleDiscoverArtists }>
                       Music Producers
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={ handleExploreArtists }>
-                      <i className="fas fa-microphone drop-down-icons mr-3"></i>
+                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={ handleDiscoverArtists }>
                       Vocalists
                     </DropdownItem>
                   </DropdownMenu>

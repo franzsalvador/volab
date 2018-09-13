@@ -123,10 +123,6 @@ body {
   color: rgb(253, 104, 33);
 }
 
-.explore-view-city {
-  margin-bottom: 3rem;
-}
-
 @media (max-width: 768px) {
   .profile-image {
     margin: 0 auto;
@@ -140,7 +136,7 @@ body {
     margin-bottom: 0;
   }
 
-  .explore-view-city {
+  .view-profile-button {
     margin-bottom: 1rem;
   }
 
