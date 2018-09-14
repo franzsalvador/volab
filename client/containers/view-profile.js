@@ -6,6 +6,7 @@ export default class ViewProfile extends Component {
   constructor(props) {
     super(props)
     this.state = { artist: {} }
+    this.handleFollow = this.handleFollow.bind(this)
   }
   componentDidMount() {
     const { displayName } = this.props.params
@@ -14,9 +15,28 @@ export default class ViewProfile extends Component {
       .then(artist => artist && this.setState({ artist }))
       .catch(err => console.error(err))
   }
+  handleFollow() {
+    const user = this.props.user.id
+    const artistFollowed = this.state.artist.id
+    const updateUserUrl = 'artists/' + user
+    const reqUpdateUser = { following: artistFollowed }
+
+    const reqFollow = {
+      method: 'PUT',
+      body: JSON.stringify(reqUpdateUser),
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    fetch(updateUserUrl, reqFollow)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && console.log(user))
+      .catch(err => console.error(err))
+
+  }
   render() {
     const { artist } = this.state
     const { displayName, firstName, lastName, city, country, imageUrl, bio, facebook, twitter, instagram, soundcloud, artistType } = this.state.artist
+    const { handleFollow } = this
     return (
       <div>
         <Container className="container clear-border bg-white px-0">
@@ -29,7 +49,7 @@ export default class ViewProfile extends Component {
           <div className="info-bar pt-2">
             <div className="px-4 font-weight-bold float-left">Tracks</div>
             <div className="px-4 float-right">
-              <Button className="btn btn-outline-dark btn-sm mb-3">Follow</Button>
+              <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={ handleFollow }>Follow</Button>
             </div>
           </div>
           <hr className="mx-4"/>
