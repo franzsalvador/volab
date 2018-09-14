@@ -31,7 +31,7 @@ export default class NavBar extends Component {
     return (
       <div>
         <Navbar className="container border-bottom" light expand="md">
-          <NavbarBrand className="font-weight-bold nav-items" id="brand" href="/">Volab</NavbarBrand>
+          <NavbarBrand className="font-weight-bold" id="brand" href="/">Volab</NavbarBrand>
           <NavbarToggler onClick={this.toggle}/>
           {registeredUser === true &&
             <Collapse isOpen={this.state.isOpen} navbar>

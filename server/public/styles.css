@@ -176,6 +176,12 @@ body {
   overflow: hidden;
 }
 
+.info-bar {
+  display: block;
+  height: 2rem;
+  font-size: 1.5rem;
+}
+
 .clear-border {
   border: 1px solid transparent;
 }

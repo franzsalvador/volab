@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container } from 'reactstrap'
+import { Container, Button } from 'reactstrap'
 import MusicSection from '../components/music-section'
 
 export default class ViewProfile extends Component {
@@ -26,11 +26,17 @@ export default class ViewProfile extends Component {
             <p className="profile-details mb-0">{firstName + ' ' + lastName}</p>
             <p className="profile-details details-location">{city + ', ' + country}</p>
           </div>
-          <hr className="mx-5"/>
+          <div className="info-bar pt-2">
+            <div className="px-4 font-weight-bold float-left">Tracks</div>
+            <div className="px-4 float-right">
+              <Button className="btn btn-outline-dark btn-sm mb-3">Follow</Button>
+            </div>
+          </div>
+          <hr className="mx-4"/>
           <Container className="clear-border border-right px-4 col-md-9 float-md-left">
             <MusicSection artist = { artist }/>
           </Container>
-          <Container className="clear-border profile-side-bar px-4 col-md-3 float-md-right">
+          <Container className="clear-border profile-side-bar px-4 col-md-3">
             <Container className="profile-stats col-lg-6 col-sm-12 float-left border-left">Followers</Container>
             <Container className="profile-stats col-lg-6 col-sm-12 border-left">Following</Container>
             <p>{bio}</p>
