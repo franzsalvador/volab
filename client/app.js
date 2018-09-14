@@ -107,13 +107,12 @@ export default class App extends Component {
     }
   }
   render() {
-    const { registeredUser, path, user } = this.state
+    const { registeredUser, user } = this.state
     const { discover, navigate } = this
     return (
       <div>
         <NavBar
           registeredUser = { registeredUser }
-          path = { path }
           user = { user }
           discover = { discover }
           navigate = { navigate }/>

@@ -10,6 +10,7 @@ export default class DiscoverArtists extends Component {
   componentDidMount() {
     window.addEventListener('hashchange', () => location.reload())
     const { artistType } = this.props.params
+    console.log(artistType)
     fetch('/artists/' + artistType)
       .then(res => res.ok ? res.json() : null)
       .then(filteredArtists => this.setState({ filteredArtists }))
@@ -28,7 +29,7 @@ export default class DiscoverArtists extends Component {
       <div>
         <Container className="container bg-white mt-5">
           <Jumbotron className="bg-white pt-4 mb-0">
-            <h5 className="mb-5 font-weight-bold">{ artistType === 'music-producers' ? 'Discover Producers' : 'Discover Vocalists' }</h5>
+            <h5 className="mb-5 font-weight-bold">{ artistType === 'Music%20Producer' ? 'Discover Producers' : 'Discover Vocalists' }</h5>
             {filteredArtists.map((artist, index) => {
               return (
                 <div key= { index }>
