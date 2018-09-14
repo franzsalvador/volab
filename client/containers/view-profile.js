@@ -53,6 +53,7 @@ export default class ViewProfile extends Component {
     const { artist } = this.state
     const { displayName, firstName, lastName, city, country, imageUrl, bio, facebook, twitter, instagram, soundcloud, artistType } = this.state.artist
     const { handleFollow } = this
+    const { user } = this.props
     return (
       <div>
         <Container className="container clear-border bg-white px-0">
@@ -65,7 +66,9 @@ export default class ViewProfile extends Component {
           <div className="info-bar pt-2">
             <div className="px-4 font-weight-bold float-left">Tracks</div>
             <div className="px-4 float-right">
+              {user.displayName !== artist.displayName &&
               <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={ handleFollow }>Follow</Button>
+              }
             </div>
           </div>
           <hr className="mx-4"/>
