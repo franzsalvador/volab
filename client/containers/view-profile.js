@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Button } from 'reactstrap'
+import { Container, Button, Badge } from 'reactstrap'
 import MusicSection from '../components/music-section'
 
 export default class ViewProfile extends Component {
@@ -48,12 +48,26 @@ export default class ViewProfile extends Component {
       .then(res => res.ok ? res.json() : null)
       .then(user => user && console.log(user))
       .catch(err => console.error(err))
+
+    location.reload()
   }
   render() {
     const { artist } = this.state
     const { displayName, firstName, lastName, city, country, imageUrl, bio, facebook, twitter, instagram, soundcloud, artistType } = this.state.artist
     const { handleFollow } = this
     const { user } = this.props
+    let followers = 0
+    for (const key in artist) {
+      if (key === 'followedBy') {
+        followers++
+      }
+    }
+    let following = 0
+    for (const key in artist) {
+      if (key === 'following') {
+        following++
+      }
+    }
     return (
       <div>
         <Container className="container clear-border bg-white px-0">
@@ -76,8 +90,9 @@ export default class ViewProfile extends Component {
             <MusicSection artist = { artist }/>
           </Container>
           <Container className="clear-border profile-side-bar px-4 col-md-3">
-            <Container className="profile-stats col-lg-6 col-sm-12 float-left border-left">Followers</Container>
-            <Container className="profile-stats col-lg-6 col-sm-12 border-left">Following</Container>
+            <div className="float-left col-md-6 profile-stats pl-0">Followers <Badge color="primary"> { followers } </Badge></div>
+            <div className="col-md-6 profile-stats pl-0">Following <Badge color="primary"> { following } </Badge></div>
+            <hr/>
             <p>{bio}</p>
             <ul className="list-unstyled">
               <li>

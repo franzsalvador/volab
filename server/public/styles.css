@@ -168,6 +168,14 @@ body {
   display: inline-block;
   color: rgba(0, 0, 0, 0.5);
   font-size: 0.85rem;
+  overflow: hidden;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .profile-side-bar {
+    margin-top: 1rem;
+  }
 }
 
 .profile-stats {
