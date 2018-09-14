@@ -10,8 +10,8 @@ export default class AddMusic extends Component {
   }
 
   addMusic(music) {
-    const { id } = this.props.user
-    const url = '/artists/' + id
+    const { displayName } = this.props.user
+    const url = '/artists/' + displayName
     const req = {
       method: 'PUT',
       body: JSON.stringify(music),

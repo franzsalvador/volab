@@ -32,11 +32,11 @@ module.exports = function producersRouter(artists) {
       .catch(err => next(err))
   })
 
-  router.put('/:id', (req, res, next) => {
-    const id = req.params.id
+  router.put('/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
     artists
       .findOneAndUpdate(
-        { id: id },
+        { displayName: displayName },
         { $set: req.body },
         { returnOriginal: false }
       )

@@ -7,6 +7,7 @@ export default class ViewProfile extends Component {
     super(props)
     this.state = { artist: {} }
     this.handleFollow = this.handleFollow.bind(this)
+    this.handleFollowedBy = this.handleFollowedBy.bind(this)
   }
   componentDidMount() {
     const { displayName } = this.props.params
@@ -16,22 +17,37 @@ export default class ViewProfile extends Component {
       .catch(err => console.error(err))
   }
   handleFollow() {
-    const user = this.props.user.id
-    const artistFollowed = this.state.artist.id
-    const updateUserUrl = 'artists/' + user
-    const reqUpdateUser = { following: artistFollowed }
+    const user = this.props.user.displayName
+    const artistFollowed = this.state.artist.displayName
+    const { handleFollowedBy } = this
+    const url = 'artists/' + user
 
-    const reqFollow = {
+    const req = {
       method: 'PUT',
-      body: JSON.stringify(reqUpdateUser),
+      body: JSON.stringify({ following: artistFollowed }),
       headers: { 'Content-Type': 'application/json' }
     }
 
-    fetch(updateUserUrl, reqFollow)
+    fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && console.log(user))
       .catch(err => console.error(err))
 
+    handleFollowedBy()
+  }
+  handleFollowedBy() {
+    const user = this.props.user.displayName
+    const artistFollowed = this.state.artist.displayName
+    const url = 'artists/' + artistFollowed
+    const req = {
+      method: 'PUT',
+      body: JSON.stringify({ followedBy: user }),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(url, req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && console.log(user))
+      .catch(err => console.error(err))
   }
   render() {
     const { artist } = this.state

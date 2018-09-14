@@ -22,8 +22,8 @@ export default class CreateUpdateProfile extends Component {
   }
   updateProfile(userDetails) {
     const { updateUser } = this.props
-    const { id } = this.props.user
-    const url = '/artists/' + id
+    const { displayName } = this.props.user
+    const url = '/artists/' + displayName
     const req = {
       method: 'PUT',
       body: JSON.stringify(userDetails),
