@@ -21,8 +21,7 @@ export default class CreateUpdateProfile extends Component {
       .catch(err => console.error(err))
   }
   updateProfile(userDetails) {
-    const { updateUser } = this.props
-    const { displayName } = this.props.user
+    const { updateUser, user: displayName } = this.props
     const url = '/artists/' + displayName
     const req = {
       method: 'PUT',
@@ -40,12 +39,12 @@ export default class CreateUpdateProfile extends Component {
     return (
       <div>
         <ProfileForm
-          createProfile = { createProfile }
-          updateProfile = { updateProfile }
-          registeredUser= { registeredUser }
-          navigate = { navigate }
-          user={ user }
-          path={ path }/>
+          createProfile = {createProfile}
+          updateProfile = {updateProfile}
+          registeredUser= {registeredUser}
+          navigate = {navigate}
+          user={user}
+          path={path}/>
       </div>
     )
   }

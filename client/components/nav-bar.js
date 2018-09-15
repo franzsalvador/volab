@@ -24,6 +24,7 @@ export default class NavBar extends Component {
   handleViewProfile() {
     const { user, navigate } = this.props
     navigate({path: 'view-profile', params: { 'displayName': user.displayName }})
+    location.reload()
   }
   render() {
     const { registeredUser, user } = this.props
@@ -42,10 +43,10 @@ export default class NavBar extends Component {
                     Discover Artists
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={ handleDiscoverArtists }>
+                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={handleDiscoverArtists}>
                       Music Producers
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={ handleDiscoverArtists }>
+                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={handleDiscoverArtists}>
                       Vocalists
                     </DropdownItem>
                   </DropdownMenu>
@@ -58,11 +59,11 @@ export default class NavBar extends Component {
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret className="menu-items">
-                    <div className="profile-image-nav rounded-circle mx-2" style={{ backgroundImage: `url(${user.imageUrl})` }}></div>
+                    <div className="profile-image-nav rounded-circle mx-2" style={{backgroundImage: `url(${user.imageUrl})`}}></div>
                     Me
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" onClick={ handleViewProfile }>
+                    <DropdownItem className="drop-down-print" onClick={handleViewProfile}>
                       <i className="far fa-user-circle mr-2"></i>
                       Profile
                     </DropdownItem>

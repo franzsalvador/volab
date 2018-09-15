@@ -9,29 +9,37 @@ export default class ViewProfile extends Component {
   constructor(props) {
     super(props)
     this.state = { artist: {} }
+    this.updateArtist = this.updateArtist.bind(this)
   }
   componentDidMount() {
-    const { displayName } = this.props.params
+    const {displayName} = this.props.params
     fetch('/artists/displayName/' + displayName)
       .then(res => res.ok ? res.json() : null)
-      .then(artist => artist && this.setState({ artist }))
+      .then(artist => artist && this.setState({artist}))
       .catch(err => console.error(err))
+  }
+  updateArtist(artist) {
+    this.setState({ artist })
   }
   render() {
     const { artist } = this.state
-    const { user } = this.props
+    const { user, updateUser, params: { displayName } } = this.props
+    const { updateArtist } = this
     return (
       <div>
         <Container className="container clear-border bg-white px-0">
           <ProfileHeader
-            artist = { artist }
-            user = { user }/>
+            artist = {artist}
+            user = {user}/>
           <InfoBar
-            artist = { artist }
-            user = { user }/>
-          <MusicSection artist = { artist }/>
+            artist = {artist}
+            user = {user}
+            updateUser = {updateUser}
+            updateArtist = {updateArtist}
+            displayName = {displayName}/>
+          <MusicSection artist = {artist}/>
           <ProfileSideBar
-            artist = { artist }/>
+            artist = {artist}/>
         </Container>
       </div>
     )

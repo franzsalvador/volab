@@ -12,7 +12,7 @@ export default class Home extends Component {
           <div id="welcome-banner">
             <WelcomeMessage/>
             {registeredUser === false &&
-            <ProfileSelectors navigate= { navigate }/>
+            <ProfileSelectors navigate= {navigate}/>
             }
           </div>
         </div>

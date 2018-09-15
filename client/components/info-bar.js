@@ -1,15 +1,35 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
 
-export default class ProfileHeader extends Component {
+export default class InfoBar extends Component {
   constructor(props) {
     super(props)
+    this.state = { isFollowing: false }
     this.handleFollow = this.handleFollow.bind(this)
     this.handleFollowedBy = this.handleFollowedBy.bind(this)
   }
+  componentDidMount() {
+    const { displayName } = this.props
+    const currentArtistView = displayName.replace('%20', ' ')
+    const artistsFollowing = []
+    const { user } = this.props
+    for (const key in user) {
+      if (key.startsWith('following')) {
+        artistsFollowing.push(user[key])
+      }
+    }
+    artistsFollowing.forEach(artistFollowed => {
+      if (artistFollowed === currentArtistView) {
+        this.setState({ isFollowing: true })
+      }
+    })
+    console.log(artistsFollowing)
+    console.log(currentArtistView)
+  }
   handleFollow() {
     const user = this.props.user.displayName
-    const artistFollowed = this.state.artist.displayName
+    const artistFollowed = this.props.artist.displayName
+    const { updateUser } = this.props
     const { handleFollowedBy } = this
     const url = 'artists/' + user
 
@@ -21,14 +41,15 @@ export default class ProfileHeader extends Component {
 
     fetch(url, req)
       .then(res => res.ok ? res.json() : null)
-      .then(user => user && console.log(user))
+      .then(user => user && updateUser(user))
       .catch(err => console.error(err))
 
     handleFollowedBy()
   }
   handleFollowedBy() {
     const user = this.props.user.displayName
-    const artistFollowed = this.state.artist.displayName
+    const artistFollowed = this.props.artist.displayName
+    const { updateArtist } = this.props
     const url = 'artists/' + artistFollowed
     const req = {
       method: 'PUT',
@@ -37,21 +58,39 @@ export default class ProfileHeader extends Component {
     }
     fetch(url, req)
       .then(res => res.ok ? res.json() : null)
-      .then(user => user && console.log(user))
+      .then(artist => updateArtist(artist))
       .catch(err => console.error(err))
-
-    location.reload()
+  }
+  update() {
+    const currentArtistPage = this.props.artist.displayName
+    const artistsFollowing = []
+    const { user } = this.props
+    for (const key in user) {
+      if (key.startsWith('following')) {
+        artistsFollowing.push(user[key])
+      }
+    }
+    artistsFollowing.forEach(artistFollowed => {
+      if (artistFollowed === currentArtistPage) {
+        this.setState({ isFollowing: true })
+      }
+    })
+    console.log(artistsFollowing)
+    console.log(this.props.user)
   }
   render() {
+    console.log(this.state)
     const { handleFollow } = this
-    const { artist, user } = this.props
+    const { user } = this.props
+    const { isFollowing } = this.state
+    const currentArtistPage = this.props.artist.displayName
     return (
       <div>
         <div className="info-bar pt-2">
           <div className="px-4 font-weight-bold float-left">Tracks</div>
           <div className="px-4 float-right">
-            {user.displayName !== artist.displayName &&
-            <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={ handleFollow }>Follow</Button>
+            {user.displayName !== currentArtistPage &&
+            <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
             }
           </div>
         </div>

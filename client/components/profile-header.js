@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class ProfileHeader extends Component {
-  render() {
-    const { displayName, firstName, lastName, city, country, imageUrl, artistType } = this.props.artist
-    return (
-      <div>
-        <div className="profile-header p-4">
-          <div className="profile-image rounded-circle float-md-left" style={{ backgroundImage: `url(${imageUrl})` }}></div>
-          <p className="profile-display-name mb-0 profile-details">{displayName + ' (' + artistType + ')'}</p>
-          <p className="profile-details mb-0">{firstName + ' ' + lastName}</p>
-          <p className="profile-details details-location">{city + ', ' + country}</p>
-        </div>
+export default function ProfileHeader(props) {
+  const { displayName, firstName, lastName, city, country, imageUrl, artistType } = props.artist
+  return (
+    <div>
+      <div className="profile-header p-4">
+        <div className="profile-image rounded-circle float-md-left" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+        <p className="profile-display-name mb-0 profile-details">{displayName + ' (' + artistType + ')'}</p>
+        <p className="profile-details mb-0">{firstName + ' ' + lastName}</p>
+        <p className="profile-details details-location">{city + ', ' + country}</p>
       </div>
-    )
-  }
+    </div>
+  )
 }
