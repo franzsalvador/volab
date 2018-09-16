@@ -10,7 +10,6 @@ export default class DiscoverArtists extends Component {
   componentDidMount() {
     window.addEventListener('hashchange', () => location.reload())
     const { artistType } = this.props.params
-    console.log(artistType)
     fetch('/artists/' + artistType)
       .then(res => res.ok ? res.json() : null)
       .then(filteredArtists => this.setState({ filteredArtists }))

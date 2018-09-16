@@ -21,7 +21,7 @@ export default class CreateUpdateProfile extends Component {
       .catch(err => console.error(err))
   }
   updateProfile(userDetails) {
-    const { updateUser, user: displayName } = this.props
+    const { updateUser, user: { displayName } } = this.props
     const url = '/artists/' + displayName
     const req = {
       method: 'PUT',

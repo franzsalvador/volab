@@ -23,15 +23,13 @@ export default class InfoBar extends Component {
         this.setState({ isFollowing: true })
       }
     })
-    console.log(artistsFollowing)
-    console.log(currentArtistView)
   }
   handleFollow() {
     const user = this.props.user.displayName
     const artistFollowed = this.props.artist.displayName
     const { updateUser } = this.props
     const { handleFollowedBy } = this
-    const url = 'artists/' + user
+    const url = 'artists/updateStats/' + user
 
     const req = {
       method: 'PUT',
@@ -50,12 +48,14 @@ export default class InfoBar extends Component {
     const user = this.props.user.displayName
     const artistFollowed = this.props.artist.displayName
     const { updateArtist } = this.props
-    const url = 'artists/' + artistFollowed
+    const url = 'artists/updateStats/' + artistFollowed
+
     const req = {
       method: 'PUT',
       body: JSON.stringify({ followedBy: user }),
       headers: { 'Content-Type': 'application/json' }
     }
+
     fetch(url, req)
       .then(res => res.ok ? res.json() : null)
       .then(artist => updateArtist(artist))
@@ -75,11 +75,8 @@ export default class InfoBar extends Component {
         this.setState({ isFollowing: true })
       }
     })
-    console.log(artistsFollowing)
-    console.log(this.props.user)
   }
   render() {
-    console.log(this.state)
     const { handleFollow } = this
     const { user } = this.props
     const { isFollowing } = this.state

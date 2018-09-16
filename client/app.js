@@ -96,7 +96,8 @@ export default class App extends Component {
           <AddMusic
             navigate = {navigate}
             path = {path}
-            user = {user}/>
+            user = {user}
+            updateUser = {updateUser}/>
         )
       case 'discover' :
         return (

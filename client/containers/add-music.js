@@ -4,25 +4,9 @@ import { Row, Col, Button, Form, FormGroup, Input, Container } from 'reactstrap'
 export default class AddMusic extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
     this.addMusic = this.addMusic.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-
-  addMusic(music) {
-    const { displayName } = this.props.user
-    const url = '/artists/' + displayName
-    const req = {
-      method: 'PUT',
-      body: JSON.stringify(music),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && this.setState({user}))
-      .catch(err => console.error(err))
-  }
-
   handleSubmit(event) {
     event.preventDefault()
     const { addMusic } = this
@@ -36,6 +20,19 @@ export default class AddMusic extends Component {
     addMusic(music)
     alert('Your music has been updated.')
     navigate({ path: 'view-profile', params: { 'displayName': user.displayName } })
+  }
+  addMusic(music) {
+    const { user: { displayName }, updateUser } = this.props
+    const url = '/artists/' + displayName
+    const req = {
+      method: 'PUT',
+      body: JSON.stringify(music),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(url, req)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && updateUser(user))
+      .catch(err => console.error(err))
   }
   render() {
     const { handleSubmit } = this

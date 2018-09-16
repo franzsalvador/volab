@@ -48,6 +48,22 @@ module.exports = function producersRouter(artists) {
       .catch(err => next(err))
   })
 
+  router.put('/updateStats/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
+    artists
+      .findOneAndUpdate(
+        { displayName: displayName },
+        { $push: req.body },
+        { returnOriginal: false }
+      )
+      .then(({ value }) => {
+        value
+          ? res.json(value)
+          : res.sendStatus(404)
+      })
+      .catch(err => next(err))
+  })
+
   router.delete('/:id', (req, res, next) => {
     const id = req.params.id
     artists
