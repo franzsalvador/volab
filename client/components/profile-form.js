@@ -20,6 +20,8 @@ export default class ProfileForm extends React.Component {
     const user = {}
     for (const pair of formData.entries()) {
       user[pair[0]] = pair[1]
+      user.followers = []
+      user.following = []
     }
     createProfile(user)
     navigate({ path: 'add-music' })
