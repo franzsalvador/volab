@@ -52,7 +52,7 @@ export default class InfoBar extends Component {
 
     const req = {
       method: 'PUT',
-      body: JSON.stringify({ followedBy: user }),
+      body: JSON.stringify({ followers: user }),
       headers: { 'Content-Type': 'application/json' }
     }
 
