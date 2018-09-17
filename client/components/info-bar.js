@@ -6,7 +6,7 @@ export default class InfoBar extends Component {
     super(props)
     this.state = { isFollowing: false }
     this.handleFollow = this.handleFollow.bind(this)
-    this.handleFollowedBy = this.handleFollowedBy.bind(this)
+    this.handleUnFollow = this.handleUnFollow.bind(this)
   }
   componentDidMount() {
     const userFollowing = this.props.user.following
@@ -17,57 +17,64 @@ export default class InfoBar extends Component {
   handleFollow() {
     const user = this.props.user.displayName
     const artistFollowed = this.props.artist.displayName
-    const { updateUser } = this.props
-    const { handleFollowedBy } = this
-    const url = 'artists/updateStats/' + user
+    const { updateUser, updateArtist } = this.props
+    const urlFollow = 'artists/follow/' + user
+    const urlFollowedBy = 'artists/follow/' + artistFollowed
 
-    const req = {
+    const reqFollow = {
       method: 'PUT',
       body: JSON.stringify({ following: artistFollowed }),
       headers: { 'Content-Type': 'application/json' }
     }
-
-    fetch(url, req)
+    fetch(urlFollow, reqFollow)
       .then(res => res.ok ? res.json() : null)
       .then(user => user && updateUser(user))
       .catch(err => console.error(err))
 
-    handleFollowedBy()
-  }
-  handleFollowedBy() {
-    const user = this.props.user.displayName
-    const artistFollowed = this.props.artist.displayName
-    const { updateArtist } = this.props
-    const url = 'artists/updateStats/' + artistFollowed
-
-    const req = {
+    const reqFollowedBy = {
       method: 'PUT',
       body: JSON.stringify({ followers: user }),
       headers: { 'Content-Type': 'application/json' }
     }
-
-    fetch(url, req)
+    fetch(urlFollowedBy, reqFollowedBy)
       .then(res => res.ok ? res.json() : null)
       .then(artist => updateArtist(artist))
       .catch(err => console.error(err))
+
+    this.setState({ isFollowing: true })
+
   }
-  update() {
-    const currentArtistPage = this.props.artist.displayName
-    const artistsFollowing = []
-    const { user } = this.props
-    for (const key in user) {
-      if (key.startsWith('following')) {
-        artistsFollowing.push(user[key])
-      }
+  handleUnFollow() {
+    const user = this.props.user.displayName
+    const artistUnFollowed = this.props.artist.displayName
+    const { updateUser, updateArtist } = this.props
+    const urlUnFollow = 'artists/unfollow/' + user
+    const urlUnFollowedBy = 'artists/unfollow/' + artistUnFollowed
+
+    const reqUnFollow = {
+      method: 'PUT',
+      body: JSON.stringify({ following: { $in: [ artistUnFollowed ] } }),
+      headers: { 'Content-Type': 'application/json' }
     }
-    artistsFollowing.forEach(artistFollowed => {
-      if (artistFollowed === currentArtistPage) {
-        this.setState({ isFollowing: true })
-      }
-    })
+    fetch(urlUnFollow, reqUnFollow)
+      .then(res => res.ok ? res.json() : null)
+      .then(user => user && updateUser(user))
+      .catch(err => console.error(err))
+
+    const reqUnFollowedBy = {
+      method: 'PUT',
+      body: JSON.stringify({ followers: { $in: [ user ] } }),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(urlUnFollowedBy, reqUnFollowedBy)
+      .then(res => res.ok ? res.json() : null)
+      .then(artist => updateArtist(artist))
+      .catch(err => console.error(err))
+
+    this.setState({ isFollowing: false })
   }
   render() {
-    const { handleFollow } = this
+    const { handleFollow, handleUnFollow } = this
     const { user } = this.props
     const { isFollowing } = this.state
     const currentArtistPage = this.props.artist.displayName
@@ -77,7 +84,7 @@ export default class InfoBar extends Component {
           <div className="px-4 font-weight-bold float-left">Tracks</div>
           <div className="px-4 float-right">
             {user.displayName !== currentArtistPage &&
-            <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
+            <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
             }
           </div>
         </div>

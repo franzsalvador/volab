@@ -41,7 +41,6 @@ export default class App extends Component {
   }
   updateUser(user) {
     this.setState({ user, registeredUser: true })
-    location.reload()
   }
   deleteUser() {
     this.setState({
