@@ -12,7 +12,7 @@ import DiscoverArtists from './containers/discover-artists'
 export default class App extends Component {
   constructor(props) {
     super(props)
-    const { path, params } = parseHash(window.location.hash)
+    const {path, params} = parseHash(window.location.hash)
     const user = window.localStorage.getItem('user')
     const registeredUser = window.localStorage.getItem('registeredUser')
     this.state = {
@@ -27,7 +27,7 @@ export default class App extends Component {
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
-      const { path, params } = parseHash(window.location.hash)
+      const {path, params} = parseHash(window.location.hash)
       this.setState({ path, params })
     })
     window.addEventListener('beforeunload', () => {
@@ -55,69 +55,70 @@ export default class App extends Component {
       case '' :
         return (
           <Home
-            navigate = { navigate }
-            path = { path }
-            registeredUser = { registeredUser }/>
+            navigate = {navigate}
+            path = {path}
+            registeredUser = {registeredUser}/>
         )
       case 'create-profile' :
         return (
           <CreateupdateUser
-            updateUser = { updateUser }
-            navigate = { navigate }
-            user = { user }
-            registeredUser = { registeredUser }/>
+            updateUser = {updateUser}
+            navigate = {navigate}
+            user = {user}
+            registeredUser = {registeredUser}/>
         )
       case 'view-profile' :
         return (
           <ViewProfile
-            user = { user }
-            params = { params }/>
+            user = {user}
+            params = {params}
+            updateUser = {updateUser}/>
         )
       case 'update-profile' :
         return (
           <CreateupdateUser
-            updateUser = { updateUser }
-            registeredUser = { registeredUser }
-            navigate = { navigate }
-            path = { path }
-            user = { user }/>
+            updateUser = {updateUser}
+            registeredUser = {registeredUser}
+            navigate = {navigate}
+            path = {path}
+            user = {user}/>
         )
       case 'account-settings' :
         return (
           <AccountSettings
-            deleteUser = { deleteUser }
-            navigate = { navigate }
-            user = { user }/>
+            deleteUser = {deleteUser}
+            navigate = {navigate}
+            user = {user}/>
         )
       case 'add-music' :
         return (
           <AddMusic
-            navigate = { navigate }
-            path = { path }
-            user = { user }/>
+            navigate = {navigate}
+            path = {path}
+            user = {user}
+            updateUser = {updateUser}/>
         )
       case 'discover' :
         return (
           <DiscoverArtists
-            path = { path }
-            params = { params }
-            navigate = { navigate }
-            filteredArtists = { filteredArtists }/>
+            path = {path}
+            params = {params}
+            navigate = {navigate}
+            filteredArtists = {filteredArtists }/>
         )
     }
   }
   render() {
-    const { registeredUser, path, user } = this.state
+    const { registeredUser, user } = this.state
     const { discover, navigate } = this
     return (
       <div>
         <NavBar
-          registeredUser = { registeredUser }
-          path = { path }
-          user = { user }
-          discover = { discover }
-          navigate = { navigate }/>
-        { this.renderView() }
+          registeredUser = {registeredUser }
+          user = {user }
+          discover = {discover }
+          navigate = {navigate }/>
+        {this.renderView() }
       </div>
     )
   }

@@ -32,12 +32,44 @@ module.exports = function producersRouter(artists) {
       .catch(err => next(err))
   })
 
-  router.put('/:id', (req, res, next) => {
-    const id = req.params.id
+  router.put('/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
     artists
       .findOneAndUpdate(
-        { id: id },
+        { displayName: displayName },
         { $set: req.body },
+        { returnOriginal: false }
+      )
+      .then(({ value }) => {
+        value
+          ? res.json(value)
+          : res.sendStatus(404)
+      })
+      .catch(err => next(err))
+  })
+
+  router.put('/follow/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
+    artists
+      .findOneAndUpdate(
+        { displayName: displayName },
+        { $push: req.body },
+        { returnOriginal: false }
+      )
+      .then(({ value }) => {
+        value
+          ? res.json(value)
+          : res.sendStatus(404)
+      })
+      .catch(err => next(err))
+  })
+
+  router.put('/unfollow/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
+    artists
+      .findOneAndUpdate(
+        { displayName: displayName },
+        { $pull: req.body },
         { returnOriginal: false }
       )
       .then(({ value }) => {

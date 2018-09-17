@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Container, Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -24,48 +24,46 @@ export default class NavBar extends Component {
   handleViewProfile() {
     const { user, navigate } = this.props
     navigate({path: 'view-profile', params: { 'displayName': user.displayName }})
+    location.reload()
   }
   render() {
-    const { registeredUser, path } = this.props
+    const { registeredUser, user } = this.props
     const { handleDiscoverArtists, handleViewProfile } = this
-    const styleWhite = { color: 'white' }
-    const styleBlack = { color: 'black' }
     return (
-      <div className={ path === '' ? 'nav-container' : 'nav-container bg-dark' }>
-        <Container className="bg-white px-0">
-          <Navbar className={ path === '' ? 'container bg-white py-2' : 'container bg-dark py-2' } light expand="md">
-            <NavbarBrand className="font-weight-bold py-0 nav-items" id="brand" style={ path === '' ? styleBlack : styleWhite } href="/">Volab</NavbarBrand>
-            <NavbarToggler onClick={this.toggle}/>
-            {registeredUser === true &&
+      <div>
+        <Navbar className="container border-bottom" light expand="md">
+          <NavbarBrand className="font-weight-bold" id="brand" href="/">Volab</NavbarBrand>
+          <NavbarToggler onClick={this.toggle}/>
+          {registeredUser === true &&
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle href="#Discover" className="menu-items" nav caret style={ path === '' ? styleBlack : styleWhite }>
+                  <DropdownToggle href="#Discover" className="menu-items" nav caret>
                     <i className="fas fa-search drop-down-icons"></i>
                     Discover Artists
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={ handleDiscoverArtists }>
+                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={handleDiscoverArtists}>
                       Music Producers
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={ handleDiscoverArtists }>
+                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={handleDiscoverArtists}>
                       Vocalists
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
                 <NavItem>
-                  <NavLink className="mr-3 menu-items" href="#add-music" style={ path === '' ? styleBlack : styleWhite }>
+                  <NavLink className="menu-items" href="#add-music">
                     <i className="fas fa-music drop-down-icons"></i>
                     Add Music
                   </NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret className="menu-items" style={ path === '' ? styleBlack : styleWhite }>
-                    <i className="fas fa-user-circle drop-down-icons"></i>
+                  <DropdownToggle nav caret className="menu-items">
+                    <div className="profile-image-nav rounded-circle mx-2" style={{backgroundImage: `url(${user.imageUrl})`}}></div>
                     Me
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" onClick={ handleViewProfile }>
+                    <DropdownItem className="drop-down-print" onClick={handleViewProfile}>
                       <i className="far fa-user-circle mr-2"></i>
                       Profile
                     </DropdownItem>
@@ -81,9 +79,8 @@ export default class NavBar extends Component {
                 </UncontrolledDropdown>
               </Nav>
             </Collapse>
-            }
-          </Navbar>
-        </Container>
+          }
+        </Navbar>
       </div>
     )
   }

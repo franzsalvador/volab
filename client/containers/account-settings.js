@@ -27,15 +27,15 @@ export default class AccountSettings extends Component {
         <Row>
           <Col className="mx-auto form-top-margin" md="6">
             <h5 className="font-weight-bold">Account Settings</h5>
-            <Form onSubmit={ handleDelete } className="mb-5">
+            <Form onSubmit={handleDelete} className="mb-5">
               <FormGroup>
-                <Input type="text" name="firstName" id="first-name" defaultValue={ user.firstName }/>
+                <Input type="text" name="firstName" id="first-name" defaultValue={user.firstName}/>
               </FormGroup>
               <FormGroup>
-                <Input type="text" name="lastName" id="last-name" defaultValue={ user.lastName }/>
+                <Input type="text" name="lastName" id="last-name" defaultValue={user.lastName}/>
               </FormGroup>
               <FormGroup>
-                <Input type="email" name="email" id="email" defaultValue={ user.email }/>
+                <Input type="email" name="email" id="email" defaultValue={user.email}/>
               </FormGroup>
               <Button className="btn btn-outline-dark btn-sm" type="submit">Delete Account</Button>
             </Form>

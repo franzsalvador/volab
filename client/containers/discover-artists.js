@@ -28,7 +28,7 @@ export default class DiscoverArtists extends Component {
       <div>
         <Container className="container bg-white mt-5">
           <Jumbotron className="bg-white pt-4 mb-0">
-            <h5 className="mb-5 font-weight-bold">{ artistType === 'music-producers' ? 'Discover Producers' : 'Discover Vocalists' }</h5>
+            <h5 className="mb-5 font-weight-bold">{ artistType === 'Music%20Producer' ? 'Discover Producers' : 'Discover Vocalists' }</h5>
             {filteredArtists.map((artist, index) => {
               return (
                 <div key= { index }>
@@ -36,7 +36,7 @@ export default class DiscoverArtists extends Component {
                   <p className="profile-display-name-explore-view mb-0">{artist.displayName + ' (' + artist.artistType + ')'}</p>
                   <p className="profile-details-explore-view mb-0">{artist.firstName + ' ' + artist.lastName}</p>
                   <p className="profile-details-explore-view explore-view-city">{artist.city + ', ' + artist.country}</p>
-                  <Button className="btn btn-outline-dark btn-sm view-profile-button" onClick={ handleViewProfile } name={ artist.displayName }>View Profile</Button>
+                  <Button className="btn btn-outline-dark btn-sm view-profile-button" onClick={handleViewProfile} name={artist.displayName}>View Profile</Button>
                   <hr className="theme-break"/>
                 </div>
               )
