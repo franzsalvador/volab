@@ -9,20 +9,10 @@ export default class InfoBar extends Component {
     this.handleFollowedBy = this.handleFollowedBy.bind(this)
   }
   componentDidMount() {
+    const userFollowing = this.props.user.following
     const { displayName } = this.props
-    const currentArtistView = displayName.replace('%20', ' ')
-    const artistsFollowing = []
-    const { user } = this.props
-    for (const key in user) {
-      if (key.startsWith('following')) {
-        artistsFollowing.push(user[key])
-      }
-    }
-    artistsFollowing.forEach(artistFollowed => {
-      if (artistFollowed === currentArtistView) {
-        this.setState({ isFollowing: true })
-      }
-    })
+    const artist = displayName.replace('%20', ' ')
+    userFollowing.includes(artist) ? this.setState({ isFollowing: true }) : this.setState({ isFollowing: false })
   }
   handleFollow() {
     const user = this.props.user.displayName
