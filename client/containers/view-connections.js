@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Following from '../components/view-following'
+import Followers from '../components/view-followers'
 
 export default class ViewConnections extends Component {
   constructor(props) {
@@ -26,6 +28,22 @@ export default class ViewConnections extends Component {
     navigate({ path: 'view-profile', params: { 'displayName': displayName } })
   }
 
+  renderView() {
+    const { path } = this.props
+    const { followers, following } = this.state
+    switch (path) {
+      case 'following' :
+        return (
+          <Following
+            following = {following}/>
+        )
+      case 'followers' :
+        return (
+          <Followers
+            followers = {followers}/>
+        )
+    }
+  }
   render() {
     return (
       <div>
