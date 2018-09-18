@@ -70,6 +70,7 @@ export default class App extends Component {
       case 'view-profile' :
         return (
           <ViewProfile
+            navigate = {navigate}
             user = {user}
             params = {params}
             updateUser = {updateUser}/>

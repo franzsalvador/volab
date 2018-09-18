@@ -23,7 +23,7 @@ export default class ViewProfile extends Component {
   }
   render() {
     const { artist } = this.state
-    const { user, updateUser, params: { displayName } } = this.props
+    const { user, navigate, updateUser, params: { displayName } } = this.props
     const { updateArtist } = this
     return (
       <div>
@@ -39,6 +39,7 @@ export default class ViewProfile extends Component {
             displayName = {displayName}/>
           <MusicSection artist = {artist}/>
           <ProfileSideBar
+            navigate = {navigate}
             artist = {artist}/>
         </Container>
       </div>
