@@ -80,7 +80,7 @@ export default class App extends Component {
         return (
           <ViewConnections
             navigate = {navigate}
-            user = {user}
+            path = {path}
             params = {params}
             updateUser = {updateUser}/>
         )
