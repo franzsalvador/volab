@@ -56,7 +56,6 @@ export default class ViewConnections extends Component {
     }
   }
   render() {
-    console.log(this.state)
     return (
       <div>
         { this.renderView() }
