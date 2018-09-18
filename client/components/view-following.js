@@ -16,6 +16,7 @@ export default function ViewFollowing(props) {
           <div key= { index } className="float-left mx-3">
             <div className="profile-image-connection-view rounded-circle mx-auto" style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
             <div className="mt-3 text-center">
+              <p className="profile-details-explore-view mb-2">{artist.firstName + ' ' + artist.lastName}</p>
               <Button className="btn btn-outline-dark btn-sm" onClick={viewProfile} name={artist.displayName}>View Profile</Button>
             </div>
           </div>

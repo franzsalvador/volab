@@ -81,16 +81,14 @@ export default class App extends Component {
           <ViewConnections
             navigate = {navigate}
             path = {path}
-            params = {params}
-            updateUser = {updateUser}/>
+            params = {params}/>
         )
       case 'view-followers' :
         return (
           <ViewConnections
             navigate = {navigate}
             path = {path}
-            params = {params}
-            updateUser = {updateUser}/>
+            params = {params}/>
         )
       case 'update-profile' :
         return (
