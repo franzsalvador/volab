@@ -184,6 +184,11 @@ body {
   overflow: hidden;
 }
 
+.profile-stats:hover {
+  cursor: pointer;
+  color: black;
+}
+
 .info-bar {
   display: block;
   height: 2rem;
