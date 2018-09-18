@@ -76,7 +76,7 @@ export default class App extends Component {
             params = {params}
             updateUser = {updateUser}/>
         )
-      case 'view-followers' :
+      case 'view-following' :
         return (
           <ViewConnections
             navigate = {navigate}
@@ -84,11 +84,11 @@ export default class App extends Component {
             params = {params}
             updateUser = {updateUser}/>
         )
-      case 'view-following' :
+      case 'view-followers' :
         return (
           <ViewConnections
             navigate = {navigate}
-            user = {user}
+            path = {path}
             params = {params}
             updateUser = {updateUser}/>
         )
@@ -136,7 +136,7 @@ export default class App extends Component {
           user = {user }
           discover = {discover }
           navigate = {navigate }/>
-        {this.renderView() }
+        { this.renderView() }
       </div>
     )
   }

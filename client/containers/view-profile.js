@@ -15,7 +15,7 @@ export default class ViewProfile extends Component {
     const {displayName} = this.props.params
     fetch('/artists/displayName/' + displayName)
       .then(res => res.ok ? res.json() : null)
-      .then(artist => artist && this.setState({artist}))
+      .then(artist => artist && this.setState({ artist }))
       .catch(err => console.error(err))
   }
   updateArtist(artist) {

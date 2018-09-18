@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import Following from '../components/view-following'
-import Followers from '../components/view-followers'
+import ViewFollowers from '../components/view-followers'
+import ViewFollowing from '../components/view-following'
 
 export default class ViewConnections extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      artist: {},
       followers: [],
       following: []
     }
@@ -13,6 +14,10 @@ export default class ViewConnections extends Component {
   }
   componentDidMount() {
     const { displayName } = this.props.params
+    fetch('/artists/displayName/' + displayName)
+      .then(res => res.ok ? res.json() : null)
+      .then(artist => artist && this.setState({ artist }))
+      .catch(err => console.error(err))
     fetch('/artists/followers/' + displayName)
       .then(res => res.ok ? res.json() : null)
       .then(followers => this.setState({ followers: followers }))
@@ -27,26 +32,34 @@ export default class ViewConnections extends Component {
     const displayName = event.target.name
     navigate({ path: 'view-profile', params: { 'displayName': displayName } })
   }
-
   renderView() {
     const { path } = this.props
-    const { followers, following } = this.state
+    const { artist, followers, following } = this.state
+    const { handleViewProfile } = this
     switch (path) {
-      case 'following' :
+      case 'view-following' :
         return (
-          <Following
-            following = {following}/>
+          <ViewFollowing
+            artist = {artist}
+            following = {following}
+            path = {path}
+            viewProfile = {handleViewProfile}/>
         )
-      case 'followers' :
+      case 'view-followers' :
         return (
-          <Followers
-            followers = {followers}/>
+          <ViewFollowers
+            artist = {artist}
+            followers = {followers}
+            path = {path}
+            viewProfile = {handleViewProfile}/>
         )
     }
   }
   render() {
+    console.log(this.state)
     return (
       <div>
+        { this.renderView() }
       </div>
     )
   }
