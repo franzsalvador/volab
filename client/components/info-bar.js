@@ -84,7 +84,12 @@ export default class InfoBar extends Component {
           <div className="px-4 font-weight-bold float-left">Tracks</div>
           <div className="px-4 float-right">
             {user.displayName !== currentArtistPage &&
-            <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
+            <div>
+              <Button className="btn btn-outline-dark btn-sm mb-3 mx-2 email-icon" type="button">
+                <span className="fas fa-envelope"></span>
+              </Button>
+              <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
+            </div>
             }
           </div>
         </div>
