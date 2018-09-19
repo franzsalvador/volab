@@ -5,7 +5,8 @@ export default class InfoBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isFollowing: false
+      isFollowing: false,
+      messageModal: false
     }
     this.handleFollow = this.handleFollow.bind(this)
     this.handleUnFollow = this.handleUnFollow.bind(this)
