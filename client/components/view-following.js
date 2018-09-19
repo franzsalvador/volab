@@ -1,8 +1,8 @@
 import React from 'react'
+import * as queryString from '../util/query-string'
 import { Container, Button } from 'reactstrap'
 
-export default function ViewFollowing(props) {
-  const { artist, path, viewProfile, following } = props
+export default function ViewFollowing({ artist, path, following }) {
   return (
     <Container className="container connection-view-container bg-white pt-3">
       <div className="pt-3 container d-inline-block">
@@ -17,7 +17,7 @@ export default function ViewFollowing(props) {
             <div className="profile-image-connection-view rounded-circle mx-auto" style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
             <div className="mt-3 text-center">
               <p className="profile-details-explore-view mb-2">{artist.firstName + ' ' + artist.lastName}</p>
-              <Button className="btn btn-outline-dark btn-sm" onClick={viewProfile} name={artist.displayName}>View Profile</Button>
+              <Button className="btn btn-outline-dark btn-sm" href={'#view-profile' + queryString.stringify({'displayName': artist.displayName})}>View Profile</Button>
             </div>
           </div>
         )

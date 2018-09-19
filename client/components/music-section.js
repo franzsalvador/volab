@@ -2,8 +2,7 @@ import React from 'react'
 import Parser from 'html-react-parser'
 import { Container } from 'reactstrap'
 
-export default function MusicSection(props) {
-  const { artist } = props
+export default function MusicSection({ artist }) {
   const links = []
   for (const key in artist) {
     if (key.startsWith('soundcloudLink')) {

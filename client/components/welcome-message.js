@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function WelcomeMessage(props) {
+export default function WelcomeMessage() {
   return (
     <div id="welcome-message">
       <h1 className="banner-main-message">CONNECTING ARTISTS WORLDWIDE.</h1>
