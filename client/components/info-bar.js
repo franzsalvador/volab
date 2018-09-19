@@ -18,6 +18,11 @@ export default class InfoBar extends Component {
     const artist = displayName.replace('%20', ' ')
     userFollowing.includes(artist) ? this.setState({ isFollowing: true }) : this.setState({ isFollowing: false })
   }
+  toggle() {
+    this.setState({
+      messageModal: !this.state.messageModal
+    })
+  }
   handleFollow() {
     const user = this.props.user.displayName
     const artistFollowed = this.props.artist.displayName
