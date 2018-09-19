@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap'
 
 export default class InfoBar extends Component {
   constructor(props) {
@@ -107,6 +107,16 @@ export default class InfoBar extends Component {
           <Modal isOpen={this.state.messageModal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>{'To: ' + currentArtistPage}e</ModalHeader>
             <ModalBody>
+              <Form>
+                <FormGroup>
+                  <Label for="subject">Subject</Label>
+                  <Input type="text" name="subject" id="subject"/>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="message">Message</Label>
+                  <Input type="textarea" name="message" id="message"/>
+                </FormGroup>
+              </Form>
             </ModalBody>
             <ModalFooter>
               <Button className="btn btn-outline-dark btn-sm" onClick={this.toggle}>Send</Button>{' '}
