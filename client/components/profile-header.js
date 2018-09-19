@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function ProfileHeader(props) {
-  const { displayName, firstName, lastName, city, country, imageUrl, artistType } = props.artist
+export default function ProfileHeader({ artist }) {
+  const { displayName, firstName, lastName, city, country, imageUrl, artistType } = artist
   return (
     <div>
       <div className="profile-header p-4">

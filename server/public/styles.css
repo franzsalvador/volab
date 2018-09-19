@@ -154,6 +154,21 @@ body {
   margin-right: 2rem;
 }
 
+.profile-image-connection-view {
+  background-position: center;
+  background-size: cover;
+  height: 150px;
+  width: 150px;
+  margin-right: 2rem;
+}
+
+.artist-image-connection-view {
+  background-position: center;
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+}
+
 .profile-display-name-explore-view {
   font-size: 1rem;
   font-weight: bold;
@@ -182,12 +197,21 @@ body {
   text-align: left;
   display: inline-block;
   overflow: hidden;
+  color: gray;
+}
+
+.profile-stats:hover {
+  color: black;
 }
 
 .info-bar {
   display: block;
   height: 2rem;
   font-size: 1.5rem;
+}
+
+.connection-view-container {
+  height: 100vh;
 }
 
 .clear-border {

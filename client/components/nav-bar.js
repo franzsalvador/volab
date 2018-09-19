@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import * as queryString from '../util/query-string'
 import { Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 export default class NavBar extends Component {
@@ -8,27 +9,14 @@ export default class NavBar extends Component {
     this.state = {
       isOpen: false
     }
-    this.handleDiscoverArtists = this.handleDiscoverArtists.bind(this)
-    this.handleViewProfile = this.handleViewProfile.bind(this)
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
-  handleDiscoverArtists(event) {
-    const artistType = event.target.id
-    const { navigate } = this.props
-    navigate({ path: 'discover', params: { 'artistType': artistType } })
-  }
-  handleViewProfile() {
-    const { user, navigate } = this.props
-    navigate({path: 'view-profile', params: { 'displayName': user.displayName }})
-    location.reload()
-  }
   render() {
     const { registeredUser, user } = this.props
-    const { handleDiscoverArtists, handleViewProfile } = this
     return (
       <div>
         <Navbar className="container border-bottom" light expand="md">
@@ -38,15 +26,15 @@ export default class NavBar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle href="#Discover" className="menu-items" nav caret>
+                  <DropdownToggle className="menu-items" nav caret>
                     <i className="fas fa-search drop-down-icons"></i>
                     Discover Artists
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" id="Music Producer" name="music-producers" onClick={handleDiscoverArtists}>
+                    <DropdownItem href={'#discover' + queryString.stringify({'artistType': 'Music Producer'})} className="drop-down-print" name="music-producers">
                       Music Producers
                     </DropdownItem>
-                    <DropdownItem className="drop-down-print" id="Vocalist" name="vocalists" onClick={handleDiscoverArtists}>
+                    <DropdownItem href={'#discover' + queryString.stringify({'artistType': 'Vocalist'})} className="drop-down-print" name="vocalists">
                       Vocalists
                     </DropdownItem>
                   </DropdownMenu>
@@ -63,7 +51,7 @@ export default class NavBar extends Component {
                     Me
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem className="drop-down-print" onClick={handleViewProfile}>
+                    <DropdownItem href={'#view-profile' + queryString.stringify({'displayName': user.displayName})} className="drop-down-print">
                       <i className="far fa-user-circle mr-2"></i>
                       Profile
                     </DropdownItem>

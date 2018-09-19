@@ -1,15 +1,13 @@
 import React from 'react'
 import { Container, Badge } from 'reactstrap'
+import * as queryString from '../util/query-string'
 
-export default function ProfileSideBar(props) {
-  const { artist } = props
-  const { bio, facebook, twitter, instagram, soundcloud } = props.artist
-  const { followers } = artist
-  const { following } = artist
+export default function ProfileSideBar({ artist }) {
+  const { displayName, bio, facebook, twitter, instagram, soundcloud, followers, following } = artist
   return (
     <Container className="clear-border profile-side-bar border-left px-4 col-md-3">
-      <div className="float-left col-md-6 profile-stats pl-0">Followers <Badge color="primary"> {followers ? followers.length : 0} </Badge></div>
-      <div className="col-md-6 profile-stats pl-0">Following <Badge color="primary"> {following ? following.length : 0} </Badge></div>
+      <a className="btn btn-sm float-left col-md-6 profile-stats pl-0" href={'#view-followers' + queryString.stringify({'displayName': displayName})}>Followers <Badge color="primary"> {followers ? followers.length : 0} </Badge></a>
+      <a className="btn btn-sm col-md-6 profile-stats pl-0" href={'#view-following' + queryString.stringify({'displayName': displayName})}>Following <Badge color="primary"> {following ? following.length : 0} </Badge></a>
       <hr/>
       <p>{bio}</p>
       <ul className="list-unstyled">

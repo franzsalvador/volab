@@ -22,6 +22,24 @@ module.exports = function producersRouter(artists) {
       .catch(err => next(err))
   })
 
+  router.get('/following/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
+    artists
+      .find({ followers: displayName })
+      .toArray()
+      .then(found => res.json(found))
+      .catch(err => next(err))
+  })
+
+  router.get('/followers/:displayName', (req, res, next) => {
+    const displayName = req.params.displayName
+    artists
+      .find({ following: displayName })
+      .toArray()
+      .then(found => res.json(found))
+      .catch(err => next(err))
+  })
+
   router.post('/', (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
     artists

@@ -8,6 +8,7 @@ import ViewProfile from './containers/view-profile'
 import AccountSettings from './containers/account-settings'
 import AddMusic from './containers/add-music'
 import DiscoverArtists from './containers/discover-artists'
+import ViewConnections from './containers/view-connections'
 
 export default class App extends Component {
   constructor(props) {
@@ -70,9 +71,24 @@ export default class App extends Component {
       case 'view-profile' :
         return (
           <ViewProfile
+            navigate = {navigate}
             user = {user}
             params = {params}
             updateUser = {updateUser}/>
+        )
+      case 'view-following' :
+        return (
+          <ViewConnections
+            navigate = {navigate}
+            path = {path}
+            params = {params}/>
+        )
+      case 'view-followers' :
+        return (
+          <ViewConnections
+            navigate = {navigate}
+            path = {path}
+            params = {params}/>
         )
       case 'update-profile' :
         return (
@@ -118,7 +134,7 @@ export default class App extends Component {
           user = {user }
           discover = {discover }
           navigate = {navigate }/>
-        {this.renderView() }
+        { this.renderView() }
       </div>
     )
   }
