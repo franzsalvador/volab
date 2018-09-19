@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { Button } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 export default class InfoBar extends Component {
   constructor(props) {
     super(props)
-    this.state = { isFollowing: false }
+    this.state = {
+      isFollowing: false
+    }
     this.handleFollow = this.handleFollow.bind(this)
     this.handleUnFollow = this.handleUnFollow.bind(this)
+    this.toggle = this.toggle.bind(this)
   }
   componentDidMount() {
     const userFollowing = this.props.user.following
@@ -85,7 +88,7 @@ export default class InfoBar extends Component {
           <div className="px-4 float-right">
             {user.displayName !== currentArtistPage &&
             <div>
-              <Button className="btn btn-outline-dark btn-sm mb-3 mx-2 email-icon" type="button">
+              <Button className="btn btn-outline-dark btn-sm mb-3 mx-2 email-icon" onClick={this.toggle} type="button">
                 <span className="fas fa-envelope"></span>
               </Button>
               <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
@@ -94,6 +97,17 @@ export default class InfoBar extends Component {
           </div>
         </div>
         <hr className="mx-4"/>
+        <div>
+          <Modal isOpen={this.state.messageModal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>{'To: ' + currentArtistPage}e</ModalHeader>
+            <ModalBody>
+            </ModalBody>
+            <ModalFooter>
+              <Button className="btn btn-outline-dark btn-sm" onClick={this.toggle}>Send</Button>{' '}
+              <Button className="btn btn-outline-dark btn-sm" onClick={this.toggle}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     )
   }
