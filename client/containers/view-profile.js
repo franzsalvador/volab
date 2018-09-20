@@ -8,7 +8,10 @@ import InfoBar from '../components/info-bar'
 export default class ViewProfile extends Component {
   constructor(props) {
     super(props)
-    this.state = { artist: {} }
+    this.state = {
+      artist: {},
+      messageModal: false
+    }
     this.updateArtist = this.updateArtist.bind(this)
   }
   componentDidMount() {

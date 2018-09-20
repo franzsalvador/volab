@@ -1,18 +1,28 @@
 import React, { Component } from 'react'
-import { Button } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap'
 
 export default class InfoBar extends Component {
   constructor(props) {
     super(props)
-    this.state = { isFollowing: false }
+    this.state = {
+      isFollowing: false,
+      messageModal: false
+    }
+    this.toggle = this.toggle.bind(this)
     this.handleFollow = this.handleFollow.bind(this)
     this.handleUnFollow = this.handleUnFollow.bind(this)
+    this.handleSendMessage = this.handleSendMessage.bind(this)
   }
   componentDidMount() {
     const userFollowing = this.props.user.following
     const { displayName } = this.props
     const artist = displayName.replace('%20', ' ')
     userFollowing.includes(artist) ? this.setState({ isFollowing: true }) : this.setState({ isFollowing: false })
+  }
+  toggle() {
+    this.setState({
+      messageModal: !this.state.messageModal
+    })
   }
   handleFollow() {
     const user = this.props.user.displayName
@@ -73,8 +83,32 @@ export default class InfoBar extends Component {
 
     this.setState({ isFollowing: false })
   }
+  handleSendMessage(event) {
+    event.preventDefault()
+    const { toggle } = this
+    const sender = this.props.user.email
+    const recipient = this.props.artist.email
+    const sendMessageForm = event.target
+    const formData = new FormData(sendMessageForm)
+    const messageDetails = {}
+    for (const pair of formData.entries()) {
+      messageDetails[pair[0]] = pair[1]
+      messageDetails.from = sender
+      messageDetails.to = recipient
+    }
+    toggle()
+    const url = '/email'
+    const req = {
+      method: 'POST',
+      body: JSON.stringify(messageDetails),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(url, req)
+      .then(res => res.ok ? res.json() : null)
+      .catch(err => console.error(err))
+  }
   render() {
-    const { handleFollow, handleUnFollow } = this
+    const { handleFollow, handleUnFollow, toggle, handleSendMessage } = this
     const { user } = this.props
     const { isFollowing } = this.state
     const currentArtistPage = this.props.artist.displayName
@@ -84,11 +118,35 @@ export default class InfoBar extends Component {
           <div className="px-4 font-weight-bold float-left">Tracks</div>
           <div className="px-4 float-right">
             {user.displayName !== currentArtistPage &&
-            <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
+            <div>
+              <Button className="btn btn-outline-dark btn-sm mb-3 mx-2 email-icon" onClick={toggle} type="button">
+                <span className="fas fa-envelope"></span>
+              </Button>
+              <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
+            </div>
             }
           </div>
         </div>
         <hr className="mx-4"/>
+        <div>
+          <Modal isOpen={this.state.messageModal} toggle={this.toggle}>
+            <ModalHeader toggle={this.toggle}>{'To: ' + currentArtistPage}</ModalHeader>
+            <ModalBody>
+              <Form onSubmit={handleSendMessage}>
+                <FormGroup>
+                  <Label for="subject">Subject</Label>
+                  <Input type="text" name="subject" id="subject"/>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="message">Message</Label>
+                  <Input type="textarea" name="text" id="text"/>
+                </FormGroup>
+                <Button className="btn btn-outline-dark btn-sm float-right ml-2" type="submit">Send</Button>
+              </Form>
+              <Button className="btn btn-outline-dark btn-sm float-right" onClick={this.toggle}>Cancel</Button>
+            </ModalBody>
+          </Modal>
+        </div>
       </div>
     )
   }

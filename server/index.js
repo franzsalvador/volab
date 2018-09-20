@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { MongoClient } = require('mongodb')
 const artistsRouter = require('./routes/artists-router')
+const emailRouter = require('./routes/email-router')
 
 MongoClient
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
@@ -19,6 +20,7 @@ MongoClient
       .use(express.static(publicPath))
       .use(bodyParser.json())
       .use('/artists', artistsRouter(artists))
+      .use('/email', emailRouter())
       .use((err, req, res, next) => {
         console.error(err)
         res.status(500).json({
