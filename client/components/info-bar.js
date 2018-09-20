@@ -129,7 +129,7 @@ export default class InfoBar extends Component {
         </div>
         <hr className="mx-4"/>
         <div>
-          <Modal isOpen={this.state.messageModal} toggle={this.toggle} className={this.props.className}>
+          <Modal isOpen={this.state.messageModal} toggle={this.toggle}>
             <ModalHeader toggle={this.toggle}>{'To: ' + currentArtistPage}</ModalHeader>
             <ModalBody>
               <Form onSubmit={handleSendMessage}>
