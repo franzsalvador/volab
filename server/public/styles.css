@@ -198,6 +198,7 @@ body {
   display: inline-block;
   overflow: hidden;
   color: gray;
+  white-space: normal;
 }
 
 .profile-stats:hover {
