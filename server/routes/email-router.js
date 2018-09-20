@@ -10,6 +10,7 @@ module.exports = function emailRouter() {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     const msg = req.body
     sgMail.send(msg)
+      .then(msg => res.json(msg))
       .catch(err => next(err))
   })
   return router
