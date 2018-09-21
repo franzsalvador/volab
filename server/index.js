@@ -13,7 +13,7 @@ MongoClient
     process.exit(1)
   })
   .then(client => {
-    const db = client.db('volab-app')
+    const db = client.db()
     const artists = db.collection('artists')
     const publicPath = path.join(__dirname, 'public/')
     express()
