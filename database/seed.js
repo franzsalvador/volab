@@ -66,6 +66,7 @@ module.exports = [
 
   {
     id: uuid(),
+    artistType: 'Vocalist',
     displayName: 'Empire of the Sun',
     firstName: 'Luke Steel &',
     lastName: 'Nick Littlemore',
@@ -150,8 +151,8 @@ module.exports = [
     id: uuid(),
     artistType: 'Music Producer',
     displayName: 'Louis The Child',
-    firstName: 'music that makes you happy',
-    lastName: '',
+    firstName: 'Eric Teichner &',
+    lastName: 'Frederic Kennett',
     city: 'Chicago',
     country: 'United States',
     emailAddress: 'fsalvador79@gmail.com',
