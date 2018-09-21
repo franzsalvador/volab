@@ -5,7 +5,7 @@ const seed = require('./seed')
 MongoClient
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(client => {
-    const db = client.db('volab-app')
+    const db = client.db()
     const collection = db.collection('artists')
     return collection
       .deleteMany({})
