@@ -104,8 +104,10 @@ export default class ProfileForm extends React.Component {
                 <Label for="genre">Genre</Label>
                 <Input type="select" name="genre" id="genre" defaultValue={path === 'update-profile' ? user.genre : ''}>
                   <option>Rock</option>
+                  <option>Indie</option>
                   <option>Pop</option>
                   <option>Hip Hop</option>
+                  <option>R&B</option>
                   <option>Dance</option>
                   <option>Folk</option>
                   <option>Country</option>
