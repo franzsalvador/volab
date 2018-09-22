@@ -58,8 +58,10 @@ module.exports = [
     imageUrl: 'https://i1.sndcdn.com/avatars-000334582793-42uh6n-t500x500.jpg',
     genre: 'Dance',
     bio: "Words will inevitably fail to properly describe Freddy Todd. Genre-busting could be an understatement. You can't pin him down with lexicon like lazer-bass and glitch-funk; these phrases fall way short of capturing the expressiveness, fearlessness, and space-traveling qualities of his music. Hearing his music is akin to being abducted by an extra-terrestrial cruise liner where everyone is tripping on space acid. And if you are lucky enough to witness him produce, you'll see that he fittingly looks just like the captain of said space cruiser, both hands intently gripping his electronics like the instrument panel on the flight deck.",
-    soundcloudLink1: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/359519681&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
-    soundcloudLink2: '<iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/356296893&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
+    soundcloudLink1: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/341351118&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
+    soundcloudLink2: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/243763957&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
+    soundcloudLink3: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/359519681&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
+    soundcloudLink4: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/485944722&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
   },
 
   {
@@ -79,9 +81,8 @@ module.exports = [
     genre: 'Dance',
     bio: 'Empire of the Sun are an Australian electronic music duo from Sydney, formed in 2007. The band is a collaboration between Luke Steele, of alternative rock act The Sleepy Jackson, and Nick Littlemore, of electronic dance outfit Pnau.',
     soundcloudLink1: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/87639862&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
-    soundcloudLink2: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/95880936&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
-    soundcloudLink3: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/255870218&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
-    soundcloudLink4: '<iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/249661283&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
+    soundcloudLink2: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/255870218&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>',
+    soundcloudLink3: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/108632879&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
   },
   {
     id: uuid(),
@@ -149,8 +150,8 @@ module.exports = [
     id: uuid(),
     artistType: 'Music Producer',
     displayName: 'Louis The Child',
-    firstName: 'Eric Teichner &',
-    lastName: 'Frederic Kennett',
+    firstName: 'music that makes you happy',
+    lastName: '',
     city: 'Chicago',
     country: 'United States',
     emailAddress: 'fsalvador79@gmail.com',
