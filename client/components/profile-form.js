@@ -101,6 +101,9 @@ export default class ProfileForm extends React.Component {
                 <Input type="url" name="imageUrl" id="image-url" onChange={handleChange} placeholder="Profile Image URL" defaultValue={path === 'update-profile' ? user.imageUrl : ''}/>
               </FormGroup>
               <FormGroup>
+                <Input type="url" name="backgroundImageUrl" id="backgroundImageUrl" placeholder="Background Image URL" defaultValue={path === 'update-profile' ? user.backgroundImageUrl : ''}/>
+              </FormGroup>
+              <FormGroup>
                 <Label for="genre">Genre</Label>
                 <Input type="select" name="genre" id="genre" defaultValue={path === 'update-profile' ? user.genre : ''}>
                   <option>Rock</option>
