@@ -58,8 +58,8 @@ export default class ProfileForm extends React.Component {
           )}
         </div>
         <Form onSubmit={path === 'update-profile' ? handleUpdate : handleSubmit} className="mb-5">
-          <Row className="p-5">
-            <Col className="col-md-6">
+          <Row className="px-5 pt-5">
+            <Col className="col-lg-6">
               <FormGroup>
                 <Label for="genre">Choose One</Label>
                 <Input className="form-control form-control-sm" type="select" name="artistType" id="artistType" placeholder="Choose one" defaultValue={path === 'edit-profile' ? user.artistType : ''}>
@@ -87,7 +87,7 @@ export default class ProfileForm extends React.Component {
                 <Input className="form-control form-control-sm" type="textarea" name="bio" id="bio-section" defaultValue={path === 'update-profile' ? user.bio : ''}/>
               </FormGroup>
             </Col>
-            <Col className="col-md-6">
+            <Col className="col-lg-6">
               <FormGroup>
                 <Label for="genre">Genre</Label>
                 <Input className="form-control form-control-sm" type="select" name="genre" id="genre" defaultValue={path === 'update-profile' ? user.genre : ''}>
@@ -123,8 +123,10 @@ export default class ProfileForm extends React.Component {
                 <Input className="form-control form-control-sm" type="url" name="backgroundImageUrl" id="backgroundImageUrl" placeholder="Background Image URL" defaultValue={path === 'update-profile' ? user.backgroundImageUrl : ''}/>
               </FormGroup>
             </Col>
-            <Button className="btn btn-outline-dark btn-sm  mt-3 mx-auto" type="submit">{path === 'update-profile' ? 'Save Changes' : 'Save' }</Button>
           </Row>
+          <div className="save-profile-button mx-auto pt-3 pb-5">
+            <Button className="btn btn-outline-dark btn-sm" type="submit">{path === 'update-profile' ? 'Save Changes' : 'Save'}</Button>
+          </div>
         </Form>
       </Container>
     )

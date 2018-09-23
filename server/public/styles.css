@@ -15,6 +15,11 @@ body {
   font-size: 0.85rem;
 }
 
+.save-profile-button {
+  margin: 0 auto;
+  text-align: center;
+}
+
 .drop-down-icons {
   margin-right: 0.5rem;
 }
