@@ -10,7 +10,7 @@ export default function MusicSection({ artist }) {
     }
   }
   return (
-    <Container className="clear-border px-4 col-md-9 float-md-left">
+    <Container className="border-right px-4 col-md-9 float-md-left">
       {links.map((link, index) => {
         return (
           <div key={index}>

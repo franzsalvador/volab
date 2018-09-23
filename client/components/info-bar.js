@@ -129,8 +129,8 @@ export default class InfoBar extends Component {
         </div>
         <hr className="mx-4"/>
         <div>
-          <Modal isOpen={this.state.messageModal} toggle={this.toggle}>
-            <ModalHeader toggle={this.toggle}>{'To: ' + currentArtistPage}</ModalHeader>
+          <Modal isOpen={this.state.messageModal} toggle={toggle}>
+            <ModalHeader toggle={toggle}>{'To: ' + currentArtistPage}</ModalHeader>
             <ModalBody>
               <Form onSubmit={handleSendMessage}>
                 <FormGroup>
@@ -143,7 +143,7 @@ export default class InfoBar extends Component {
                 </FormGroup>
                 <Button className="btn btn-outline-dark btn-sm float-right ml-2" type="submit">Send</Button>
               </Form>
-              <Button className="btn btn-outline-dark btn-sm float-right" onClick={this.toggle}>Cancel</Button>
+              <Button className="btn btn-outline-dark btn-sm float-right" onClick={toggle}>Cancel</Button>
             </ModalBody>
           </Modal>
         </div>
