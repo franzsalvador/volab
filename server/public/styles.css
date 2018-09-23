@@ -88,8 +88,10 @@ body {
 
 .profile-header {
   display: block;
+  background-position: center;
+  background-size: cover;
   min-height: 15rem;
-  padding-top: 0 0 0 0;
+  padding: 0 0 0 0;
   margin-bottom: 0;
 }
 
@@ -110,8 +112,14 @@ body {
 }
 
 .profile-display-name {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: bolder;
+  color: white;
+}
+
+.profile-details span {
+  color: white;
+  background: black;
 }
 
 .contact-icons {
