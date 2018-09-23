@@ -5,24 +5,27 @@ import { Jumbotron, Container, Button } from 'reactstrap'
 export default class DiscoverArtists extends Component {
   constructor(props) {
     super(props)
-    this.state = { filteredArtists: [] }
+    this.state = {
+      view: '',
+      filteredArtists: []
+    }
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => location.reload())
     const { artistType } = this.props.params
+    this.setState({ view: artistType })
     fetch('/artists/' + artistType)
       .then(res => res.ok ? res.json() : null)
       .then(filteredArtists => this.setState({ filteredArtists }))
       .catch(err => console.error(err))
   }
   render() {
-    const { filteredArtists } = this.state
-    const { artistType } = this.props.params
+    const { view, filteredArtists } = this.state
     return (
       <div>
         <Container className="container bg-white mt-5">
           <Jumbotron className="bg-white pt-4 mb-0">
-            <h5 className="mb-5 font-weight-bold">{ artistType === 'Music%20Producer' ? 'Discover Producers' : 'Discover Vocalists' }</h5>
+            <h5 className="mb-5 font-weight-bold">{ view === 'Music%20Producer' ? 'Discover Producers' : 'Discover Vocalists' }</h5>
             {filteredArtists.map((artist, index) => {
               return (
                 <div key= { index }>

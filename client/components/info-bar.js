@@ -114,7 +114,7 @@ export default class InfoBar extends Component {
     const currentArtistPage = this.props.artist.displayName
     return (
       <div>
-        <div className="info-bar pt-2">
+        <div className="info-bar pt-2 mt-2">
           <div className="px-4 font-weight-bold float-left">Tracks</div>
           <div className="px-4 float-right">
             {user.displayName !== currentArtistPage &&
@@ -129,8 +129,8 @@ export default class InfoBar extends Component {
         </div>
         <hr className="mx-4"/>
         <div>
-          <Modal isOpen={this.state.messageModal} toggle={this.toggle}>
-            <ModalHeader toggle={this.toggle}>{'To: ' + currentArtistPage}</ModalHeader>
+          <Modal isOpen={this.state.messageModal} toggle={toggle}>
+            <ModalHeader toggle={toggle}>{'To: ' + currentArtistPage}</ModalHeader>
             <ModalBody>
               <Form onSubmit={handleSendMessage}>
                 <FormGroup>
@@ -143,7 +143,7 @@ export default class InfoBar extends Component {
                 </FormGroup>
                 <Button className="btn btn-outline-dark btn-sm float-right ml-2" type="submit">Send</Button>
               </Form>
-              <Button className="btn btn-outline-dark btn-sm float-right" onClick={this.toggle}>Cancel</Button>
+              <Button className="btn btn-outline-dark btn-sm float-right" onClick={toggle}>Cancel</Button>
             </ModalBody>
           </Modal>
         </div>
