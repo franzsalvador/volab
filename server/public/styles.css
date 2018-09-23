@@ -185,6 +185,7 @@ body {
   font-size: 0.85rem;
   overflow: hidden;
   height: 100vh;
+  border: 1px transparent;
 }
 
 @media (max-width: 768px) {
