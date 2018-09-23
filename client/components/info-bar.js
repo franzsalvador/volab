@@ -114,7 +114,7 @@ export default class InfoBar extends Component {
     const currentArtistPage = this.props.artist.displayName
     return (
       <div>
-        <div className="info-bar pt-2">
+        <div className="info-bar pt-2 mt-2">
           <div className="px-4 font-weight-bold float-left">Tracks</div>
           <div className="px-4 float-right">
             {user.displayName !== currentArtistPage &&
