@@ -20,20 +20,21 @@ System Requirements
 
 ## Key Features
 User can create a profile.
-![Demo](https://media.giphy.com/media/U7vgFvhEXpxPg5Mkb0/giphy.gif)
+![Create Profile](gifs/create-profile.gif)
 
 User can add music.
+![Add Music](gifs/add-music.gif)
 
 User can discover other artists.
+![Discover Artists](gifs/discover-artists.gif)
 
 User can follow other artists.
+![Follow Artists](gifs/follow-artists.gif)
 
 User can send messages via Sendgrid
+![Send Messages](gifs/send-email.gif)
 
 ## Usage
-
-<!-- ### Create, edit, practice, study and record failed and correct attempts.
-![Demo](flash1.gif) -->
 
 Clone the repository.
 ```
