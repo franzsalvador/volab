@@ -20,7 +20,7 @@ System Requirements
 
 ## Key Features
 User can create a profile.
-![Demo](https://giphy.com/embed/SI9Adh7JZ2vRu9BVdJ)
+![Demo](https://media.giphy.com/media/U7vgFvhEXpxPg5Mkb0/giphy.gif)
 
 User can add music.
 
