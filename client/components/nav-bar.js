@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import * as queryString from '../util/query-string'
 import { Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import SearchBar from './search-bar'
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ export default class NavBar extends Component {
             {registeredUser === true &&
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
+                  <SearchBar/>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle className="menu-items" nav caret>
                       <i className="fas fa-search drop-down-icons"></i>
@@ -48,7 +50,7 @@ export default class NavBar extends Component {
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret className="menu-items">
-                      <div className="profile-image-nav rounded-circle mx-2" style={{backgroundImage: `url(${user.imageUrl})`}}></div>
+                      <div className="profile-image-nav rounded-circle mx-md-2 mr-sm-2" style={{backgroundImage: `url(${user.imageUrl})`}}></div>
                       Me
                     </DropdownToggle>
                     <DropdownMenu right>
