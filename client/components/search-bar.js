@@ -20,10 +20,11 @@ export default class SearchBar extends Component {
       .catch(err => console.error(err))
   }
   handleSearch(event) {
+    const userSearch = event.target.value
     const { dataBase } = this.state
     const results = dataBase.filter(artist => {
       for (let key in artist) {
-        if ((artist[key]) === event.target.value) {
+        if ((artist[key]).toLowerCase() === userSearch.toLowerCase()) {
           return true
         }
       }
@@ -48,7 +49,7 @@ export default class SearchBar extends Component {
         <form className="form-inline my-2 my-lg-0">
           <input className="form-control form-control-sm mt-1 mr-sm-3" type="search" placeholder="Search" aria-label="Search" onChange={handleSearch}/>
         </form>
-        <ListGroup className={results.length ? 'search-list-results border' : 'search-list-group mt-1'} onMouseLeave={handleBlur}>
+        <ListGroup className={results.length ? 'search-list-results border' : 'search-list-results mt-1'} onMouseLeave={handleBlur}>
           {results.map((artist, index) => {
             return (
               <Button className="search-list-item btn btn-outline-dark btn-sm p-2" key={index} name={artist.displayName} onClick={handleClick}>
