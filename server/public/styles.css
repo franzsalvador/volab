@@ -236,6 +236,30 @@ body {
   width: 2.5rem;
 }
 
+.search-list-results {
+  position: absolute;
+  width: 30%;
+  border-color: lightgray;
+}
+
+@media (max-width: 768px) {
+  .search-list-results {
+    position: relative;
+    width: 50%;
+  }
+}
+
+.search-list-item {
+  border: none;
+  background: white;
+  border-radius: 0%;
+}
+
+.search-list-item-display-name {
+  font-size: 0.85rem;
+  padding-top: 0.2rem;
+}
+
 .clear-border {
   border: 1px solid transparent;
 }
