@@ -39,7 +39,7 @@ export default class ProfileForm extends React.Component {
     }
     updateProfile(user)
     alert('Your profile has been updated.')
-    navigate({ path: 'view-profile', params: { displayName } })
+    navigate({ path: '#' + displayName })
   }
   render() {
     const { handleChange, handleSubmit, handleUpdate } = this

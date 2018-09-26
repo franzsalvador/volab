@@ -17,7 +17,7 @@ export default class NavBar extends Component {
     })
   }
   render() {
-    const { registeredUser, user, path } = this.props
+    const { registeredUser, user, path, navigate } = this.props
     return (
       <div>
         <header className={path === '' ? 'bg-white' : ''}>
@@ -27,7 +27,8 @@ export default class NavBar extends Component {
             {registeredUser === true &&
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                  <SearchBar/>
+                  <SearchBar
+                    navigate = {navigate}/>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle className="menu-items" nav caret>
                       <i className="fas fa-search drop-down-icons"></i>

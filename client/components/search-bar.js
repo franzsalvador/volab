@@ -41,7 +41,6 @@ export default class SearchBar extends Component {
     location.reload()
   }
   render() {
-    console.log(this.state)
     const { handleSearch, handleBlur, handleClick } = this
     const { results } = this.state
     return (

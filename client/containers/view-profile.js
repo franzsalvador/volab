@@ -15,7 +15,7 @@ export default class ViewProfile extends Component {
     this.updateArtist = this.updateArtist.bind(this)
   }
   componentDidMount() {
-    const {displayName} = this.props.params
+    const displayName = this.props.path
     fetch('/artists/displayName/' + displayName)
       .then(res => res.ok ? res.json() : null)
       .then(artist => artist && this.setState({ artist }))
@@ -26,7 +26,7 @@ export default class ViewProfile extends Component {
   }
   render() {
     const { artist } = this.state
-    const { user, navigate, updateUser, params: { displayName } } = this.props
+    const { user, navigate, updateUser, path } = this.props
     const { updateArtist } = this
     return (
       <div>
@@ -39,7 +39,7 @@ export default class ViewProfile extends Component {
             user = {user}
             updateUser = {updateUser}
             updateArtist = {updateArtist}
-            displayName = {displayName}/>
+            displayName = {path}/>
           <MusicSection artist = {artist}/>
           <ProfileSideBar
             navigate = {navigate}
