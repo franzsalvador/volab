@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ListGroup, Button } from 'reactstrap'
+import { ListGroup } from 'reactstrap'
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -24,7 +24,8 @@ export default class SearchBar extends Component {
     const { dataBase } = this.state
     const results = dataBase.filter(artist => {
       for (let key in artist) {
-        if ((artist[key]).toLowerCase() === userSearch.toLowerCase()) {
+        const artistDetails = artist[key].toString()
+        if (artistDetails.toLowerCase() === userSearch.toLowerCase()) {
           return true
         }
       }
@@ -35,10 +36,7 @@ export default class SearchBar extends Component {
     event.target.value = ''
     this.setState({ results: [] })
   }
-  handleClick(event) {
-    const artist = event.target.name
-    const { navigate } = this.props
-    navigate({ path: '#' + artist })
+  handleClick() {
     location.reload()
   }
   render() {
@@ -52,10 +50,10 @@ export default class SearchBar extends Component {
         <ListGroup className={results.length ? 'search-list-results border' : 'search-list-results mt-1'} onMouseLeave={handleBlur}>
           {results.map((artist, index) => {
             return (
-              <Button className="search-list-item btn btn-outline-dark btn-sm p-2" key={index} name={artist.displayName} onClick={handleClick}>
-                <div className="profile-image-nav rounded-circle" style={{backgroundImage: `url(${artist.imageUrl})`}} key={index}></div>
+              <a className="search-list-item btn btn-outline-dark btn-sm p-2" key={index} onClick={handleClick} href={'#' + artist.displayName}>
+                <div className="profile-image-nav rounded-circle" style={{backgroundImage: `url(${artist.imageUrl})`}}></div>
                 <div className="search-list-item-display-name float-left ml-5">{artist.displayName}</div>
-              </Button>
+              </a>
             )
           })}
         </ListGroup>
