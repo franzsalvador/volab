@@ -68,14 +68,6 @@ export default class App extends Component {
             user = {user}
             registeredUser = {registeredUser}/>
         )
-      case 'view-profile' :
-        return (
-          <ViewProfile
-            navigate = {navigate}
-            user = {user}
-            params = {params}
-            updateUser = {updateUser}/>
-        )
       case 'view-following' :
         return (
           <ViewConnections
@@ -122,6 +114,14 @@ export default class App extends Component {
             navigate = {navigate}
             filteredArtists = {filteredArtists }/>
         )
+      default:
+        return (
+          <ViewProfile
+            navigate = {navigate}
+            user = {user}
+            path = {path}
+            updateUser = {updateUser}/>
+        )
     }
   }
   render() {
@@ -131,10 +131,10 @@ export default class App extends Component {
       <div>
         <NavBar
           path = {path}
-          registeredUser = {registeredUser }
-          user = {user }
-          discover = {discover }
-          navigate = {navigate }/>
+          registeredUser = {registeredUser}
+          user = {user}
+          discover = {discover}
+          navigate = {navigate}/>
         { this.renderView() }
       </div>
     )

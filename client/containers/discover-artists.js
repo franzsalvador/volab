@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import * as queryString from '../util/query-string'
 import { Jumbotron, Container, Button } from 'reactstrap'
 
 export default class DiscoverArtists extends Component {
@@ -33,7 +32,7 @@ export default class DiscoverArtists extends Component {
                   <p className="profile-display-name-explore-view mb-0">{artist.displayName + ' (' + artist.artistType + ')'}</p>
                   <p className="profile-details-explore-view mb-0">{artist.firstName + ' ' + artist.lastName}</p>
                   <p className="profile-details-explore-view explore-view-city">{artist.city + ', ' + artist.country}</p>
-                  <Button className="btn btn-outline-dark btn-sm view-profile-button" href={'#view-profile' + queryString.stringify({'displayName': artist.displayName})}>View Profile</Button>
+                  <Button className="btn btn-outline-dark btn-sm view-profile-button" href={'/#' + artist.displayName}>View Profile</Button>
                   <hr className="theme-break"/>
                 </div>
               )

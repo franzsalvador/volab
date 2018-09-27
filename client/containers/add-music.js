@@ -19,7 +19,7 @@ export default class AddMusic extends Component {
     }
     addMusic(music)
     alert('Your music has been updated.')
-    navigate({ path: 'view-profile', params: { 'displayName': user.displayName } })
+    navigate({ path: '#' + user.displayName })
   }
   addMusic(music) {
     const { user: { displayName }, updateUser } = this.props

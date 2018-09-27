@@ -19,20 +19,23 @@ System Requirements
 - MongoDB v4
 
 ## Key Features
-User can create a profile.
+### User can create a profile.
 ![Create Profile](gifs/create-profile.gif)
 
-User can add music.
+### User can add music.
 ![Add Music](gifs/add-music.gif)
 
-User can discover other artists.
+### User can discover other artists.
 ![Discover Artists](gifs/discover-artists.gif)
 
-User can follow other artists.
+### User can follow other artists.
 ![Follow Artists](gifs/follow-artists.gif)
 
-User can send messages via Sendgrid
+### User can send messages via Sendgrid
 ![Send Messages](gifs/send-email.gif)
+
+### User can send messages via Sendgrid
+![Search Bar](gifs/search-bar.gif)
 
 ## Usage
 
@@ -56,7 +59,7 @@ Automatically run/restart server with `nodemon` and live reload page on update w
 ```
 npm run watch
 ```
-Run without nodemon and browser-sync
+Run without `nodemon` and `browser-sync`
 ```
 npm run build
 npm run start

@@ -15,8 +15,7 @@ export default class InfoBar extends Component {
   }
   componentDidMount() {
     const userFollowing = this.props.user.following
-    const { displayName } = this.props
-    const artist = displayName.replace('%20', ' ')
+    const { artist } = this.props.user.displayName
     userFollowing.includes(artist) ? this.setState({ isFollowing: true }) : this.setState({ isFollowing: false })
   }
   toggle() {
