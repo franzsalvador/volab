@@ -34,6 +34,9 @@ System Requirements
 ### User can send messages via Sendgrid
 ![Send Messages](gifs/send-email.gif)
 
+### User can send messages via Sendgrid
+![Search Bar](gifs/search-bar.gif)
+
 ## Usage
 
 Clone the repository.
