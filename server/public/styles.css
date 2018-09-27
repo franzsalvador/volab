@@ -247,6 +247,10 @@ body {
     position: relative;
     width: 50%;
   }
+
+  .search-bar {
+    width: 30%;
+  }
 }
 
 .search-list-item {

@@ -45,7 +45,7 @@ export default class SearchBar extends Component {
     return (
       <div>
         <form className="form-inline my-2 my-lg-0">
-          <input className="form-control form-control-sm mt-1 mr-sm-3" type="search" placeholder="Search" aria-label="Search" onChange={handleSearch}/>
+          <input className="form-control form-control-sm mt-1 mr-sm-3 search-bar" type="search" placeholder="Search" aria-label="Search" onChange={handleSearch}/>
         </form>
         <ListGroup className={results.length ? 'search-list-results border' : 'search-list-results mt-1'} onMouseLeave={handleBlur}>
           {results.map((artist, index) => {
