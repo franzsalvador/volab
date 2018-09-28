@@ -31,10 +31,10 @@ System Requirements
 ### User can follow other artists.
 ![Follow Artists](gifs/follow-artists.gif)
 
-### User can send messages via Sendgrid
+### User can send messages via Sendgrid.
 ![Send Messages](gifs/send-email.gif)
 
-### User can send messages via Sendgrid
+### User can search for artists using a search bar.
 ![Search Bar](gifs/search-bar.gif)
 
 ## Usage
