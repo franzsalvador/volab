@@ -45,14 +45,31 @@ export default class SearchBar extends Component {
     return (
       <div>
         <form className="form-inline my-2 my-lg-0">
-          <input className="form-control form-control-sm mt-1 mr-sm-3 search-bar" type="search" placeholder="Search" aria-label="Search" onChange={handleSearch}/>
+          <input
+            className="form-control form-control-sm mt-1 mr-sm-3 search-bar"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={handleSearch}/>
         </form>
-        <ListGroup className={results.length ? 'search-list-results border' : 'search-list-results mt-1'} onMouseLeave={handleBlur}>
+        <ListGroup
+          className={results.length
+            ? 'search-list-results border'
+            : 'search-list-results mt-1'}
+          onMouseLeave={handleBlur}>
           {results.map((artist, index) => {
             return (
-              <a className="search-list-item btn btn-outline-dark btn-sm p-2" key={index} onClick={handleClick} href={'#' + artist.displayName}>
-                <div className="profile-image-nav rounded-circle" style={{backgroundImage: `url(${artist.imageUrl})`}}></div>
-                <div className="search-list-item-display-name float-left ml-5">{artist.displayName}</div>
+              <a
+                className="search-list-item btn btn-outline-dark btn-sm p-2"
+                key={index} onClick={handleClick}
+                href={'#' + artist.displayName}>
+                <div
+                  className="profile-image-nav rounded-circle"
+                  style={{backgroundImage: `url(${artist.imageUrl})`}}></div>
+                <div
+                  className="search-list-item-display-name float-left ml-5">
+                  {artist.displayName}
+                </div>
               </a>
             )
           })}

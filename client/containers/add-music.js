@@ -50,21 +50,43 @@ export default class AddMusic extends Component {
             <h5 className="font-weight-bold mb-3">Add Music</h5>
             <Form onSubmit={handleSubmit} className="mb-5">
               <FormGroup>
-                <Input className="form-control form-control-sm" type="text" defaultValue={links[0] ? links[0] : ''} placeholder="Add your Soundcloud embedd links here." name="soundcloudLink1"/>
+                <Input
+                  className="form-control form-control-sm"
+                  type="text" defaultValue={links[0] ? links[0] : ''}
+                  placeholder="Add your Soundcloud embedd links here."
+                  name="soundcloudLink1"/>
               </FormGroup>
               <FormGroup>
-                <Input className="form-control form-control-sm" type="text" defaultValue={links[1] ? links[1] : ''} name="soundcloudLink2"/>
+                <Input
+                  className="form-control form-control-sm"
+                  type="text"
+                  defaultValue={links[1] ? links[1] : ''}
+                  name="soundcloudLink2"/>
               </FormGroup>
               <FormGroup>
-                <Input className="form-control form-control-sm" type="text" defaultValue={links[2] ? links[2] : ''} name="soundcloudLink3"/>
+                <Input
+                  className="form-control form-control-sm"
+                  type="text"
+                  defaultValue={links[2] ? links[2] : ''}
+                  name="soundcloudLink3"/>
               </FormGroup>
               <FormGroup>
-                <Input className="form-control form-control-sm" type="text" defaultValue={links[3] ? links[3] : ''} name="soundcloudLink4"/>
+                <Input
+                  className="form-control form-control-sm"
+                  type="text" defaultValue={links[3] ? links[3] : ''}
+                  name="soundcloudLink4"/>
               </FormGroup>
               <FormGroup>
-                <Input className="form-control form-control-sm" type="text" defaultValue={links[4] ? links[4] : ''} name="soundcloudLink5"/>
+                <Input
+                  className="form-control form-control-sm"
+                  type="text" defaultValue={links[4] ? links[4] : ''}
+                  name="soundcloudLink5"/>
               </FormGroup>
-              <Button className="btn btn-outline-dark btn-sm" type="submit">Add Music</Button>
+              <Button
+                className="btn btn-outline-dark btn-sm"
+                type="submit">
+                Add Music
+              </Button>
             </Form>
           </Col>
         </Row>

@@ -118,10 +118,15 @@ export default class InfoBar extends Component {
           <div className="px-4 float-right">
             {user.displayName !== currentArtistPage &&
             <div>
-              <Button className="btn btn-outline-dark btn-sm mb-3 mx-2 email-icon" onClick={toggle} type="button">
+              <Button className="btn btn-outline-dark btn-sm mb-3 mx-2 email-icon"
+                onClick={toggle} type="button">
                 <span className="fas fa-envelope"></span>
               </Button>
-              <Button className="btn btn-outline-dark btn-sm mb-3" type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>{isFollowing ? 'Following' : 'Follow'}</Button>
+              <Button
+                className="btn btn-outline-dark btn-sm mb-3"
+                type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>
+                {isFollowing ? 'Following' : 'Follow'}
+              </Button>
             </div>
             }
           </div>
@@ -140,9 +145,13 @@ export default class InfoBar extends Component {
                   <Label for="message">Message</Label>
                   <Input type="textarea" name="text" id="text"/>
                 </FormGroup>
-                <Button className="btn btn-outline-dark btn-sm float-right ml-2" type="submit">Send</Button>
+                <Button
+                  className="btn btn-outline-dark btn-sm float-right ml-2"
+                  type="submit">Send</Button>
               </Form>
-              <Button className="btn btn-outline-dark btn-sm float-right" onClick={toggle}>Cancel</Button>
+              <Button
+                className="btn btn-outline-dark btn-sm float-right"
+                onClick={toggle}>Cancel</Button>
             </ModalBody>
           </Modal>
         </div>
