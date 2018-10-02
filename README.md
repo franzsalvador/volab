@@ -12,6 +12,7 @@ https://volab-app.herokuapp.com/
 - MongoDB
 - ExpressJS
 - NodeJS
+- Sendgrid API
 
 System Requirements
 - Node.js v10
