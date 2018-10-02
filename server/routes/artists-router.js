@@ -5,47 +5,72 @@ module.exports = function producersRouter(artists) {
 
   const router = new Router()
 
-  router.get('/', (req, res, next) => {
-    artists
-      .find()
-      .toArray()
-      .then(found => res.json(found))
-      .catch(err => next(err))
+  router.get('/', async (req, res, next) => {
+    try {
+      let found = await
+      artists
+        .find()
+        .toArray()
+      res.json(found)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.get('/displayName/:displayName', (req, res, next) => {
+  router.get('/displayName/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
-    artists
-      .findOne({ displayName: displayName })
-      .then(found => res.json(found))
-      .catch(err => next(err))
+    try {
+      let found = await
+      artists
+        .findOne({ displayName: displayName })
+      res.json(found)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.get('/:artistType', (req, res, next) => {
+  router.get('/:artistType', async (req, res, next) => {
     const artistType = req.params.artistType
-    artists
-      .find({ artistType: artistType })
-      .toArray()
-      .then(found => res.json(found))
-      .catch(err => next(err))
+    try {
+      let found = await
+      artists
+        .find({ artistType: artistType })
+        .toArray()
+      res.json(found)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.get('/following/:displayName', (req, res, next) => {
+  router.get('/following/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
-    artists
-      .find({ followers: displayName })
-      .toArray()
-      .then(found => res.json(found))
-      .catch(err => next(err))
+    try {
+      let found = await
+      artists
+        .find({ followers: displayName })
+        .toArray()
+      res.json(found)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.get('/followers/:displayName', (req, res, next) => {
+  router.get('/followers/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
-    artists
-      .find({ following: displayName })
-      .toArray()
-      .then(found => res.json(found))
-      .catch(err => next(err))
+    try {
+      let found = await
+      artists
+        .find({ following: displayName })
+        .toArray()
+      res.json(found)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
   router.post('/', (req, res, next) => {
