@@ -29,9 +29,9 @@ export default class DiscoverArtists extends Component {
                 ? 'Discover Producers'
                 : 'Discover Vocalists' }
             </h5>
-            {filteredArtists.map((artist, index) => {
+            {filteredArtists.map(artist => {
               return (
-                <div key= { index }>
+                <div key= { artist.id }>
                   <div
                     className="profile-image-explore-view float-md-left rounded-circle"
                     style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
