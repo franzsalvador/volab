@@ -7,8 +7,7 @@ module.exports = function producersRouter(artists) {
 
   router.get('/', async (req, res, next) => {
     try {
-      let allArtists = await
-      artists
+      const allArtists = await artists
         .find()
         .toArray()
       res.json(allArtists)
@@ -21,8 +20,7 @@ module.exports = function producersRouter(artists) {
   router.get('/displayName/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let artist = await
-      artists
+      const artist = await artists
         .findOne({ displayName: displayName })
       res.json(artist)
     }
@@ -34,8 +32,7 @@ module.exports = function producersRouter(artists) {
   router.get('/:artistType', async (req, res, next) => {
     const artistType = req.params.artistType
     try {
-      let artistsFound = await
-      artists
+      const artistsFound = await artists
         .find({ artistType: artistType })
         .toArray()
       res.json(artistsFound)
@@ -48,8 +45,7 @@ module.exports = function producersRouter(artists) {
   router.get('/following/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let followers = await
-      artists
+      const followers = await artists
         .find({ followers: displayName })
         .toArray()
       res.json(followers)
@@ -62,8 +58,7 @@ module.exports = function producersRouter(artists) {
   router.get('/followers/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let following = await
-      artists
+      const following = await artists
         .find({ following: displayName })
         .toArray()
       res.json(following)
@@ -76,8 +71,7 @@ module.exports = function producersRouter(artists) {
   router.post('/', async (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
     try {
-      let newArtist = await
-      artists
+      const newArtist = await artists
         .insertOne(userProfile)
       res.status(201).json(newArtist.ops[0])
     }
@@ -89,8 +83,7 @@ module.exports = function producersRouter(artists) {
   router.put('/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let updateProfile = await
-      artists
+      const updateProfile = await artists
         .findOneAndUpdate(
           { displayName: displayName },
           { $set: req.body },
@@ -108,8 +101,7 @@ module.exports = function producersRouter(artists) {
   router.put('/follow/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let addfollower = await
-      artists
+      const addfollower = await artists
         .findOneAndUpdate(
           { displayName: displayName },
           { $push: req.body },
@@ -127,8 +119,7 @@ module.exports = function producersRouter(artists) {
   router.put('/unfollow/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let removefollower = await
-      artists
+      const removefollower = await artists
         .findOneAndUpdate(
           { displayName: displayName },
           { $pull: req.body },
@@ -146,8 +137,7 @@ module.exports = function producersRouter(artists) {
   router.delete('/:id', async (req, res, next) => {
     const id = req.params.id
     try {
-      let deleteUser = await
-      artists
+      const deleteUser = await artists
         .findOneAndDelete({ id: id })
       deleteUser
         ? res.sendStatus(204)
