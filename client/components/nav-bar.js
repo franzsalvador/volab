@@ -27,7 +27,10 @@ export default class NavBar extends Component {
       <div>
         <header className={path === '' ? 'bg-white' : ''}>
           <Navbar className="container border-bottom" light expand="md">
-            <NavbarBrand className="font-weight-bold" id="brand" href="/">Volab</NavbarBrand>
+            <NavbarBrand
+              className="font-weight-bold"
+              id="brand" href="/">Volab
+            </NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             {registeredUser === true &&
               <Collapse isOpen={this.state.isOpen} navbar>
@@ -40,10 +43,16 @@ export default class NavBar extends Component {
                       Discover Artists
                     </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem href={'#discover' + queryString.stringify({'artistType': 'Music Producer'})} className="drop-down-print" name="music-producers">
+                      <DropdownItem
+                        href={'#discover' + queryString.stringify({'artistType': 'Music Producer'})}
+                        className="drop-down-print"
+                        name="music-producers">
                         Music Producers
                       </DropdownItem>
-                      <DropdownItem href={'#discover' + queryString.stringify({'artistType': 'Vocalist'})} className="drop-down-print" name="vocalists">
+                      <DropdownItem
+                        href={'#discover' + queryString.stringify({'artistType': 'Vocalist'})}
+                        className="drop-down-print"
+                        name="vocalists">
                         Vocalists
                       </DropdownItem>
                     </DropdownMenu>
@@ -56,19 +65,29 @@ export default class NavBar extends Component {
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret className="menu-items">
-                      <div className="profile-image-nav rounded-circle mx-md-2 mr-sm-2" style={{backgroundImage: `url(${user.imageUrl})`}}></div>
+                      <div
+                        className="profile-image-nav rounded-circle mx-md-2 mr-sm-2"
+                        style={{backgroundImage: `url(${user.imageUrl})`}}>
+                      </div>
                       Me
                     </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem href={'#' + user.displayName} className="drop-down-print" onClick={reload}>
+                      <DropdownItem
+                        href={'#' + user.displayName}
+                        className="drop-down-print"
+                        onClick={reload}>
                         <i className="far fa-user-circle mr-2"></i>
                         Profile
                       </DropdownItem>
-                      <DropdownItem className="drop-down-print" href='#update-profile'>
+                      <DropdownItem
+                        className="drop-down-print"
+                        href='#update-profile'>
                         <i className="fas fa-user-edit mr-1"></i>
                         Update Profile
                       </DropdownItem>
-                      <DropdownItem className="drop-down-print" href="#account-settings">
+                      <DropdownItem
+                        className="drop-down-print"
+                        href="#account-settings">
                         <i className="fas fa-ellipsis-h mr-2"></i>
                         Account Settings
                       </DropdownItem>
