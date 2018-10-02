@@ -15,9 +15,9 @@ export default function ViewFollowing({ artist, path, following }) {
         { path === 'view-followers' ? 'Followers' : 'Following' }
       </h5>
       <hr className="px-3"/>
-      {following.map((artist, index) => {
+      {following.map(artist => {
         return (
-          <div key= { index } className="float-left m-4">
+          <div key= { artist.id } className="float-left m-4">
             <div
               className="profile-image-connection-view rounded-circle mx-auto border"
               style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>

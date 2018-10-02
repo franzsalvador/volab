@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Button } from 'reactstrap'
 
-export default function ViewFollowers({ artist, path, viewProfile, followers }) {
+export default function ViewFollowers({ artist, path, followers }) {
   return (
     <Container className="container connection-view-container bg-white pt-3">
       <div className="pt-3 container d-inline-block">
@@ -15,9 +15,9 @@ export default function ViewFollowers({ artist, path, viewProfile, followers }) 
         { path === 'view-followers' ? 'Followers' : 'Following' }
       </h5>
       <hr className="px-3"/>
-      {followers.map((artist, index) => {
+      {followers.map(artist => {
         return (
-          <div key= { index } className="float-left m-4">
+          <div key= { artist.id } className="float-left m-4">
             <div
               className="profile-image-connection-view rounded-circle mx-auto border"
               style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
