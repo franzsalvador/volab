@@ -7,11 +7,11 @@ module.exports = function producersRouter(artists) {
 
   router.get('/', async (req, res, next) => {
     try {
-      let found = await
+      let allArtists = await
       artists
         .find()
         .toArray()
-      res.json(found)
+      res.json(allArtists)
     }
     catch (err) {
       next(err)
@@ -21,10 +21,10 @@ module.exports = function producersRouter(artists) {
   router.get('/displayName/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let found = await
+      let artist = await
       artists
         .findOne({ displayName: displayName })
-      res.json(found)
+      res.json(artist)
     }
     catch (err) {
       next(err)
@@ -34,11 +34,11 @@ module.exports = function producersRouter(artists) {
   router.get('/:artistType', async (req, res, next) => {
     const artistType = req.params.artistType
     try {
-      let found = await
+      let artistsFound = await
       artists
         .find({ artistType: artistType })
         .toArray()
-      res.json(found)
+      res.json(artistsFound)
     }
     catch (err) {
       next(err)
@@ -48,11 +48,11 @@ module.exports = function producersRouter(artists) {
   router.get('/following/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let found = await
+      let followers = await
       artists
         .find({ followers: displayName })
         .toArray()
-      res.json(found)
+      res.json(followers)
     }
     catch (err) {
       next(err)
@@ -62,85 +62,100 @@ module.exports = function producersRouter(artists) {
   router.get('/followers/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {
-      let found = await
+      let following = await
       artists
         .find({ following: displayName })
         .toArray()
-      res.json(found)
+      res.json(following)
     }
     catch (err) {
       next(err)
     }
   })
 
-  router.post('/', (req, res, next) => {
+  router.post('/', async (req, res, next) => {
     const userProfile = Object.assign(req.body, { id: uuid() })
-    artists
-      .insertOne(userProfile)
-      .then(({ ops: [ created ] }) => {
-        res.status(201).json(created)
-      })
-      .catch(err => next(err))
+    try {
+      let newArtist = await
+      artists
+        .insertOne(userProfile)
+      res.status(201).json(newArtist.ops[0])
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.put('/:displayName', (req, res, next) => {
+  router.put('/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
-    artists
-      .findOneAndUpdate(
-        { displayName: displayName },
-        { $set: req.body },
-        { returnOriginal: false }
-      )
-      .then(({ value }) => {
-        value
-          ? res.json(value)
-          : res.sendStatus(404)
-      })
-      .catch(err => next(err))
+    try {
+      let updateProfile = await
+      artists
+        .findOneAndUpdate(
+          { displayName: displayName },
+          { $set: req.body },
+          { returnOriginal: false }
+        )
+      updateProfile
+        ? res.json(updateProfile.value)
+        : res.sendStatus(404)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.put('/follow/:displayName', (req, res, next) => {
+  router.put('/follow/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
-    artists
-      .findOneAndUpdate(
-        { displayName: displayName },
-        { $push: req.body },
-        { returnOriginal: false }
-      )
-      .then(({ value }) => {
-        value
-          ? res.json(value)
-          : res.sendStatus(404)
-      })
-      .catch(err => next(err))
+    try {
+      let addfollower = await
+      artists
+        .findOneAndUpdate(
+          { displayName: displayName },
+          { $push: req.body },
+          { returnOriginal: false }
+        )
+      addfollower
+        ? res.json(addfollower.value)
+        : res.sendStatus(404)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.put('/unfollow/:displayName', (req, res, next) => {
+  router.put('/unfollow/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
-    artists
-      .findOneAndUpdate(
-        { displayName: displayName },
-        { $pull: req.body },
-        { returnOriginal: false }
-      )
-      .then(({ value }) => {
-        value
-          ? res.json(value)
-          : res.sendStatus(404)
-      })
-      .catch(err => next(err))
+    try {
+      let removefollower = await
+      artists
+        .findOneAndUpdate(
+          { displayName: displayName },
+          { $pull: req.body },
+          { returnOriginal: false }
+        )
+      removefollower
+        ? res.json(removefollower.value)
+        : res.sendStatus(404)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
-  router.delete('/:id', (req, res, next) => {
+  router.delete('/:id', async (req, res, next) => {
     const id = req.params.id
-    artists
-      .findOneAndDelete({ id: id })
-      .then(({ value }) => {
-        value
-          ? res.sendStatus(204)
-          : res.sendStatus(404)
-      })
-      .catch(err => next(err))
+    try {
+      let deleteUser = await
+      artists
+        .findOneAndDelete({ id: id })
+      deleteUser
+        ? res.sendStatus(204)
+        : res.sendStatus(404)
+    }
+    catch (err) {
+      next(err)
+    }
   })
 
   return router
