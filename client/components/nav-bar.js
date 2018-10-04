@@ -1,7 +1,19 @@
 import React, {Component} from 'react'
 import * as queryString from '../util/query-string'
-import { Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import SearchBar from './search-bar'
+import {
+  Collapse,
+  Navbar,
+  NavLink,
+  NavItem,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from 'reactstrap'
 
 export default class NavBar extends Component {
   constructor(props) {
