@@ -119,7 +119,9 @@ export default class InfoBar extends Component {
   render() {
     const { handleFollow, handleUnFollow, toggle, handleSendMessage } = this
     const { user } = this.props
-    const { isFollowing } = this.state
+    const { isFollowing, messageModal } = this.state
+    const onClick = isFollowing ? handleUnFollow : handleFollow
+    const buttonLabel = isFollowing ? 'Following' : 'Follow'
     const currentArtistPage = this.props.artist.displayName
     return (
       <div>
@@ -135,10 +137,8 @@ export default class InfoBar extends Component {
               <Button
                 className="btn btn-outline-dark btn-sm mb-3"
                 type="button"
-                onClick={isFollowing
-                  ? handleUnFollow
-                  : handleFollow}>
-                {isFollowing ? 'Following' : 'Follow'}
+                onClick={onClick}>
+                {buttonLabel}
               </Button>
             </div>
             }
@@ -146,7 +146,7 @@ export default class InfoBar extends Component {
         </div>
         <hr className="mx-4"/>
         <div>
-          <Modal isOpen={this.state.messageModal} toggle={toggle}>
+          <Modal isOpen={messageModal} toggle={toggle}>
             <ModalHeader toggle={toggle}>{'To: ' + currentArtistPage}</ModalHeader>
             <ModalBody>
               <Form onSubmit={handleSendMessage}>
