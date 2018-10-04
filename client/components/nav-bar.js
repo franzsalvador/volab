@@ -35,9 +35,10 @@ export default class NavBar extends Component {
   render() {
     const { registeredUser, user, path, navigate } = this.props
     const { reload } = this
+    const headerClass = path === '' ? 'bg-white' : ''
     return (
       <div>
-        <header className={path === '' ? 'bg-white' : ''}>
+        <header className={headerClass}>
           <Navbar className="container border-bottom" light expand="md">
             <NavbarBrand
               className="font-weight-bold"
