@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap'
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  FormGroup,
+  Label,
+  Input } from 'reactstrap'
 
 export default class InfoBar extends Component {
   constructor(props) {
@@ -16,7 +24,9 @@ export default class InfoBar extends Component {
   componentDidMount() {
     const userFollowing = this.props.user.following
     const { artist } = this.props.user.displayName
-    userFollowing.includes(artist) ? this.setState({ isFollowing: true }) : this.setState({ isFollowing: false })
+    userFollowing.includes(artist)
+      ? this.setState({ isFollowing: true })
+      : this.setState({ isFollowing: false })
   }
   toggle() {
     this.setState({
@@ -124,7 +134,10 @@ export default class InfoBar extends Component {
               </Button>
               <Button
                 className="btn btn-outline-dark btn-sm mb-3"
-                type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>
+                type="button"
+                onClick={isFollowing
+                  ? handleUnFollow
+                  : handleFollow}>
                 {isFollowing ? 'Following' : 'Follow'}
               </Button>
             </div>
