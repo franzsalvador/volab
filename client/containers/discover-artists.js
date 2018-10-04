@@ -20,14 +20,16 @@ export default class DiscoverArtists extends Component {
   }
   render() {
     const { view, filteredArtists } = this.state
+    const discoverPageHeading =
+      view === 'Music%20Producer'
+        ? 'Discover Producers'
+        : 'Discover Vocalists'
     return (
       <div>
         <Container className="container bg-white mt-5">
           <Jumbotron className="bg-white pt-4 mb-0">
             <h5 className="mb-5 font-weight-bold">
-              { view === 'Music%20Producer'
-                ? 'Discover Producers'
-                : 'Discover Vocalists' }
+              {discoverPageHeading}
             </h5>
             {filteredArtists.map(artist => {
               return (

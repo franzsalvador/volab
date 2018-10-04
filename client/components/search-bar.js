@@ -42,6 +42,9 @@ export default class SearchBar extends Component {
   render() {
     const { handleSearch, handleBlur, handleClick } = this
     const { results } = this.state
+    const listGroupClass = results.length
+      ? 'search-list-results border'
+      : 'search-list-results mt-1'
     return (
       <div>
         <form className="form-inline my-2 my-lg-0">
@@ -53,9 +56,7 @@ export default class SearchBar extends Component {
             onChange={handleSearch}/>
         </form>
         <ListGroup
-          className={results.length
-            ? 'search-list-results border'
-            : 'search-list-results mt-1'}
+          className={listGroupClass}
           onMouseLeave={handleBlur}>
           {results.map((artist, index) => {
             return (
