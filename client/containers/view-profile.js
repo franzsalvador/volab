@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container } from 'reactstrap'
+import * as request from '../util/fetch'
 import MusicSection from '../components/music-section'
 import ProfileHeader from '../components/profile-header'
 import ProfileSideBar from '../components/profile-side-bar'
@@ -16,10 +17,9 @@ export default class ViewProfile extends Component {
   }
   componentDidMount() {
     const displayName = this.props.path
-    fetch('/artists/displayName/' + displayName)
-      .then(res => res.ok ? res.json() : null)
-      .then(artist => artist && this.setState({ artist }))
-      .catch(err => console.error(err))
+    const { updateArtist } = this
+    const url = '/artists/displayName/' + displayName
+    request.get(url, updateArtist)
   }
   updateArtist(artist) {
     this.setState({ artist })

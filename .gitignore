@@ -1,1 +1,4 @@
 sendgrid.env
+.env
+.vscode/
+node_modules/

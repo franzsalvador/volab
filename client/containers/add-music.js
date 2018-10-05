@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as request from '../util/fetch'
 import { Row, Col, Button, Form, FormGroup, Input, Container } from 'reactstrap'
 
 export default class AddMusic extends Component {
@@ -29,10 +30,7 @@ export default class AddMusic extends Component {
       body: JSON.stringify(music),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && updateUser(user))
-      .catch(err => console.error(err))
+    request.put(url, req, updateUser)
   }
   render() {
     const { handleSubmit } = this

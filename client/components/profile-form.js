@@ -45,10 +45,12 @@ export default class ProfileForm extends React.Component {
     const { handleChange, handleSubmit, handleUpdate } = this
     const { path, user, registeredUser } = this.props
     const { imageUrl } = this.state
+    const profileFormHeader = registeredUser !== true ? 'Create Profile' : 'Edit Profile'
+    const onSubmitAction = path === 'update-profile' ? handleUpdate : handleSubmit
     return (
       <Container>
         <h5 className="save-edit-header pt-5 pb-4 font-weight-bold">
-          {registeredUser !== true ? 'Create Profile' : 'Edit Profile'}
+          {profileFormHeader}
         </h5>
         <div>
           {imageUrl ? (
@@ -61,7 +63,7 @@ export default class ProfileForm extends React.Component {
           )}
         </div>
         <Form
-          onSubmit={path === 'update-profile' ? handleUpdate : handleSubmit}
+          onSubmit={onSubmitAction}
           className="mb-5">
           <Row className="px-5 pt-5">
             <Col className="col-lg-6">

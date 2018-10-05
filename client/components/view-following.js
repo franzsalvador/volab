@@ -1,6 +1,31 @@
 import React from 'react'
 import { Container, Button } from 'reactstrap'
 
+function FollowingList({ following }) {
+  return (
+    following.map(artist => {
+      return (
+        <div key= { artist.id } className="float-left m-4">
+          <div
+            className="profile-image-connection-view rounded-circle mx-auto border"
+            style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
+          <div
+            className="mt-3 text-center">
+            <p className="profile-details-explore-view mb-2">
+              {artist.firstName + ' ' + artist.lastName}
+            </p>
+            <Button
+              className="btn btn-outline-dark btn-sm"
+              href={'#' + artist.displayName}>
+              View Profile
+            </Button>
+          </div>
+        </div>
+      )
+    })
+  )
+}
+
 export default function ViewFollowing({ artist, path, following }) {
   return (
     <Container className="container connection-view-container bg-white pt-3">
@@ -15,26 +40,8 @@ export default function ViewFollowing({ artist, path, following }) {
         { path === 'view-followers' ? 'Followers' : 'Following' }
       </h5>
       <hr className="px-3"/>
-      {following.map(artist => {
-        return (
-          <div key= { artist.id } className="float-left m-4">
-            <div
-              className="profile-image-connection-view rounded-circle mx-auto border"
-              style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
-            <div
-              className="mt-3 text-center">
-              <p className="profile-details-explore-view mb-2">
-                {artist.firstName + ' ' + artist.lastName}
-              </p>
-              <Button
-                className="btn btn-outline-dark btn-sm"
-                href={'#' + artist.displayName}>
-                View Profile
-              </Button>
-            </div>
-          </div>
-        )
-      })}
+      <FollowingList
+        following = {following}/>
     </Container>
   )
 }

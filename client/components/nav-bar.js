@@ -1,7 +1,19 @@
 import React, {Component} from 'react'
 import * as queryString from '../util/query-string'
-import { Collapse, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import SearchBar from './search-bar'
+import {
+  Collapse,
+  Navbar,
+  NavLink,
+  NavItem,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from 'reactstrap'
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -23,16 +35,17 @@ export default class NavBar extends Component {
   render() {
     const { registeredUser, user, path, navigate } = this.props
     const { reload } = this
+    const headerClass = path === '' ? 'bg-white' : ''
     return (
       <div>
-        <header className={path === '' ? 'bg-white' : ''}>
+        <header className={headerClass}>
           <Navbar className="container border-bottom" light expand="md">
             <NavbarBrand
               className="font-weight-bold"
               id="brand" href="/">Volab
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
-            {registeredUser === true &&
+            {registeredUser &&
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <SearchBar

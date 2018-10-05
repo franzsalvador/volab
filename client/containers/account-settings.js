@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as request from '../util/fetch'
 import { Row, Col, Button, Form, FormGroup, Input, Container } from 'reactstrap'
 
 export default class AccountSettings extends Component {
@@ -12,10 +13,8 @@ export default class AccountSettings extends Component {
     const { navigate, deleteUser, user: { id } } = this.props
     const url = '/artists/' + id
     const req = { method: 'DELETE' }
-    fetch(url, req)
-      .then(res => res.ok)
-      .then(deleteUser())
-      .catch(err => console.error(err))
+    request.remove(url, req, deleteUser)
+
     alert('Your profile has been deleted.')
     navigate({ path: '' })
   }

@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap'
+import * as request from '../util/fetch'
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  FormGroup,
+  Label,
+  Input } from 'reactstrap'
 
 export default class InfoBar extends Component {
   constructor(props) {
@@ -16,7 +25,9 @@ export default class InfoBar extends Component {
   componentDidMount() {
     const userFollowing = this.props.user.following
     const { artist } = this.props.user.displayName
-    userFollowing.includes(artist) ? this.setState({ isFollowing: true }) : this.setState({ isFollowing: false })
+    userFollowing.includes(artist)
+      ? this.setState({ isFollowing: true })
+      : this.setState({ isFollowing: false })
   }
   toggle() {
     this.setState({
@@ -35,20 +46,14 @@ export default class InfoBar extends Component {
       body: JSON.stringify({ following: artistFollowed }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlFollow, reqFollow)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && updateUser(user))
-      .catch(err => console.error(err))
+    request.put(urlFollow, reqFollow, updateUser)
 
     const reqFollowedBy = {
       method: 'PUT',
       body: JSON.stringify({ followers: user }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlFollowedBy, reqFollowedBy)
-      .then(res => res.ok ? res.json() : null)
-      .then(artist => updateArtist(artist))
-      .catch(err => console.error(err))
+    request.put(urlFollowedBy, reqFollowedBy, updateArtist)
 
     this.setState({ isFollowing: true })
 
@@ -65,20 +70,14 @@ export default class InfoBar extends Component {
       body: JSON.stringify({ following: { $in: [ artistUnFollowed ] } }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlUnFollow, reqUnFollow)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && updateUser(user))
-      .catch(err => console.error(err))
+    request.put(urlUnFollow, reqUnFollow, updateUser)
 
     const reqUnFollowedBy = {
       method: 'PUT',
       body: JSON.stringify({ followers: { $in: [ user ] } }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlUnFollowedBy, reqUnFollowedBy)
-      .then(res => res.ok ? res.json() : null)
-      .then(artist => updateArtist(artist))
-      .catch(err => console.error(err))
+    request.put(urlUnFollowedBy, reqUnFollowedBy, updateArtist)
 
     this.setState({ isFollowing: false })
   }
@@ -102,14 +101,14 @@ export default class InfoBar extends Component {
       body: JSON.stringify(messageDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .catch(err => console.error(err))
+    request.post(url, req)
   }
   render() {
     const { handleFollow, handleUnFollow, toggle, handleSendMessage } = this
     const { user } = this.props
-    const { isFollowing } = this.state
+    const { isFollowing, messageModal } = this.state
+    const onClick = isFollowing ? handleUnFollow : handleFollow
+    const buttonLabel = isFollowing ? 'Following' : 'Follow'
     const currentArtistPage = this.props.artist.displayName
     return (
       <div>
@@ -124,8 +123,9 @@ export default class InfoBar extends Component {
               </Button>
               <Button
                 className="btn btn-outline-dark btn-sm mb-3"
-                type="button" onClick={isFollowing ? handleUnFollow : handleFollow}>
-                {isFollowing ? 'Following' : 'Follow'}
+                type="button"
+                onClick={onClick}>
+                {buttonLabel}
               </Button>
             </div>
             }
@@ -133,7 +133,7 @@ export default class InfoBar extends Component {
         </div>
         <hr className="mx-4"/>
         <div>
-          <Modal isOpen={this.state.messageModal} toggle={toggle}>
+          <Modal isOpen={messageModal} toggle={toggle}>
             <ModalHeader toggle={toggle}>{'To: ' + currentArtistPage}</ModalHeader>
             <ModalBody>
               <Form onSubmit={handleSendMessage}>
