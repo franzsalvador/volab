@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Button } from 'reactstrap'
 
-function FollowersList({followers}) {
+function FollowersList({ followers }) {
   return (
     followers.map(artist => {
       return (
