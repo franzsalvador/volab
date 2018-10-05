@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as request from '../util/fetch'
 import {
   Button,
   Modal,
@@ -45,20 +46,14 @@ export default class InfoBar extends Component {
       body: JSON.stringify({ following: artistFollowed }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlFollow, reqFollow)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && updateUser(user))
-      .catch(err => console.error(err))
+    request.sendFetch(urlFollow, reqFollow, updateUser)
 
     const reqFollowedBy = {
       method: 'PUT',
       body: JSON.stringify({ followers: user }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlFollowedBy, reqFollowedBy)
-      .then(res => res.ok ? res.json() : null)
-      .then(artist => updateArtist(artist))
-      .catch(err => console.error(err))
+    request.sendFetch(urlFollowedBy, reqFollowedBy, updateArtist)
 
     this.setState({ isFollowing: true })
 
@@ -75,20 +70,14 @@ export default class InfoBar extends Component {
       body: JSON.stringify({ following: { $in: [ artistUnFollowed ] } }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlUnFollow, reqUnFollow)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && updateUser(user))
-      .catch(err => console.error(err))
+    request.sendFetch(urlUnFollow, reqUnFollow, updateUser)
 
     const reqUnFollowedBy = {
       method: 'PUT',
       body: JSON.stringify({ followers: { $in: [ user ] } }),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(urlUnFollowedBy, reqUnFollowedBy)
-      .then(res => res.ok ? res.json() : null)
-      .then(artist => updateArtist(artist))
-      .catch(err => console.error(err))
+    request.sendFetch(urlUnFollowedBy, reqUnFollowedBy, updateArtist)
 
     this.setState({ isFollowing: false })
   }
@@ -112,9 +101,7 @@ export default class InfoBar extends Component {
       body: JSON.stringify(messageDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .catch(err => console.error(err))
+    request.post(url, req)
   }
   render() {
     const { handleFollow, handleUnFollow, toggle, handleSendMessage } = this
