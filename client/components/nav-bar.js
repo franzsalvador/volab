@@ -45,7 +45,7 @@ export default class NavBar extends Component {
               id="brand" href="/">Volab
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
-            {registeredUser === true &&
+            {registeredUser &&
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <SearchBar
