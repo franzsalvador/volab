@@ -1,6 +1,31 @@
 import React from 'react'
 import { Container, Button } from 'reactstrap'
 
+function FollowersList({followers}) {
+  return (
+    followers.map(artist => {
+      return (
+        <div key= { artist.id } className="float-left m-4">
+          <div
+            className="profile-image-connection-view rounded-circle mx-auto border"
+            style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
+          <div
+            className="mt-3 text-center">
+            <p className="profile-details-explore-view mb-2">
+              {artist.firstName + ' ' + artist.lastName}
+            </p>
+            <Button
+              className="btn btn-outline-dark btn-sm"
+              href={'#' + artist.displayName}>
+              View Profile
+            </Button>
+          </div>
+        </div>
+      )
+    })
+  )
+}
+
 export default function ViewFollowers({ artist, path, followers }) {
   return (
     <Container className="container connection-view-container bg-white pt-3">
@@ -15,24 +40,8 @@ export default function ViewFollowers({ artist, path, followers }) {
         { path === 'view-followers' ? 'Followers' : 'Following' }
       </h5>
       <hr className="px-3"/>
-      {followers.map(artist => {
-        return (
-          <div key= { artist.id } className="float-left m-4">
-            <div
-              className="profile-image-connection-view rounded-circle mx-auto border"
-              style={{ backgroundImage: `url(${artist.imageUrl})` }}></div>
-            <div className="mt-3 text-center">
-              <p
-                className="profile-details-explore-view mb-2">
-                {artist.firstName + ' ' + artist.lastName}
-              </p>
-              <Button
-                className="btn btn-outline-dark btn-sm"
-                href={'#' + artist.displayName}>View Profile</Button>
-            </div>
-          </div>
-        )
-      })}
+      <FollowersList
+        followers = {followers}/>
     </Container>
   )
 }
