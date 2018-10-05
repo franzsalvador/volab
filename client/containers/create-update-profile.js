@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as request from '../util/fetch'
 import ProfileForm from '../components/profile-form'
 
 export default class CreateUpdateProfile extends Component {
@@ -15,10 +16,7 @@ export default class CreateUpdateProfile extends Component {
       body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && updateUser(user))
-      .catch(err => console.error(err))
+    request.sendFetch(url, req, updateUser)
   }
   updateProfile(userDetails) {
     const { updateUser, user: { displayName } } = this.props
@@ -28,10 +26,7 @@ export default class CreateUpdateProfile extends Component {
       body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    fetch(url, req)
-      .then(res => res.ok ? res.json() : null)
-      .then(user => user && updateUser(user))
-      .catch(err => console.error(err))
+    request.sendFetch(url, req, updateUser)
   }
   render() {
     const { navigate, user, registeredUser, path } = this.props

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as request from '../util/fetch'
 import ViewFollowers from '../components/view-followers'
 import ViewFollowing from '../components/view-following'
 
@@ -10,21 +11,25 @@ export default class ViewConnections extends Component {
       followers: [],
       following: []
     }
+    this.updateArtist = this.updateArtist.bind(this)
+    this.updateFollowers = this.updateFollowers.bind(this)
+    this.updateFollowing = this.updateFollowing.bind(this)
   }
   componentDidMount() {
     const { displayName } = this.props.params
-    fetch('/artists/displayName/' + displayName)
-      .then(res => res.ok ? res.json() : null)
-      .then(artist => artist && this.setState({ artist }))
-      .catch(err => console.error(err))
-    fetch('/artists/followers/' + displayName)
-      .then(res => res.ok ? res.json() : null)
-      .then(followers => this.setState({ followers: followers }))
-      .catch(err => console.error(err))
-    fetch('/artists/following/' + displayName)
-      .then(res => res.ok ? res.json() : null)
-      .then(following => this.setState({ following: following }))
-      .catch(err => console.error(err))
+    const { updateArtist, updateFollowers, updateFollowing } = this
+    request.get('/artists/displayName/' + displayName, updateArtist)
+    request.get('/artists/followers/' + displayName, updateFollowers)
+    request.get('/artists/following/' + displayName, updateFollowing)
+  }
+  updateArtist(artist) {
+    this.setState({ artist })
+  }
+  updateFollowers(followers) {
+    this.setState({ followers })
+  }
+  updateFollowing(following) {
+    this.setState({ following })
   }
   renderView() {
     const { path } = this.props

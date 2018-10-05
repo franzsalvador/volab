@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as request from '../util/fetch'
 import { Jumbotron, Container, Button } from 'reactstrap'
 
 export default class DiscoverArtists extends Component {
@@ -8,15 +9,18 @@ export default class DiscoverArtists extends Component {
       view: '',
       filteredArtists: []
     }
+    this.updateFilteredArtists = this.updateFilteredArtists.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => location.reload())
     const { artistType } = this.props.params
+    const { updateFilteredArtists } = this
+    const url = '/artists/' + artistType
+    request.get(url, updateFilteredArtists)
     this.setState({ view: artistType })
-    fetch('/artists/' + artistType)
-      .then(res => res.ok ? res.json() : null)
-      .then(filteredArtists => this.setState({ filteredArtists }))
-      .catch(err => console.error(err))
+  }
+  updateFilteredArtists(filteredArtists) {
+    this.setState({ filteredArtists })
   }
   render() {
     const { view, filteredArtists } = this.state
