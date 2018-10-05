@@ -46,14 +46,14 @@ export default class InfoBar extends Component {
       body: JSON.stringify({ following: artistFollowed }),
       headers: { 'Content-Type': 'application/json' }
     }
-    request.sendFetch(urlFollow, reqFollow, updateUser)
+    request.put(urlFollow, reqFollow, updateUser)
 
     const reqFollowedBy = {
       method: 'PUT',
       body: JSON.stringify({ followers: user }),
       headers: { 'Content-Type': 'application/json' }
     }
-    request.sendFetch(urlFollowedBy, reqFollowedBy, updateArtist)
+    request.put(urlFollowedBy, reqFollowedBy, updateArtist)
 
     this.setState({ isFollowing: true })
 
@@ -70,14 +70,14 @@ export default class InfoBar extends Component {
       body: JSON.stringify({ following: { $in: [ artistUnFollowed ] } }),
       headers: { 'Content-Type': 'application/json' }
     }
-    request.sendFetch(urlUnFollow, reqUnFollow, updateUser)
+    request.put(urlUnFollow, reqUnFollow, updateUser)
 
     const reqUnFollowedBy = {
       method: 'PUT',
       body: JSON.stringify({ followers: { $in: [ user ] } }),
       headers: { 'Content-Type': 'application/json' }
     }
-    request.sendFetch(urlUnFollowedBy, reqUnFollowedBy, updateArtist)
+    request.put(urlUnFollowedBy, reqUnFollowedBy, updateArtist)
 
     this.setState({ isFollowing: false })
   }

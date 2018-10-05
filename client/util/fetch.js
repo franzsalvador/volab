@@ -1,4 +1,4 @@
-export function sendFetch(url, req, updateFunction) {
+export function put(url, req, updateFunction) {
   return (
     fetch(url, req)
       .then(res => res.ok ? res.json() : null)

@@ -30,7 +30,7 @@ export default class AddMusic extends Component {
       body: JSON.stringify(music),
       headers: { 'Content-Type': 'application/json' }
     }
-    request.sendFetch(url, req, updateUser)
+    request.put(url, req, updateUser)
   }
   render() {
     const { handleSubmit } = this
