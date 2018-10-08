@@ -18,9 +18,12 @@ export default class ViewConnections extends Component {
   componentDidMount() {
     const { displayName } = this.props.params
     const { updateArtist, updateFollowers, updateFollowing } = this
-    request.get('/artists/displayName/' + displayName, updateArtist)
-    request.get('/artists/followers/' + displayName, updateFollowers)
-    request.get('/artists/following/' + displayName, updateFollowing)
+    request.sendFetch('/artists/displayName/' + displayName)
+      .then(artist => updateArtist(artist))
+    request.sendFetch('/artists/followers/' + displayName)
+      .then(followers => updateFollowers(followers))
+    request.sendFetch('/artists/following/' + displayName)
+      .then(following => updateFollowing(following))
   }
   updateArtist(artist) {
     this.setState({ artist })
