@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as request from '../util/fetch'
 import { ListGroup } from 'reactstrap'
 import SearchListItems from './search-list-items'
 
@@ -7,41 +8,39 @@ export default class SearchBar extends Component {
     super(props)
     this.state = {
       isLoading: false,
-      dataBase: [],
       results: []
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
-    this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
-    fetch('/artists/')
-      .then(res => res.ok ? res.json() : null)
-      .then(artists => artists && this.setState({ dataBase: artists }))
-      .catch(err => console.error(err))
+    request.sendFetch('/artists/')
+      .then(artists => this.setState({ dataBase: artists }))
   }
   handleSearch(event) {
-    const userSearch = event.target.value
-    const { dataBase } = this.state
-    const results = dataBase.filter(artist => {
-      for (let key in artist) {
-        const artistDetails = artist[key].toString()
-        if (artistDetails.toLowerCase() === userSearch.toLowerCase()) {
-          return true
-        }
+    const debounce = (fn, time) => {
+      let timeout
+
+      return function () {
+        const functionCall = () => fn.apply(this, arguments)
+
+        clearTimeout(timeout)
+        timeout = setTimeout(functionCall, time)
       }
-    })
-    this.setState({ results })
+    }
+    window.addEventListener('keyup', debounce((event) => {
+      const searchValue = event.target.value
+      const url = '/artists/search/' + searchValue
+      request.sendFetch(url)
+        .then(results => this.setState({ results }))
+    }, 500))
   }
   handleBlur(event) {
     event.target.value = ''
     this.setState({ results: [] })
   }
-  handleClick() {
-    location.reload()
-  }
   render() {
-    const { handleSearch, handleBlur, handleClick } = this
+    const { handleSearch, handleBlur } = this
     const { results } = this.state
     const listGroupClass = results.length
       ? 'search-list-results border'
@@ -60,7 +59,6 @@ export default class SearchBar extends Component {
           className={listGroupClass}
           onMouseLeave={handleBlur}>
           <SearchListItems
-            handleClick = {handleClick}
             results = {results}/>
         </ListGroup>
       </div>

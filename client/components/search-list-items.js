@@ -1,13 +1,13 @@
 import React from 'react'
 
 export default function SearchListItems(props) {
-  const {handleClick, results} = props
+  const {results} = props
   return (
-    results.map((artist, index) => {
+    results.map(artist => {
       return (
         <a
           className="search-list-item btn btn-outline-dark btn-sm p-2"
-          key={index} onClick={handleClick}
+          key={artist.id}
           href={'#' + artist.displayName}>
           <div
             className="profile-image-nav rounded-circle"
