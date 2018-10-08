@@ -12,15 +12,22 @@ export default class DiscoverArtists extends Component {
     this.updateFilteredArtists = this.updateFilteredArtists.bind(this)
   }
   componentDidMount() {
-    window.addEventListener('hashchange', () => location.reload())
-    const { artistType } = this.props.params
     const { updateFilteredArtists } = this
-    const url = '/artists/' + artistType
-    request.get(url, updateFilteredArtists)
-    this.setState({ view: artistType })
+    updateFilteredArtists()
+    window.addEventListener('hashchange', updateFilteredArtists, false)
   }
-  updateFilteredArtists(filteredArtists) {
-    this.setState({ filteredArtists })
+  componentWillUnmount() {
+    const { updateFilteredArtists } = this
+    window.removeEventListener('hashchange', updateFilteredArtists, false)
+  }
+  updateFilteredArtists() {
+    const { artistType } = this.props.params
+    const url = '/artists/' + artistType
+    request.sendFetch(url)
+      .then(result => this.setState({
+        filteredArtists: result,
+        view: artistType
+      }))
   }
   render() {
     const { view, filteredArtists } = this.state
