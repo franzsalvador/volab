@@ -15,9 +15,6 @@ export default class CreateUpdateProfile extends Component {
     const method = path === 'update-profile'
       ? 'PUT'
       : 'POST'
-    const navigatePath = path === 'update-profile'
-      ? '#' + displayName
-      : 'add-music'
     const alertMessage = path === 'update-profile'
       ? 'Your profile has been updated.'
       : 'Your profile has been saved.'
@@ -28,8 +25,9 @@ export default class CreateUpdateProfile extends Component {
     }
     request.sendFetch(url, req)
       .then(user => updateUser(user))
-      .then(alert(alertMessage))
-      .then(navigate({ path: navigatePath }))
+
+    alert(alertMessage)
+    navigate({ path: 'add-music' })
   }
   render() {
     const { navigate, user, registeredUser, path } = this.props
