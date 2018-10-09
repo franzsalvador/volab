@@ -55,6 +55,19 @@ module.exports = function producersRouter(artists) {
     }
   })
 
+  router.get('/search/:value', async (req, res, next) => {
+    const searchValue = req.params.value
+    try {
+      const searchResults = await artists
+        .find({ $text: { $search: searchValue } })
+        .toArray()
+      res.json(searchResults)
+    }
+    catch (err) {
+      next(err)
+    }
+  })
+
   router.get('/followers/:displayName', async (req, res, next) => {
     const displayName = req.params.displayName
     try {

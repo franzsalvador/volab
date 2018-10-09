@@ -13,7 +13,8 @@ export default class AccountSettings extends Component {
     const { navigate, deleteUser, user: { id } } = this.props
     const url = '/artists/' + id
     const req = { method: 'DELETE' }
-    request.remove(url, req, deleteUser)
+    request.sendDelete(url, req)
+      .then(deleteUser)
 
     alert('Your profile has been deleted.')
     navigate({ path: '' })

@@ -28,7 +28,7 @@ export default class App extends Component {
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
-      const {path, params} = parseHash(window.location.hash)
+      const { path, params } = parseHash(window.location.hash)
       this.setState({ path, params })
     })
     window.addEventListener('beforeunload', () => {

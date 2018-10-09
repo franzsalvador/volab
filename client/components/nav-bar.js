@@ -22,19 +22,14 @@ export default class NavBar extends Component {
     this.state = {
       isOpen: false
     }
-    this.reload = this.reload.bind(this)
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
-  reload() {
-    location.reload()
-  }
   render() {
     const { registeredUser, user, path, navigate } = this.props
-    const { reload } = this
     const headerClass = path === '' ? 'bg-white' : ''
     return (
       <div>
@@ -87,8 +82,7 @@ export default class NavBar extends Component {
                     <DropdownMenu right>
                       <DropdownItem
                         href={'#' + user.displayName}
-                        className="drop-down-print"
-                        onClick={reload}>
+                        className="drop-down-print">
                         <i className="far fa-user-circle mr-2"></i>
                         Profile
                       </DropdownItem>
