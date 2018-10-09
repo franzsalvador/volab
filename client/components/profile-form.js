@@ -1,5 +1,14 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, Row, Container, Col } from 'reactstrap'
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Row,
+  Container,
+  Col
+} from 'reactstrap'
 
 export default class ProfileForm extends React.Component {
   constructor(props) {
@@ -7,46 +16,35 @@ export default class ProfileForm extends React.Component {
     this.state = {}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleUpdate = this.handleUpdate.bind(this)
   }
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value })
   }
   handleSubmit(event) {
     event.preventDefault()
-    const { createProfile, navigate } = this.props
-    const createProfileForm = event.target
-    const formData = new FormData(createProfileForm)
+    const { saveProfile, path } = this.props
+    const profileForm = event.target
+    const formData = new FormData(profileForm)
     const user = {}
     for (const pair of formData.entries()) {
       user[pair[0]] = pair[1]
+    }
+    if (path === 'update-profile') {
+      saveProfile(user)
+    }
+    else {
       user.followers = []
       user.following = []
+      saveProfile(user)
     }
-    createProfile(user)
-    navigate({ path: 'add-music' })
-    alert('Your profile has been saved.')
-  }
-  handleUpdate(event) {
-    event.preventDefault()
-    const { displayName } = this.props.user
-    const { updateProfile, navigate } = this.props
-    const createProfileForm = event.target
-    const formData = new FormData(createProfileForm)
-    const user = {}
-    for (const pair of formData.entries()) {
-      user[pair[0]] = pair[1]
-    }
-    updateProfile(user)
-    alert('Your profile has been updated.')
-    navigate({ path: '#' + displayName })
   }
   render() {
-    const { handleChange, handleSubmit, handleUpdate } = this
+    const { handleChange, handleSubmit } = this
     const { path, user, registeredUser } = this.props
     const { imageUrl } = this.state
-    const profileFormHeader = registeredUser !== true ? 'Create Profile' : 'Edit Profile'
-    const onSubmitAction = path === 'update-profile' ? handleUpdate : handleSubmit
+    const profileFormHeader = registeredUser !== true
+      ? 'Create Profile'
+      : 'Edit Profile'
     return (
       <Container>
         <h5 className="save-edit-header pt-5 pb-4 font-weight-bold">
@@ -63,7 +61,7 @@ export default class ProfileForm extends React.Component {
           )}
         </div>
         <Form
-          onSubmit={onSubmitAction}
+          onSubmit={handleSubmit}
           className="mb-5">
           <Row className="px-5 pt-5">
             <Col className="col-lg-6">

@@ -16,13 +16,19 @@ export default class ViewProfile extends Component {
     this.updateArtist = this.updateArtist.bind(this)
   }
   componentDidMount() {
-    const displayName = this.props.path
     const { updateArtist } = this
-    const url = '/artists/displayName/' + displayName
-    request.get(url, updateArtist)
+    updateArtist()
+    window.addEventListener('hashchange', updateArtist, false)
   }
-  updateArtist(artist) {
-    this.setState({ artist })
+  componentWillUnmount() {
+    const { updateArtist } = this
+    window.removeEventListener('hashchange', updateArtist, false)
+  }
+  updateArtist() {
+    const displayName = this.props.path
+    const url = '/artists/displayName/' + displayName
+    request.sendFetch(url)
+      .then(artist => this.setState({ artist }))
   }
   render() {
     const { artist } = this.state

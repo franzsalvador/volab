@@ -5,37 +5,37 @@ import ProfileForm from '../components/profile-form'
 export default class CreateUpdateProfile extends Component {
   constructor(props) {
     super(props)
-    this.createProfile = this.createProfile.bind(this)
-    this.updateProfile = this.updateProfile.bind(this)
+    this.saveProfile = this.saveProfile.bind(this)
   }
-  createProfile(userDetails) {
-    const { updateUser } = this.props
-    const url = '/artists'
+  saveProfile(userDetails) {
+    const { updateUser, navigate, path, user: { displayName } } = this.props
+    const url = path === 'update-profile'
+      ? '/artists/' + displayName
+      : '/artists'
+    const method = path === 'update-profile'
+      ? 'PUT'
+      : 'POST'
+    const alertMessage = path === 'update-profile'
+      ? 'Your profile has been updated.'
+      : 'Your profile has been saved.'
     const req = {
-      method: 'POST',
+      method: method,
       body: JSON.stringify(userDetails),
       headers: { 'Content-Type': 'application/json' }
     }
-    request.sendFetch(url, req, updateUser)
-  }
-  updateProfile(userDetails) {
-    const { updateUser, user: { displayName } } = this.props
-    const url = '/artists/' + displayName
-    const req = {
-      method: 'PUT',
-      body: JSON.stringify(userDetails),
-      headers: { 'Content-Type': 'application/json' }
-    }
-    request.sendFetch(url, req, updateUser)
+    request.sendFetch(url, req)
+      .then(user => updateUser(user))
+
+    alert(alertMessage)
+    navigate({ path: 'add-music' })
   }
   render() {
     const { navigate, user, registeredUser, path } = this.props
-    const { createProfile, updateProfile } = this
+    const { saveProfile } = this
     return (
       <div>
         <ProfileForm
-          createProfile = {createProfile}
-          updateProfile = {updateProfile}
+          saveProfile = {saveProfile}
           registeredUser= {registeredUser}
           navigate = {navigate}
           user={user}
