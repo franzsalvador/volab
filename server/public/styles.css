@@ -36,9 +36,7 @@ body {
 #home-section {
   background: url(../images/one-mic.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
   background-attachment: fixed;
-  background-position: center;
   min-height: 100vh;
 }
 
@@ -91,13 +89,13 @@ body {
 
 .profile-header {
   display: block;
-  background-position: center;
-  background-size: cover;
   min-height: 15rem;
   padding: 0 0 0 0;
   margin-bottom: 0;
 }
 
+#home-section,
+.profile-header,
 .profile-image,
 .profile-image-nav,
 .profile-image-explore-view,
