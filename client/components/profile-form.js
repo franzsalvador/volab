@@ -157,6 +157,7 @@ export default class ProfileForm extends React.Component {
                   name="displayName"
                   id="display-name"
                   placeholder="Display Name"
+                  required
                   defaultValue={path === 'update-profile' ? user.displayName : ''}/>
               </FormGroup>
               <FormGroup>
