@@ -23,10 +23,6 @@ export default class SearchBar extends Component {
     this.findData = debounce(this.findData.bind(this), 600)
     this.handleBlur = this.handleBlur.bind(this)
   }
-  componentDidMount() {
-    request.sendFetch('/artists/')
-      .then(artists => this.setState({ dataBase: artists }))
-  }
   handleSearch(event) {
     const userInput = event.target.value
     const { findData } = this
