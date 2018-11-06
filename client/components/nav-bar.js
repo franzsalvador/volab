@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import * as queryString from '../util/query-string'
-import SearchBar from './search-bar'
+// import SearchBar from './search-bar'
 import {
   Collapse,
   Navbar,
@@ -29,7 +29,9 @@ export default class NavBar extends Component {
     })
   }
   render() {
-    const { registeredUser, user, path, navigate } = this.props
+    const { registeredUser, user, path } = this.props
+    // add navigate above once heroku bug is resolved
+    // const { navigate } = this.props
     const headerClass = path === '' ? 'bg-white' : ''
     return (
       <div>
@@ -43,8 +45,8 @@ export default class NavBar extends Component {
             {registeredUser &&
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                  <SearchBar
-                    navigate = {navigate}/>
+                  {/* <SearchBar
+                    navigate = {navigate}/> */}
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle className="menu-items" nav caret>
                       <i className="fas fa-search drop-down-icons"></i>

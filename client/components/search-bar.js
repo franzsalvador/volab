@@ -3,6 +3,15 @@ import * as request from '../util/fetch'
 import { ListGroup } from 'reactstrap'
 import SearchListItems from './search-list-items'
 
+const debounce = (fn, time) => {
+  let timeout
+  return function () {
+    const functionCall = () => fn.apply(this, arguments)
+    clearTimeout(timeout)
+    timeout = setTimeout(functionCall, time)
+  }
+}
+
 export default class SearchBar extends Component {
   constructor(props) {
     super(props)
@@ -11,7 +20,7 @@ export default class SearchBar extends Component {
       results: []
     }
     this.handleSearch = this.handleSearch.bind(this)
-    this.findData = this.findData.bind(this)
+    this.findData = debounce(this.findData.bind(this), 600)
     this.handleBlur = this.handleBlur.bind(this)
   }
   handleSearch(event) {
